@@ -1,0 +1,334 @@
+\documentclass[12pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\allsectionsfont{\sffamily\mdseries\upshape} 
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{empheq}
+\usepackage{xcolor}
+\renewcommand{\L}[1]{\mathcal{L}\{#1\}}
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+\newcommand{\vecs}[1]{\langle #1\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\F}[1]{\mathcal{F}(#1)}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+
+\title{APMA 0360: Midterm 1 Review Sheet}
+\author{Milan Capoor}
+\date{1 March 2023}
+\begin{document}
+\maketitle
+\section*{Basic Math}
+\textbf{Useful Trig:}
+\begin{itemize}
+    \item $\sin^2 x + \cos^2 x = 1$
+    \item $1 + \tan^2 x = \sec^2 x$
+    \item $\cos(-x) = \cos x$
+    \item $\sin(-x) = -\sin x$
+    \item $\cos(2x) = \cos^2(x) - \sin^2(x)$
+    \item $\sin(2x) = 2\sin x \cos x $
+    \item $\cos^2 x = \frac{1}{2} + \frac{1}{2} \cos (2x)$
+    \item $\sin^2 x = \frac{1}{2} - \frac{1}{2}\cos (2x)$
+    \item $\int \tan x \; dx = \ln | \sec x | + C$
+    \item $\int \sec x\; dx = \ln|\sec x + \tan x| + C$
+    \item $\int \frac{1}{x^2 + 1}\; dx = \tan^{-1} x + C$
+    \item $\int \sin^2 x\; dx = \frac{x}{2} - \frac{1}{4}\sin(2x)$   
+    \item $\int \cos^2 x \; dx = \frac{x}{2} + \frac{1}{4} \sin(2x)$ 
+\end{itemize}
+
+\section*{Introduction}
+\textbf{Check if a function solves the PDE:} plug the function in (differentiate) and see if you get an identity
+
+\textbf{Solve a simple PDE:} Use ODEs
+Examples:
+\begin{itemize}
+    \item $u_x = 0 \implies u(x, y) = f(y)$
+    \item $u_{xx} = 0 \implies u_x = f(y) \implies u(x, y) = xf(y) + g(y)$
+    \item $u_{xx} +u = 0 \overset{y'' + y = 0}{\Longrightarrow} u(x, y) = A(y) \cos x + B(y) \sin x$
+    \item $u_{xy}= 0 \implies (u_x)_y = 0 \implies u_x = f(x) \implies u(x, y) = F(X) + G(y)$
+\end{itemize}
+
+\textbf{Classification:}
+
+\emph{Order:} highest derivative 
+
+\emph{Constant coefficient}
+
+\emph{Linear:} coefficients depend on x, y but not u 
+\begin{itemize}
+    \item $L(u + v) = L(u) + L(v)$
+    \item $L(cu) = cL(u)$
+\end{itemize}
+
+\emph{Homogeneous:} RHS is 0 
+
+\emph{Elliptic forms of Second Order PDEs:}
+\[au_{xx} + bu_{xy} + cu_{yy} + du_x + eu_y + fu = g(x,y)\]
+Let $D = b^2 - 4ac$, 
+\begin{itemize}
+    \item elliptic if $D < 0$
+    \item parabolic if $D = 0$
+    \item hyperbolic if $D > 0$
+\end{itemize}
+
+\section*{First Order Linear}
+\textbf{Directional Derivative:}
+\begin{enumerate}
+    \item Write as a directional derivative
+    \item Show that u is constant on characteristic lines 
+\end{enumerate}
+
+Example 1: $au_x + bu_y = 0$
+\[\brak{u_x, u_y} \cdot \brak{a, b} = \nabla u \cdot \vec{v} = 0\]
+\[m = \frac{b}{a} \implies y = \frac{b}{a}x + C \implies ay - bx = C\]
+\[u(x, y) = f(ay - bx)\]
+
+Example 2: $u_x + yu_y = 0$
+\[\nabla u \cdot (1, y) = 0\]
+\[\frac{y}{1} = y' \quad \text{slope = derivative} \]
+\[y' = y \implies y = Ce^x \implies ye^{-x} = C \implies u(x, y) = f(ye^{-x})\]
+
+\textbf{Coordinate Method:}
+\begin{enumerate}
+    \item Define new variables $\xi$ and $\eta$ that are perpendicular
+    \item Rewrite the PDE in terms of $\xi$ and $\eta$ with the chain rule
+    \item Substitute definitions 
+    \item Solve
+\end{enumerate}
+
+Example: $2u_x + 3u_y = 0$
+\[\begin{cases}
+    \xi = 2x  +3y \quad \text{(from equation)}\\
+    \eta = -3x + 2y \quad \text{(perpendicular)}
+\end{cases}\]
+\begin{align*}
+    \frac{\partial u}{\partial x} = \frac{\partial u}{\partial \xi}\frac{\partial \xi}{\partial x} + \frac{\partial u}{\partial \eta}\frac{\partial \eta}{\partial x} = 2u_\xi - 3u_\eta\\
+    \frac{\partial u}{\partial y} = \frac{\partial u}{\partial \xi}\frac{\partial \xi}{\partial y} + \frac{\partial u}{\partial \eta}\frac{\partial \eta}{\partial y} = 3u_\xi + 2u_\eta\\
+\end{align*}
+\begin{align*}
+    2u_x + 3u_y &= 2(2u_\xi - 3u_\eta) + 3(3u_\xi + 2u_\eta)\\
+    &= 4u_\xi - 6u_\eta + 9u_\xi + 6u_\eta = 0\\
+    &= 13u_\xi = 0
+\end{align*}
+\[\implies u_\xi = 0 \implies u = f(\eta) \implies u(x, y) = f(2y - 3x)\]
+
+\textbf{Transform Method:} Rewrite the derivatives of u in terms of a new PDE v and solve 
+
+\section*{The Transport Equation}
+\textbf{Derivation}
+The mass on an interval is 
+\[M = \int_0^b u(x, t)\; dx\]
+But as mass is conserved between time intervals, 
+\[M_1 = M_2 = \int_0^b u(x, t)\; dx = \int_{ch}^{b + ch}u(x, t + h)\; dx\]
+where c is the speed of the fluid. Then,
+\[\frac{d}{db} \int_0^b u(x, t)\; dx = \frac{d}{db} \int_{ch}^{b+ch} u(x, t + h)\; dx\]
+By FTC, 
+\[u(b, t) = u(b + ch, t + h)\]
+Differentiate WRT h, 
+\[0 = u_x \cdot (b+ch)_h + u_t \cdot (t+h)_h = cu_x + u_t\]
+
+\textbf{Solution}
+\[u_t + cu_x = 0 \implies cu_x - u_t = 0 \implies u(x, t) = f(x -ct)\]
+
+\section*{The Fourier Transform}
+\textbf{The Gaussian:}
+\[I = \int_{-\infty}^{\infty} e^{-x^2}\; dx\]
+\begin{align*}
+    I^2 &= (I)(I)\\
+    &= \left(\int_{-\infty}^{\infty} e^{-x^2}\; dx\right)\left(\int_{-\infty}^{\infty} e^{-y^2}\; dy\right) \quad \text{(trick)}\\
+    &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{-x^2} e^{-y^2}\; dx \, dy\\
+    &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{-(x^2 + y^2)} \; dx \, dy\\
+    &= 2\pi \int_{0}^{\infty} re^{-r^2}\; dr\\
+    &= \pi
+\end{align*}
+\[\implies I = \int_{-\infty}^{\infty} e^{-x^2}\; dx = \sqrt{\pi}\]
+
+\emph{Application to sin and cos:}
+\begin{align*}
+    I &= \int_{-\infty}^{\infty} e^{ix^2}\; dx\\
+    I^2 &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{i(x^2 + y^2)}\; dy\; dx\\
+    &= \int_0^{2\pi} \int_0^\infty re^{ir^2}\; dr d\theta\\
+    &= \int_0^{2\pi} \left[\frac{e^{ir^2}}{2i}\right]_{r=0}^{r=\infty} \; d\theta = \int_0^{2\pi} -\frac{1}{2i} \; d\theta\\
+    &= \pi i\\
+    I &= \int_{-\infty}^{\infty} e^{ix^2}\; dx = \sqrt{\pi i}
+\end{align*}
+
+\begin{align*}
+    \sqrt{\pi i} &= \sqrt{\pi} \sqrt{i}\\
+    &= \sqrt{\pi} \sqrt{e^{i \frac{\pi}{2}}}\\
+    &= \sqrt{\pi} e^{i \frac{\pi}{4}}\\
+    &= \sqrt{\frac{\pi}{2}} + i\sqrt{\frac{\pi}{2}}
+\end{align*}
+\[\int_{-\infty}^{\infty} e^{ix^2}\; dx = \int_{-\infty}^{\infty} \cos(x^2) + i\sin(x^2) \; dx = \sqrt{\frac{\pi}{2}} + i\sqrt{\frac{\pi}{2}}\]
+\[\begin{cases}
+    \int_{-\infty}^{\infty} \cos(x^2)\; dx = \sqrt{\frac{\pi}{2}}\\
+    \int_{-\infty}^{\infty} \sin(x^2)\; dx = \sqrt{\frac{\pi}{2}}
+\end{cases}\]
+
+\textbf{The Fourier Transform:}
+\[\hat{f}(\kappa) = \int_{-\infty}^{\infty} f(x)e^{i\kappa x}\; dx\]
+
+Example: $\F{e^{-x^2}}$
+\begin{align*}
+    \hat{f}(\kappa) &= \int_{-\infty}^{\infty} e^{-x^2}e^{i\kappa x}\; dx\\
+    \hat{f}'(\kappa) &= i\int_{-\infty}^{\infty} xe^{-x^2} e^{i\kappa x}\; dx\\
+    &\overset{\text{IBP}}{=} i\left[-\frac{1}{2}e^{-x^2}e^{i\kappa x}\right]_{-\infty}^\infty - i \int_{-\infty}^{\infty} -\frac{1}{2} e^{-x^2}e^{i\kappa x}\; dx\\
+    &= -\frac{\kappa}{2} \hat{f}(\kappa)
+\end{align*}
+\[\hat{f}'(\kappa)= -\frac{\kappa}{2} \hat{f}(\kappa) \implies \hat{f}(\kappa) =Ce^{-\kappa^2/4} \implies \hat{f}(\kappa) = \sqrt{\pi}e^{-\kappa^2/4}\]
+
+Generally,
+\[\F{e^{-ax^2}} = \sqrt{\frac{\pi}{a}} e^{-\frac{\kappa^2}{4a}}\]
+
+\textbf{Derivatives:}
+\[\hat{f}'(\kappa) = (-i\kappa) \hat{f}(\kappa)\]
+
+Proof:
+\begin{align*}
+    \hat{f}'(\kappa) &= \int_{-\infty}^{\infty} f'(x) e^{i\kappa x}\; dx\\
+    &\overset{\text{IBP}}{=} \left[f(x)e^{i\kappa x}\right]_{-\infty}^\infty - \int_{-\infty}^{\infty} f(x) \frac{d}{dx}e^{i\kappa x}\; dx\\
+    &= 0 - i\kappa \int_{-\infty}^{\infty} f(x) e^{i\kappa x}\; dx\\
+    &= -i\kappa \hat{f}(\kappa)
+\end{align*}
+
+\textbf{Convolution:}
+\[(f \star g)(x) = \int_{-\infty}^{\infty} f(x - y)g(y)\; dy\]
+\[\F{(f \star g)(\kappa)} = \hat{f}(\kappa) \cdot \hat{g}(\kappa)\]
+
+\textbf{Inverse Fourier:}
+\[\mathcal{F}^{-1}(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} f(\kappa) e^{-i\kappa x}\; d\kappa\]
+
+\textbf{Shifting:}
+\[\F{f(x - a)} = e^{i\kappa a} \hat{f}(\kappa)\]
+
+\section*{The Heat Equation}
+\textbf{Derivation}
+Let $u= u(x,t)$ be the concentration of particles that move only left or right along a rod. 
+Focus on the change in the concentration along an interval of length $h$ around $(x, t)$.
+Assume that as $t \to t + \tau$, each particle moves left or right with equal property, 
+\[hu(x, t + \tau) = hu(x, t) + \Delta u(x, t)\]
+\[\Delta u(x, t) = \text{in - out} = \frac{1}{2}hu(x - h, t) + \frac{1}{2}hu(x + h, t) - hu(x, t)\]
+(interpretation: all the original particles at $(x, t)$ leave but half from $(x - h, t)$ and half from $(x + h, t)$ come)
+Therefore, 
+\[hu(x, t + \tau) - hu(x, t)= \frac{1}{2}hu(x - h, t) + \frac{1}{2}hu(x + h, t) - hu(x, t) \]
+
+Make some transformations and write in the limit form of the derivative to get 
+\[\frac{u(x, t + \tau) - u(x, t)}{\tau} = \frac{h^2}{2\tau}\left(\frac{u(x - h, t) - 2u(x, t) + u(x + h, t)}{h^2}\right)\]
+\[u_t = \frac{h^2}{2\tau} u_{xx}\]
+Then define tau such that $h^2/2\tau = D$ giving 
+\[u_t = Du_{xx}\]
+
+\textbf{Solving}
+\[\begin{cases}
+    u_t = Du_{xx}\\
+    u(x, 0) = f(x)
+\end{cases}\]
+
+Solution:
+\begin{align*}
+    \F{u_t} =\F{Du_{xx}}\\
+    \frac{d}{dt} \hat{u} &= D(-i\kappa)^2 \hat{u}\\
+    &= -D\kappa^2 \hat{u}\\
+    \hat{u} &= \hat{u}(\kappa, 0)e^{-D\kappa^2t}\\
+    &= \hat{f}(\kappa) e^{-D\kappa^2t}
+\end{align*}
+From the Gaussian, 
+\[e^{-\frac{\kappa^2}{4a} = e^{-D\kappa^2t}}\implies a = \frac{1}{4Dt} \implies \sqrt{\frac{a}{\pi}} = \frac{1}{\sqrt{4\pi Dt}}\]
+\[e^{-\kappa^2Dt} = \F{\frac{1}{\sqrt{4\pi Dt}}e^{-\frac{x^2}{4Dt}}}\]
+\[\hat{u} = \hat{f}(\kappa) \cdot \F{\frac{1}{\sqrt{4\pi Dt}}e^{-\frac{x^2}{4Dt}}} = \F{(f \star g)(\kappa, t)}\]
+\[u(x, t) = \int_{-\infty}^{\infty} f(y) g(x - y, t)\; dy\]
+\[u(x, t) = \frac{1}{\sqrt{4\pi Dt}} \int_{-\infty}^{\infty} f(y) e^{-\frac{(x - y)^2}{4Dt}} \; dy\]
+
+If there is a specified exponential initial condition, simplify the exponent, complete the square, and u-sub to form the gaussian, then eliminate with $\sqrt{\pi}$
+
+\textbf{Properties}
+\begin{enumerate}
+    \item ``Infinite speed of propagation:" If $f \geq 0$ is positive somewhere and continuous, u is positive everywhere
+    \emph{Proof:} the exponential function is positive and if f is continuous, it is positive around a region $x_0$ so the full infinite integrand is positive (so $\geq$ to a subset) but that subset is strictly positive so u is strictly positive 
+    \item ``Smoothness:'' u is infinitely differentiable 
+    \emph{Proof:} the exponential term is infinitely differentiable
+    \item ``Irreversibility:'' $u(x, 0)$ cannot be determined from $u(x, 1)$
+    \emph{Proof:} $u(x, 1) = |x|$ can be given but this is not smooth so violates the earlier property 
+    \item ``Heat dissipates over time:'' 
+    \[\lim_{t \to \infty}u(x, t) = 0\]
+    \emph{Proof:}
+    \begin{align*}
+        |u(x, t)| &= \left|\frac{1}{\sqrt4\pi D t} \int_{-\infty}^\infty e^{-\frac{(x - y)^2}{4Dt}} f(y) \; dy\right|\\
+        &\leq \frac{1}{\sqrt4\pi D t} \int_{-\infty}^\infty |f(y)| \underbrace{e^{-\frac{(x - y)^2}{4Dt}}}_{\leq 1} \; dy\\
+        &\leq \frac{1}{\sqrt4\pi D t} \int_{-\infty}^\infty |f(y)| \; dy\\
+        &= C \overset{t \to \infty}{\longrightarrow} 0
+    \end{align*}
+    \item ``Boundedness:'' if $|f(x)| \leq M$, then $|u(x, t)| \leq M$
+    \emph{Proof:}
+    \[|u(x, t)| \leq \frac{1}{\sqrt{4\pi Dt}} \int_{-\infty}^{\infty} |f(y)| e^{-\frac{(x - y)^2}{4Dt}} \; dy \leq M\]
+    \item ``Conservation of Mass:'' 
+    \[\int_{-\infty}^{\infty} u(x, t)\; dx = \int_{-\infty}^{\infty} f(x) \; dx\]
+    \emph{Proof:}
+    \[\frac{d}{dt}\int_{-\infty}^{\infty} u(x, t)\; dx = 0\] 
+    \[\implies \int_{-\infty}^{\infty} u(x, t)\; dx = \int_{-\infty}^{\infty} u(x, 0)\; dx = \int_{-\infty}^{\infty} f(x)\; dx\]
+\end{enumerate}
+\section*{The Wave Equation}
+\[u_{tt} = c^2 u_{xx}\]
+\textbf{Factoring Method}
+Apply the differential operator to the difference:
+\[u_{tt} - c^2 u_{xx} = \left(\frac{\partial}{\partial t} - c \frac{\partial}{\partial x}\right)\left(\frac{\partial}{\partial t} + c\frac{\partial}{\partial x}\right) = 0\]
+Let $v = (\frac{\partial}{\partial t} + c\frac{\partial}{\partial x})$ so 
+\[\left(\frac{\partial}{\partial t} - c \frac{\partial}{\partial x}\right)v = 0 \implies v_t - cv_x = 0 \implies v(x, t) = f(x + ct)\]
+Solve for u:
+\[v = \left(\frac{\partial}{\partial t} + c\frac{\partial}{\partial x}\right)u = u_t + cu_x \implies u_t + cu_x = f(x + ct)\]
+Solve the inhomogeneous transport equation using undetermined coefficients:
+\[u_p = h(x + ct) \overset{\text{plug in}}{\Longrightarrow} h(x + ct) = \frac{1}{2c}F(x + ct)\]
+where $F$ is an antiderivative of $f$ giving a general solution
+\[u(x, t) = F(x + ct) + G(x - ct)\]
+
+\textbf{Coordinate Method}
+Define variables 
+\[\begin{cases}
+    \xi = x - ct\\
+    \eta = x + ct
+\end{cases}\]
+Chain rule:
+\[\begin{cases}
+    u_x = u_\xi \xi_x + u_\eta \eta_x = u_\xi + u_\eta\\
+    u_{xx} = (u_x)_\xi \xi_x + (u_x)_\eta \eta_x  = (u_\xi)_\xi + (u_\eta)_\eta = u_{\xi \xi} + 2u_{\xi \eta} + u_{\eta \eta}\\
+    u_{tt} = c^2(u_{\xi \xi} - 2u_{\xi \eta} + u_{\eta \eta})  
+\end{cases}\]
+\[c^2(u_{\xi \xi} - 2u_{\xi \eta} + u_{\eta \eta}) = c^2(u_{\xi \xi} + 2u_{\xi \eta} + u_{\eta \eta}) \Longrightarrow 4u_{\xi \eta} = 0\]
+\[u_{\xi \eta} = 0 \implies u_{\xi} = f(\xi) \implies u = F(\xi) + G(\eta)\]
+\[u(x, t) = F(x - ct) + G(x + ct)\]
+
+\textbf{Fourier Transform}
+\[\F{u_{tt}} = c^2 \F{u_{xx}}\]
+\begin{align*}
+    \frac{d^2}{dt^2} \hat{u} &= c^2 (-i\kappa)^2 \hat{u}= -\kappa^2 c^2 \hat{u}\\
+    \overset{y'' +ay=0}{\Longrightarrow} \hat{u} &= \hat{F}(\kappa)e^{i\kappa ct} + \hat{G}(\kappa)e^{-i\kappa ct}
+\end{align*}
+\[u = F(x - ct) + G(x + ct)\]
+\end{document}

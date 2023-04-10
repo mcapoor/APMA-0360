@@ -1,0 +1,507 @@
+\documentclass[12pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{empheq}
+\usepackage{xcolor}
+\renewcommand{\L}[1]{\mathcal{L}\{#1\}}
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+\newcommand{\vecs}[1]{\langle #1\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\F}[1]{\mathcal{F}(#1)}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+\newcommand{\E}{\mathbb{E}}
+
+\title{APMA 0360 Midterm 2 Review}
+\author{Milan Capoor}
+\date{12 April 2023}
+
+\begin{document}
+\maketitle
+\section{Trig Identities}
+\begin{enumerate}
+    \item $\sin^2 x + \cos^2 x = 1$
+    \item $1 + \tan^2 x = \sec^2 x$
+    \item $\cos(-x) = \cos(x), \quad \sin(-x) = -\sin(x)$
+    \item $\cos(2x) = \cos^2x - \sin^2 x$
+    \item $\sin(2x) = 2\sin(x)\cos(x)$
+    \item $\cos^2 x = \frac{1}{2} + \frac{1}{2}\cos(2x)$
+    \item $\sin^2 x = \frac{1}{2} - \frac{1}{2}\cos(2x)$
+\end{enumerate}
+
+\section{Wave Equation}
+\[u_{tt} = c^2 u_{xx}\]
+\subsection{Factoring Method}
+\begin{align*}
+    u_{tt} - c^2 u_{xx} &= \left[\left(\frac{\partial}{\partial t}\right)^2 - c^2 \left(\frac{\partial}{\partial x}\right)^2\right]u\\
+    &= \left(\frac{\partial}{\partial t} - c \frac{\partial}{\partial x}\right)\left(\frac{\partial}{\partial t} + c\frac{\partial}{\partial x}\right) = 0
+\end{align*}
+Let $v = \frac{\partial}{\partial t} + c\frac{\partial}{\partial x}$ si 
+\[\left(\frac{\partial}{\partial t} - c\frac{\partial}{\partial x}\right)v = 0 \implies v_t - cv_x = 0\]
+Solving the transport PDE,
+\[v(x, t) = f(x + ct)\]
+Solving for u,
+\[u_t + cu_x = f(x + ct)\]
+Homogeneous solution:
+\[u_0(x, t) = G(x - ct)\]
+Undetermined coeffiecients:
+\[u_p = h(x + ct)\]
+\begin{gather*}
+    (h(x +ct))_t + c(h(x + ct))_x = f(x + ct)\\
+    ch' + ch' = f\\
+    h' = \frac{1}{2c}f\\
+    h(x + ct) = \frac{1}{2c}F(x + ct)
+\end{gather*}
+so 
+\[\boxed{u(x, t) = G(x - ct) + F(x + ct)}\]
+
+\subsection{Coordinate Method}
+Define orthogonal variables from the equation
+\[\begin{cases}
+    \xi = x - ct\\
+    \eta = x + ct
+\end{cases}\]
+So 
+\begin{align*}
+    u_x &= u_\xi \, \xi_x + u_\eta \, \eta_x = u_\xi + u_\eta\\
+    u_{xx} &= (u_x)_x = (u_x)_{\xi} \, \xi_x + (u_x)_\eta \, \eta_x\\
+    &= u_{\xi \xi} + 2u_{\xi \eta} + u_{\eta \eta}\\
+    u_{tt} &= c^2(u_{\xi \xi} - 2u_{\xi \eta} + u_{\eta \eta})
+\end{align*}
+Plug into the wave equation 
+\begin{gather*}
+    u_{tt} = c^2 u_{xx}\\
+    c^2(u_{\xi \xi} - 2u_{\xi \eta} + u_{\eta \eta}) = c^2(u_{\xi \xi} + 2u_{\xi \eta} + u_{\eta \eta}) = 4u_{\xi \eta}\\
+    u_{\xi \eta} = 0\\
+    u_\xi = f(\xi)\\
+    u = F(\xi) + G(\eta)
+\end{gather*}
+\[\boxed{u(x, t) = F(x - ct) + G(x + ct)}\]
+
+\subsection{D'Alembert's Formula Derivation}
+\[\begin{cases}
+    u_{tt} = c^2 u_{xx}\\
+    u(x, 0) = \phi(x)\\
+    u_t(x, 0) = \psi(x)
+\end{cases}\]
+
+From above, the wave equation has general solution 
+\[u(x, t) = F(x - ct) + G(x + ct)\]
+so with initial conditions:
+\[u(x, 0) = \phi(x) = F(x) + G(x)\]
+\[u_t(x, 0)= \psi(x) = -cF'(x) + cG'(x) \implies -F'(x) + G'(x) = \frac{\psi(x)}{c}\]
+Integrate over $[0, x]$:
+\begin{gather*}
+    \int_0^x -F'(s) + G'(s) \; ds = \int_0^x \frac{\psi(s)}{c}\; ds\\
+    -F(x) + G(x) -(-F(0) + G(0)) = \frac{1}{c}\int_0^x \psi(s)\; ds
+\end{gather*}
+This gives the system of equations 
+\[\begin{cases}
+    -F(x) + G(x) = A + \frac{1}{c}\int_0^x \psi(s)\; ds\\
+    F(x) + G(x) = \phi(x)
+\end{cases}\]
+\[\implies \begin{cases*}
+    2G(x) = \phi(x) + A + \frac{1}{c}\int_0^x \psi(s)\; ds\\
+    2F(x) = \phi(x) - A - \frac{1}{c}\int_0^xx \psi(s)\;ds
+\end{cases*}\]
+Solution:
+\begin{align*}
+    u(x, t) &= F(x - ct) + G(x+ct)\\
+    &= \frac{1}{2}\phi(x - ct) - \frac{A}{2} - \frac{1}{2c}\int_0^{x - ct} \psi(s)\; ds + \frac{1}{2}\phi(x + ct) + \frac{A}{2} + \frac{1}{2c}\int_0^{x+ct}\psi(s)\;ds\\
+    &= \frac{1}{2}(\phi(x -ct) + \psi(x + ct)) + \frac{1}{2c}\left(\int_{x-ct}^0 \psi(s)\;ds + \int_0^{x+ ct} \psi(s)\; ds\right)
+\end{align*}
+Which at last gives us d'Alembert's equation:
+\[\boxed{u(x, t) = \frac{1}{2}(\phi(x -ct) + \psi(x + ct)) + \frac{1}{2c}\left(\int_{x-ct}^0 \psi(s)\;ds + \int_0^{x+ ct} \psi(s)\; ds\right)}\]
+
+\section{Energy Methods}
+\subsection{Wave Equation}
+Steps:
+\begin{enumerate}
+    \item Multiply by a clever function (usually $u$ or $u_t$)
+    \item Integrate with respect to $x$
+\end{enumerate}
+
+\textbf{Example:}
+\[u_{tt} = c^2 u_{xx}\]
+\[u_{tt}u_t = c^2 u_{xx} u_t\]
+\[\int_{-\infty}^{\infty} u_{tt} u_t \; dx =\]
+LHS by chain rule:
+\[\int_{-\infty}^{\infty} u_{tt} u_t \; dx = \frac{d}{dt}\left(\frac{1}{2}\int_{-\infty}^{\infty} (u_t)^2 \; dx\right)\]
+
+RHS by parts:
+\begin{align*}
+    c^2 \int_{-\infty}^{\infty} u_{xx} u_t \; dx &= [u_x u_t]_{-\infty}^\infty - \int_{-\infty}^{\infty} u_x u_{xt}\; dx\\
+    &= -\int_{-\infty}^{\infty} u_x u_{xt} \; dx\\
+    &= - \int_{-\infty}^{\infty} \frac{d}{dt}\left(\frac{1}{2}(u_x)^2\right)\; dx\\
+    &= \frac{d}{dt}\left(-\frac{1}{2}\int_{-\infty}^{\infty} (u_x)^2\; dx\right)
+\end{align*}
+Then from $u_{tt} u_t = c^2u_{xx} u_t$,
+\[\frac{d}{dt}\left(\frac{1}{2}\int_{-\infty}^{\infty} (u_t)^2 \; dx\right) = c^2 \frac{d}{dt}\left(-\frac{1}{2}\int_{-\infty}^{\infty} (u_x)^2\; dx\right)\]
+\[\frac{d}{dt}\left(\frac{1}{2}\int_{-\infty}^{\infty} (u_t)^2 + c^2(u_x)^2 \; dx\right)= 0\]
+\[\frac{d}{dt}E(t) = 0\]
+Which proves that the energy function is constant. $\qed$
+
+\subsection{Heat Equation}
+Suppose u solves the PDE 
+\[\begin{cases}
+    u_t = Du_{xx}\\
+    u(x, 0) = 0\\
+    u(0, t) = 0\\
+    u(l, t) = 0
+\end{cases}\]
+Then $u(x, t) = 0\quad \forall x,\, t$.
+
+\textbf{Proof:}
+Start with $u_t = Du_{xx}$ and multiply by $u$:
+\[u_t u = Du_{xx} u\]
+Integrate WRT $x$ on $[0, l]$ 
+\[\int_0^l u_t u\; dx = D\int_0^l u_{xx}u \; dx\]
+\[\frac{d}{dt} \left(\int_0^l u^2 \; dx\right) = D\left[u_x(l, t)u(l, t) - u_x(0, t) - \int_0^l u_x u_x \; dx\right]\] 
+\[\frac{d}{dt} \left(\int_0^l u^2 \; dx\right) = -D\int_0^l (u_x)^2 \; dx\]
+Define 
+\[E(t) = \frac{1}{2}\int_0^l u^2 \; dx\]
+and notice that $ -D\int_0^l (u_x)^2 \; dx \leq 0$ so 
+\[\frac{d}{dt}E(t) \leq 0\] 
+which means that $E(t) \leq E(0)$ and 
+\[E(t) = \frac{1}{2}\int_0^l (u(x, t))^2 \; dx \leq E(0) = \frac{1}{2}\int_0^l(u(x, 0))^2\; dx = 0\]
+which means that $0 \leq E(t) \leq E(0) = 0 \implies E(t)= 0$ so $u(x, t) = 0$ for all $x$ and $t. \qed$
+
+\subsection{Uniqueness}
+\textbf{Fact:} there is at most one solution of 
+\[\begin{cases*}
+    u_{tt} = c^2 u_{xx}\\
+    u(x, 0) = \phi(x)\\
+    u_t(x, 0) = \psi(x)
+\end{cases*}\]
+
+\textbf{Proof:} Suppose there are two functions $u$ and $v$ that solve the above PDE. Then, checking if $w$ solves the PDE too,
+\begin{gather*}
+    w_{tt} = c^2 w_{xx}\\
+    w(x, 0) = u(x, 0) - v(x, 0) = \phi(x) - \phi(x) = 0\\
+    w_t(x, 0) = u_t(x, 0) - v_t(x, 0) = \psi(x) - \psi(x) = 0
+\end{gather*}
+Using the energy method as above, we show that 
+\[E(t) = \frac{1}{2}\int_{-\infty}^{\infty} (w_t)^2 + c^2(w_x)^2\; dx\]
+is constant so $E(t) = E(0)$ and 
+\[\frac{1}{2}\int_{-\infty}^{\infty} (w_t)^2 + c^2(w_x)^2\; dx = \frac{1}{2}\int_{-\infty}^{\infty} (w_t(x, 0))^2 + c^2(w_x(x, 0))^2 \; dx\]
+by the initial conditions $w_t(x, 0) = 0$ and 
+\[w(x, 0) = 0 \implies (w(x, 0))_x = 0_x \implies w_x(x, 0) = 0\]
+so the above becomes 
+\[\frac{1}{2}\int_{-\infty}^{\infty} (w_t)^2 + c^2(w_x)^2 \; dx =0\]
+Then as $(w_t)^2 + c^2(w_x)^2 \geq 0$, and the integral is positive, 
+\[(w_t)^2 + c^2(w_x)^2 = 0\]
+so 
+\[\begin{cases}
+    w_t = 0\\
+    w_x = 0
+\end{cases} \implies w(x, t) = C\]
+but as $w(x, 0) = 0$, we know that 
+\[w(x, t) = 0 \implies u - v= 0 \implies u = v\]
+so there is at most one solution. $\qed$
+
+\section{Separation of Variables}
+\subsection{Wave}
+\textbf{Example:} 
+\[\begin{cases}
+    u_{tt} = c^2u_{xx}\\
+    u(0, t) = 0\\
+    u(1, t) = 0\\
+    u(x, 0) = x^2\\
+    u_t(x, 0) = e^x
+\end{cases}\]
+
+\textbf{Solution:}
+Assume that $u(x, t) = X(x)T(t)$ so 
+\begin{gather*}
+    XT'' = c^2X''T\\
+    \frac{T''}{c^2T} = \frac{X''}{X} = \lambda
+\end{gather*}
+
+Initial conditions:
+\[\begin{cases*}
+    X'' = \lambda X\\
+    u(0, t) = 0 \implies X(0) = 0\\
+    u(1, t) = 0 \implies X(1) = 0
+\end{cases*}\]
+
+\emph{Boundary Value Problem:}
+$\lambda > 0$:
+\[X = Ae^{\omega x} + Be^{-\omega x}\]
+\[X(0) = A + B = 0 \implies X = Ae^{\omega x} - Ae^{\omega x}\]
+\[X(1) = Ae^{\omega} - Ae^{-\omega} = 0 \implies \omega = -\omega \implies \omega = 0\]
+
+$\lambda = 0$:
+\[X(x) = A + Bx\]
+\[X(0) = A = 0 \implies X(x) = Bx\]
+\[X(1) = B = 0 \implies X(x) = 0\]
+
+$\lambda <0$:
+\[X(x) = A\cos(\omega x) + B\sin(\omega x)\]
+\[X(0) = A = 0 \implies X(x) = B\sin(\omega x)\]
+\[X(1) = 0 \implies \sin(\omega) = 0 \implies \omega = \pi m \quad (m = 1, 2, ...)\]
+So $X(x) = \sin(\pi mx)$ corresponding to $\lambda = -(\pi m)^2 \quad (m =1, 2, ...)$
+
+\emph{Conclusion}
+\[\frac{T''}{c^2T} = \lambda = -(\pi m)^2\]
+\[T'' + (\pi m c)^2 T = 0\]
+\[T(t) = A\cos(\pi mct) + b\sin(\pi mct)\]
+So via linearity and the definition of X and T, 
+\[u(x, t) = \sum_{m=1}^\infty (A_m\cos(\pi mct) + B_m\sin(\pi mct))\sin(\pi mx)\]
+
+\emph{Initial conditions:}
+\[u(x, 0) = \boxed{\sum_{m=1}^\infty A_m\sin(\pi mx) = x^2}\]
+\[u_t(x, t) = \sum_{m=1}^\infty (-A_m\pi mc \sin(\pi mct) + B_m \pi mc \cos(\pi mct))\cos(\pi mx)\]
+\[u_t(x, 0) = \boxed{\sum_{m=1}^\infty B_m\pi mc \sin(\pi mx) = e^x}\]
+
+\subsection{Heat}
+\textbf{Example:}
+\[\begin{cases}
+    u_t = Du_{xx}\\
+    u_x(0, t) = 0\\
+    u_x(\pi, t) = 0\\
+    u(x, 0) = x^2
+\end{cases}\]
+
+\textbf{Solution:}
+Suppose $u(x, t) = X(x) T(t)$. Then 
+\begin{gather*}
+    XT' = DX''T\\
+    \frac{X''}{X} = \frac{T'}{DT} = \lambda
+\end{gather*}
+
+\[\begin{cases*}
+    X'' = \lambda X\\
+    u_x(0, t) = 0\implies X'(x) = 0\\
+    u_x(\pi, t) = 0 \implies X'(\pi) = 0
+\end{cases*}\]
+
+\emph{Boundary Value Problem:}
+$\lambda > 0$: 
+\[X = Ae^{\omega x} + Be^{-\omega x}\]
+\[X'(0) = A\omega - B\omega = 0 \implies A = B\]
+\[X'(\pi) = A\omega e^{\pi \omega} - A\omega e^{\pi \omega} = 0 \implies \omega = 0\]
+
+$\lambda = 0$:
+\[X = A + Bx\]
+\[X'(0) = B =0 \implies X = A\]
+So $\lambda = 0$ is an eigenvalue with eigenfunction $X(x) =A$
+
+$\lambda < 0$:
+\[X(x) = A\cos(\omega x) + B\sin(\omega x)\]
+\[X'(0) = -A\omega \sin(0) + B\omega \cos(0) = 0 \implies B =0\]
+\[X(x) = A\cos(\omega x)\]
+\[X'(\pi) = 0 \implies \sin(\omega \pi) = 0\]
+So $\lambda = -m^2$ are the eigenvalues corresponding to eigenfunction $X(x) = \cos(mx)$
+
+\emph{T equation}
+\[\frac{T'}{DT} = \lambda = -m^2 \implies T' = -m^2DT\]
+\[T(t) = e^{-m^2Dt}\]
+so 
+\[u(x, t) = X(x)T(t) = e^{-m^2Dt}\cos(mx) \quad (m= 0, 1,2, ...)\]
+
+\emph{Initial Conditions}
+By linearity,
+\[u(x, t) = \sum_{m=0}^\infty A_me^{-m^2Dt}\cos(mx)\]
+\[u(x, 0) = \boxed{x^2 = \sum_{m=0}^\infty A_m \cos(mx)}\]
+
+\subsection{Laplace}
+\emph{Note:} For Laplace's equation, you don't always start with the X equation, sometimes you start with Y . Always choose the variable that gives you a 0 boundary condition
+
+\textbf{Example:}
+\[\begin{cases}
+    u_{xx} + u_{yy} = 0\\
+    u(0, y) = 0\\
+    u(\pi, y) = 0\\
+    u(x, 0) = x\\
+    u(x, 1) = 3
+\end{cases}\]
+
+\textbf{Solution:}
+Assume $u(x, y) = X(x)Y(y)$. 
+\begin{gather*}
+    X''Y + XY'' = 0\\
+    \frac{X''}{X} = -\frac{Y''}{Y} = \lambda
+\end{gather*}
+
+\emph{Initial conditions:}
+\begin{gather*}
+    u(0, y) = 0 \implies X(0) = 0\\
+    u(\pi, y) = 0 \implies X(\pi) = 0
+\end{gather*}
+
+\emph{Boundary Value:}
+\[X'' = \lambda X\]
+$\lambda > 0$: 
+\[X = Ae^{\omega x} + Be^{\omega x}\]
+\[X(0) = A + B = 0 \implies A = -B\]
+\[X(\pi) = Ae^{\omega \pi} - Ae^{-\omega \pi} = 0 \implies \omega = 0\]
+
+$\lambda = 0$:
+\[X = A + Bx\]
+\[X(0) = A = 0\]
+\[X(\pi) = B\pi = 0 \implies B =0\]
+
+$\lambda < 0$:
+\[X(x) = A\cos(\omega x) + B\sin(\omega x)\]
+\[X(0) = A = 0 \implies X(x) = B\sin(\omega x)\]
+\[X(\pi) = B\sin(\pi \omega) = 0 \implies \sin(\pi m) = 0 \quad (m=1, 2, ...)\]
+So $X(x) = \sin(mx)$ corresponding to $\lambda = -m^2$
+
+\emph{Back to Laplace:}
+\[Y''(y) = -\lambda Y(y) = m^2Y(y)\]
+\begin{align*}
+    Y(y) &= Ae^{my} + Be^{-my}\\
+    &= A(\cosh(my) + \sinh(my)) + B(\cosh(my)- \sinh(my))\\
+    &= (A + B)\cosh(my) + (A-B)\sinh(my)\\
+    &= A\cosh(my) + B\sinh(my)
+\end{align*}
+\[u(x, y) = X(x)Y(y) = (A\cosh(my) + B\sinh(my))\sin(mx)\]
+\[u(x, y) = \sum_{m=1}^\infty (A_m\cosh(my) + B_m\sinh(my))\sin(mx)\]
+\[u(x, 0) = \boxed{\sum_{m=1}^\infty A_m\sin(mx) = x}\]
+\[u(x, 1) = \boxed{\sum_{m=1}^\infty (A_m\cosh(m) + B_m\sinh(m))\sin(mx) = 3}\]
+
+\section{Fourier Series}
+\subsection{Sine series}
+Because $\{\sin(mx)\; | \;m= 1, 2, ...\}$ is orthogonal, for
+\[f(x) = \sum_{m=1}^\infty A_m\sin(mx)\]
+on $(0, \pi)$ we have
+\[A_m = \frac{f \cdot \sin(mx)}{\sin(mx) \cdot \sin(mx)} = \frac{\int_0^\pi f(x)\sin(mx)\; dx}{\int_0^\pi \sin^2(mx)\; dx} = \frac{2}{\pi}\int_0^\pi f(x)\, \sin(mx)\; dx.\]
+
+More generally for 
+\[f(x) = \sum_{m=1}^\infty A_m \sin(\frac{\pi mx}{L})\]
+on $(0, L)$ we have 
+\[\boxed{A_m = \frac{2}{L}\int_0^L f(x)\, \sin(\frac{\pi mx}{L})\; dx}\]
+\subsection{Cosine series}
+Similarly, for 
+\[f(x) = \sum_{m=0}^\infty A_m\cos(mx)\]
+on $(0, \pi)$, 
+\[A_m = \frac{f\cdot \cos(mx)}{\cos(mx) \cdot \cos(mx)} = \frac{2}{\pi}\int_0^\pi f(x)\cos(mx) \; dx\]
+but 
+\[A_0 = \frac{1}{\pi}\int_0^\pi f(x)\; dx.\]
+
+Generally, for 
+\[f(x) = \sum_{m=0}^\infty A_m \cos(\frac{\pi mx}{L}) \quad 0 < x < L\]
+we have 
+\begin{empheq}[box=\fbox]{align*}
+    A_m &= \frac{2}{L}\int_0^L f(x)\cos(\frac{\pi mx}{L})\; dx\\
+    A_0 &= \frac{1}{L}\int_0^L f(x)\;dx
+\end{empheq}
+\subsection{Full series}
+When the interval is extended to $(-\pi, \pi)$ we redefine the dot product as 
+\[f \cdot g = \int_{-\pi}^\pi f(x)\, g(x)\; dx\]
+so for 
+\[f(x) = \sum_{m=0}^\infty A_m\cos(\frac{\pi mx}{L}) + B_m \sin(\frac{\pi mx}{L})\] 
+on $(-\pi, \pi)$ we have 
+\begin{empheq}[box=\fbox]{align*}
+    A_m &= \frac{1}{L}\int_{-L}^L f(x)\cos(\frac{\pi mx}{L})\; dx\\
+    B_m &= \frac{1}{L}\int_{-L}^L f(x)\sin(\frac{\pi mx}{L})\; dx\\
+    A_0 &= \frac{1}{2L}\int_{-L}^L f(x)\; dx\\
+    B_0 &= 0
+\end{empheq}
+\subsection{Complex series}
+For complex numbers, we again redefine the dot product such that 
+\[f \cdot g = \int_{-\pi}^\pi f(x) \overline{g(x)}\]
+where 
+\[\overline{a +bi} = a -bi\]
+so on $-\pi < x < \pi$,
+\[f(x) = \sum_{m=-\infty}^\infty C_m e^{imx}\]
+we have 
+\[C_m = \frac{f \cdot e^{imx}}{e^{imx} \cdot e^{imx}} = \frac{1}{2\pi} \int_{-\pi}^\pi f(x)e^{-imx}\; dx.\]
+
+Generally, with 
+\[f(x) = \sum_{m=-\infty}^\infty C_me^{i\left(\frac{\pi mx}{L}\right)}\]
+on $(-L, L)$:
+\[\boxed{C_m = \frac{1}{2L} \int_{-L}^L f(x)e^{-i\left(\frac{\pi mx}{L}\right)}\; dx}\]
+
+\subsection{Parseval's Identity}
+\textbf{Definition:} $||u|| = \sqrt{u \cdot u}$ and $||cu|| = |c| \; ||u||$
+
+\textbf{Pythagorean Theorem:} If $\{u, v, w\}$ is orthogonal,
+\[||u + v + w||^2 = ||u||^2 + ||v||^2 + ||w||^2\]
+
+Then on $(0, \pi)$, because $\{\sin(mx)\}$ is orthogonal,
+\begin{align*}
+    f(x) &= \sum_{m=1}^\infty A_m \sin(mx)\\
+    ||f||^2 &= \left|\left|\sum_{m=1}^\infty A_m \sin(mx)\right|\right|^2\\
+    &= \sum_{m=1}^\infty ||A_m \sin(mx)||^2\\
+    &= \sum_{m=1}^\infty |A_m|^2 ||\sin(mx)||^2\\
+    \int_0^\pi (f(x))^2\; dx &= \sum_{m=1}^\infty |A_m|^2 \int_0^\pi \sin^2(mx) \; dx\\
+    &= \frac{\pi}{2}\sum_{m=1}^\infty |A_m|^2
+\end{align*}
+so 
+\[\boxed{\sum_{m=1}^\infty |A_m|^2 = \frac{2}{\pi}\int_0^\pi (f(x))^2\; dx}\]
+
+\section{Laplace Equation}
+\subsection{Derivation}
+From the 2D heat equation where $u = u(x, y, t)$
+\[u_t = D(u_{xx} + u_{yy})\]
+We assume that $\lim_{t\to \infty} u_t = 0$ so 
+\[0 = D(u_{xx} + u_{yy}) \implies u_{xx} + u_{yy} = 0\]
+\subsection{Rotational Invariance}
+\textbf{Theorem:} 
+
+Let $\Delta u(x, y) = 0$. Then for some constant $\theta$ where 
+\[\begin{bmatrix}
+    x'\\y'
+\end{bmatrix} = \begin{bmatrix}
+    \cos \theta & -\sin \theta\\
+    \sin \theta & \cos \theta
+\end{bmatrix} \begin{bmatrix}
+    x\\y
+\end{bmatrix}\]
+\[u_{x' x'} + u_{y' y'} = u_{xx} + u_{yy} = 0\]
+
+\textbf{Proof:}
+\[\begin{cases}
+    x' = \cos(\theta) x - \sin(\theta)y\\
+    y' = \sin(\theta)x + \cos(\theta)y
+\end{cases}\]
+\begin{align*}
+    u_x &= u_{x'} \cdot x'_x + u_{y'} \cdot y_x' = (u_{x'})\cos(\theta) + (u_{y'})\sin(\theta)\\
+    u_{xx} &= (u_x)_{x'} \cdot x'_x + (u_x)_{y'} \cdot y'_x = u_{x'x'}\cos^2(\theta) + 2u_{x'y'}\sin(\theta)\cos(\theta) + u_{y'y'} \sin^2(\theta)\\
+    u_y &= u_{x'} \cdot x'_y + u_{y'} \cdot y'_y = -u_{x'}\sin(\theta) + u_{y'}\cos(\theta)\\
+    u_{yy} &= (u_y)_{x'} \cdot x'_y + (u_y)_{y'} \cdot y'_y = u_{x'x'}\sin^2(\theta) - 2u_{y'x'}\cos(\theta)\sin(\theta) + u_{y'y'}\cos^2(\theta)
+\end{align*}
+\[u_{xx} + u_{yy}= u_{x'x'} + u_{y'y'} \qed\]
+
+\subsection{Fundamental Solution}
+\textbf{Example:}
+Use the Polar Laplace 
+\[u_{rr} + \frac{1}{r}u_r =0\]
+with constants $A = -\frac{1}{2\pi}$ and $B =0$ to derive the fundamental solution to the Laplace equation. 
+
+\textbf{Solution:}
+\emph{Integrating factors:}
+\[e^{\int \frac{1}{r}\; dr} = e^{\ln r} = r\]
+\[ru_{rr} + u_r = 0 \implies (ru_r)_r = 0\]
+\[ru_{r} = A \implies u_r = \frac{A}{r}\]
+\[u = A \ln r + B\]
+\[u(x, y) = A\ln(\sqrt{x^2 + y^2}) + B\]
+\[\boxed{\Phi(x, y) = -\frac{1}{2\pi}\ln(\sqrt{x^2 + y^2})}\]
+\end{document}
