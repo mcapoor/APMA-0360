@@ -36,6 +36,7 @@
 \newcommand{\brak}[1]{\langle #1 \rangle}
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\slashedint}{\diagup \!\!\!\!\!\!\! \int}
+\renewcommand{\div}{\text{div}}
 \title{Partial Differential Equations: APMA 0360}
 \author{Milan Capoor}
 \date{Spring 2022}
@@ -207,7 +208,7 @@ Examples:
 \end{enumerate}
 
 \textbf{Fun fact!}
-For linear homgeneous PDE $L(u) = 0$, the sum of two solutions is still a solution
+For linear homogeneous PDE $L(u) = 0$, the sum of two solutions is still a solution
 \textbf{Why?}
 L is linear so solutions span a vector space
 
@@ -1248,7 +1249,7 @@ Then $w(x, t) = 0$ for all x and t.
 \end{enumerate}
 
 \subsection*{Energy Method for Heat}
-Suppose we have a finite rod of length l with intitial temperature 0 and insulated. 
+Suppose we have a finite rod of length l with initial temperature 0 and insulated. 
 
 \textbf{Example 2:} 
 Suppose u solves the PDE
@@ -2518,6 +2519,745 @@ Starting with energy methods,
 \end{gather*}
 So 
 \[||\nabla u||^2 = 0 \implies \nabla u = 0 \implies u = C \implies u = 0 \quad \blacksquare\]
+
+\section*{Lecture 31, April 14: Calculus of Variations (I)}
+\subsection*{Part I: Laplace Equation Property 2}
+\textbf{Recall:} \emph{Strong Maximum Principle}
+If $\Delta u = 0$ in $\Omega$ then $\max\, u$ is attained on $\partial \Omega$ and only on $\partial \Omega$ except in the trivial constant case. Same with $\min \, u$
+
+\textbf{Consequence:} Uniqueness 
+
+Suppose $u$ and $v$ both solve 
+\[\begin{cases}
+    \Delta u = f \quad \in \Omega\\
+    \;\; u = g \quad \in \partial \Omega
+\end{cases}\]
+Then $u = v$
+
+\textbf{Proof:} Let $w = u - v$. then w solves 
+\[\begin{cases}
+    \Delta w = \Delta u - \Delta v = f - f = 0 \quad \in \Omega\\
+    w = g - g = 0 \quad \in \partial \Omega
+\end{cases}\]
+\[\begin{cases}
+    \Delta w = 0 \quad \in \Omega\\
+    \;\; w = 0 \quad \in \partial \Omega
+\end{cases}\]
+But then 
+\[\underset{\Omega}{\max w} = \underset{\partial \Omega}{\max w} = 0\]
+\[\underset{\Omega}{\min w} = \underset{\partial \Omega}{\min w} = 0\]
+SO $w = 0 \implies u - v = 0 \implies u = v \quad \blacksquare$
+
+\subsection*{Property 3: Positivity}
+Suppose $u$ solves
+\[\begin{cases}
+    \Delta u = 0 \quad \in \Omega\\
+    \;\; u = g \quad \in \partial \Omega
+\end{cases}\]
+When $g \geq 0$ and $g(x_0) > 0$ for some $x_0$ on $\partial \Omega$
+
+Then $u > 0$ on all of $\Omega$
+
+\textbf{Proof:}
+\[\underset{\Omega}{\min w} = \underset{\partial \Omega}{\min w} = \underset{\partial \Omega}{\min g} \geq 0\]
+so $u \geq 0 \quad \in \Omega$. 
+Now suppose $u(x) = 0$ for some x in $\Omega$. But this is a contradiction because this new minimum will not be on $\partial \Omega.$ Hence $u > 0 \quad \in \Omega$
+
+\subsection*{Part III - Calculus of Variations}
+The Calculus of variation helps turn minimization problems into differential equations and vice verse. 
+
+\textbf{Goal:} Find a function $f(x)$ such that 
+\[I[f] = \frac{1}{2}\int_0^1 (f'(x))^2\; dx\]
+is smallest among all functions f on $[0, 1]$ such that $f(0) = 0$ and $f(1) =1$.
+
+Note that this is similar to a kinetic energy $\frac{1}{2}mv^2$
+
+\textbf{Example:} $f(x) = x^3$ gives 
+\[I[f] = \frac{1}{2}\int_0^1 (3x^2)^2\; dx = \frac{1}{2}\int_0^1 9x^4 \; dx = \frac{9}{10}\]
+
+\subsection*{Part IV - A useful trick}
+\textbf{Fact:} If 
+\[\int_0^1 f(x)\, g(x) \; dx = 0\]
+for all g with $g(0) = g(1) = 0$ then $f = 0$ (when f and g are continuous).
+
+\textbf{Proof:}
+
+Suppose $f(x_0) \neq 0$ for some $x_0$ in $(0, 1)$ ``WLOG'' $f(x_0) >0$. Since f is continuous, we have $f > 0$ on some interval $(x_0 - r, x_0 + r)$. Let g be any continuous function such that $g>0$ on $(x_0 - r, x_0 + r)$ and $g = 0$ outside that interval. On the one hand, by assumption, we have 
+\[\int_0^1 f(x)\, g(x) \; dx =0\]
+On the other hand, since $g = 0$ outside $(x_0 - r, x_0 + r)$ we get 
+\[\int_0^1 f(x)\, g(x)\;dx = \int_{x_0 - r}^{x_0 + r} \underbrace{f(x)}_{>0}\, \underbrace{g(x)}_{>0} \; dx > 0\]
+Which is a contradiction, so $f = 0$ on $(0, 1)$ and therefore also on $[0, 1]$ by continuity $\quad \blacksquare$
+
+\subsection*{Part V - Euler-Lagrange Equation}
+Back to the minimization problem:
+\begin{center}
+    Suppose f minimizes $I[f] = \frac{1}{2}\int_0^1 (f'(x))^2\; dx$
+\end{center}
+Let g be arbitrary with $g(0) = g(1) = 0$ 
+
+\emph{Step 1:} Given $f, g$ and $t \in \mathbb{R}$, consider 
+\[h(t) = I[f + tg] = \frac{1}{2}\int_0^1 (f'(x) + tg'(x))^2\; dx\]
+Notice in particular that $h(0) = I[f]$ so $h$ has a min at $t=0$
+
+In particular, from calculus, we have $h'(0) = 0$
+
+\textbf{Note:} It's precisely here that we move from minimization to a differential equation
+
+\emph{Step 2:}
+\begin{align*}
+    h'(t) &= \frac{d}{dt}\left[\frac{1}{2}\int_0^1 (f'(x) + tg'(x))^2 \; dx\right]\\
+    &= \frac{1}{2}\int_0^1 \frac{d}{dt}(f'(x) + tg'(x))^2\; dx\\
+    &= \frac{1}{2}\int_0^1 2(f'(x) + tg'(x))g'(x)\; dx\\
+    &= \int_0^1 (f' + tg') g' \; dx\\
+    &= [(f'(x) + tg'(x))g(x)]_{x=0}^{x=1} - \int_0^1 (f' + tg')' g\; dx\\
+    &= - \int_0^1 (f'' + tg'')g\; dx \quad (g(0) = g(1) = 0)
+\end{align*}
+
+\emph{Step 3:} 
+
+Setting $t = 0$ we get 
+\[h'(0) = -\int_0^1 (g'' + 0g'')g\; dx = -\int_0^1 f''g\; dx\]
+Since $h'(0) = 0$ by assumption, we have 
+\[\int_0^1 (-f''(x))g(x)\; dx = 0 \quad \forall g\]
+Since g was arbitrary, by the fact above we get 
+\[-f''(x) = 0\]
+
+\emph{Step 4:}
+
+Solving, we get 
+\[f(x) = Ax + B\]
+Using $f(0) = 0$ and $f(1) = 1$ we get $A = 1$ and $B = 0$ so 
+\[f(x) = x\]
+Notice how we were able to solve this minimization problem by turning it into an ODE. This ODE is so important it has its own special name:
+\textbf{The Euler-Lagrange Equation:} 
+\[\boxed{\min I[f] = \frac{1}{2}\int_0^1 (f')^2\; dx \Longrightarrow -f'' = 0}\]
+
+More generally suppose the Lagrangian $L = L(p, z, x)$ is given. Then 
+\[\boxed{\min I[f] = \int_a^b L(f', f, x)\; dx \Longrightarrow -(L_p(f', f, x))_x+ L_z(f', f, x) = 0}\]
+
+\subsection*{Part VI - Higher Dimensions}
+In higher dimensions the Euler-Lagrange becomes a PDE!
+
+\textbf{Two Dimensional Case:}
+Suppose $L = L(p, q, z, x, y)$ is given and consider 
+\[\min I[u] = \int_{\Omega} L(u_x, u_y, u, x, y)\; dx\, dy\]
+with $u = g$ on $\partial \Omega$. 
+
+\textbf{Fact:}
+The Euler-Lagrange Equation in that case is 
+\[-(L_p)_x - (L_q)_y + L_z = 0\]
+(evaluated at $(u_x, u_y, u, x, y)$ with $u = g$ on $\partial \Omega$) 
+
+\textbf{Example 1:} Dirichlet Energy 
+\[\min I[u] = \frac{1}{2} \int_{\Omega} |\nabla u|^2 \; dx\, dy = \frac{1}{2}\int_{\Omega} (u_x)^2 + (u_y)^2 \; dx\, dy\]
+
+This is the analog of $\int (f')^2\; dx$ from before. In that case, 
+\[L(p, q, u, x, y) = \frac{1}{2}(p)^2 + \frac{1}{2}(q)^2\]
+So $L_p =p$ and $L_q = q$ and $L_z = 0$ and in that case the E-L equation becomes 
+\[-(u_x)_x - (u_y)_y + 0 = 0 \implies -(u_{xx} + u_{yy}) = 0\]
+which is Laplace's Equation!!
+
+More precisely, 
+\[\begin{cases}
+    -\Delta u = 0 \quad \in \Omega\\
+    \;\; u = g \quad \in \partial \Omega
+\end{cases}\]
+
+\textbf{Example 2:}
+\[\min I[u] = \int_{\Omega} \frac{1}{2}|\nabla u|^2 - fu\; dx\, dy\]
+Then the E-L equation becomes 
+\[\begin{cases}
+    -\Delta u = f \quad \in \Omega\\
+    \;\; u = g \quad \in \partial \Omega
+\end{cases}\]
+Which is Poisson's!
+
+\textbf{Example 3:} Minimal Surface Equation 
+\[\min I[u] = \int_{\Omega} \sqrt{1 + |\nabla u|^2}\; dx\, dy = \int_{\Omega} \sqrt{1 + (u_x)^2 + (u_y)^2}\; dx\, dy\]
+
+In that case E-L equation becomes 
+\[-\left(\frac{u_x}{\sqrt{1 + (\nabla u)^2}}\right)_x - \left(\frac{u_y}{\sqrt{1 + (\nabla u)^2}}\right)_y = 0\]
+
+This is very interesting because in practice it is hard to solve the PDE but easier to solve the minimization problem!
+Because in fact 
+\[\int_{\Omega} \sqrt{1 + |\nabla u|^2}\; dx\, dy = \text{Surface area of f over $\Omega$}\]
+So the minimization question just becomes: Among all the graphs $u$ with $u = g$ on $\partial \Omega$, which is the one with smallest surface area?
+
+\textbf{Application:} This is interestingly related to how soap bubbles and soap films behave!
+
+\section*{Lecture 31, April 17: Calculus of Variations (II)}
+\subsection*{Part I - Calculus of Variations}
+\textbf{Goal:} Find a function $f$ such that 
+\[I[f] = \frac{1}{2}\int_0^1 (f'(x))^2 \; dx\]
+is smallest among all functions f on $[0, 1]$ such that $f(0)=0$ and $f(1)=1$. 
+
+\subsection*{Part II - Euler-Lagrange Equation}
+Suppose $f$ minimizes
+\[I[f] = \frac{1}{2}\int_0^1 (f'(x))^2 \; dx\]
+Let f be arbitrary with $g(0) = g(1) =0$.
+
+\textbf{Step 1:} Given $f, g$ and $t \in \mathbb{R}$, consider 
+\[h(t) = I[f + tg] = \frac{1}{2}\int_0^1 (f'(x) + tg'(x))^2\; dx\]
+Note that $h(0) = I[f]$ so h has a min at $t = 0$.
+
+From calculus $h'(0) = 0$
+
+\textbf{Step 2:}
+\begin{align*}
+    h'(t) &= \frac{d}{dt}\left[\frac{1}{2}\int_0^1 (f'(x) + tg'(x))^2\; dx\right]\\
+    &= \frac{1}{2}\int_0^1 \frac{d}{dt}(f'(x) + tg'(x))^2\; dx\\
+    &= \frac{1}{2}\int_0^1 2(f'(x) + tg'(x))g'(x)\; dx\\
+    &= \int_0^1 (f' + tg')g' \; dx\\
+    &= [(f' + tg')g]_{x=0}^{x=1} - \int_0^1 (g' + tg')' g\; dx\\
+    &= -\int_0^1 (f'' + tg'')g\; dx
+\end{align*}
+
+\textbf{Step 3:} Setting $t= 0$ we get 
+\[h'(0) = -\int_0^1 (f'' + 0g'')g\; dx = -\int_0^1 f''g\; dx\]
+
+Since $h'(0) = 0$ by assumption, we have 
+\[\int_0^1 (-f''(X))g(x)\; dx = 0 \quad \forall g\]
+Since g was arbitrary, by a useful fact,
+\[-f''(x) = 0\]
+
+\textbf{Step 3:} Solving, we get 
+\[f(x) = Ax + B\]
+Then using $f(0) = 0$ and $f(1) = 1$ we get $A = 1$ and $B = 0$ so 
+\[\boxed{f(x) = x}\]
+
+This ODE has its own name.
+\textbf{Definition:} The \emph{Euler-Lagrange Equation} associated to the min problem 
+\[\min I[f] = \frac{1}{2}\int_0^1 (f')^2\; dx \implies -f'' = 0\]
+More generally suppose the Lagrangian $L = L(p, z, x)$ is given then 
+
+\textbf{Fact:}
+\[\min I[f] = \int_a^b L(f', f, x)\; dx \Longrightarrow -(L_p(f', f, x))_x + L_z(f', f, x) = 0\]
+
+\section*{Lecture 32, April 19}
+\subsection{Part I - Calculus of Variations Redux}
+\textbf{Example:} Minimal surface equation 
+\[\min I[u] = \int_{\Omega} \sqrt{1 + ||\nabla u||^2} \; dx\, dy = \int_{\Omega} \sqrt{1 + (u_x)^2  +(u_y)^2}\; dx\, dy\]
+So $L(p, q, z, x, y) = \sqrt{1 + p^2 + q^2}$ and the Euler Lagrange equation is 
+\[-\left(\frac{u_x}{\sqrt{1  +||\nabla u||^2}}\right)_x - \left(\frac{u_y}{\sqrt{1 + ||\nabla u||^2}}\right)_y = 0\]
+
+This is insanely difficult to solve but it is much easier to find $\min I[u]$ because $I[u]$ is nothing other than the surface area of the graph of $u$.
+
+\textbf{Application:} this equation actually describes how soap films behave
+
+\subsection*{Part II - Ecology Application}
+Imagine an ecosystem of bunnies and foxes. Let $u(x, t)$ be the density of bunnies at position $x$ and time $t$. Let $v(x, t)$ be the density of foxes. 
+
+\textbf{Model 1:} Diffusion model 
+\[\begin{cases}
+    u_t = u_{xx}\\
+    v_t = 50v_{xx}
+\end{cases}\]
+(the species move left and right but the foxes move much faster)
+
+If $u$ solves the heat equation, $u(x, t) \to 0$ as $t \to \infty$, so even with no interactions both populations die out.
+
+\textbf{Note:} This is a bad model because they don't interact!
+
+\textbf{Model 2:} Reaction model 
+ODE model: $u = u(t)$ and $v = v(t)$
+
+\[\begin{cases}
+    u_t = u - v \quad \text{(reproduction and eaten by foxes)}\\
+    v_t = 8u - 5v \quad \text{(eat bunnies \& compete)}
+\end{cases}\]
+
+\[\begin{bmatrix}
+    u_t\\
+    v_t
+\end{bmatrix} = \begin{bmatrix}
+    1 & -1\\
+    8 & -5
+\end{bmatrix}\begin{bmatrix}
+    u\\v
+\end{bmatrix}\]
+$A$ has eigenvalues/vectors $\lambda = -1 \longrightarrow \begin{bmatrix}
+    1\\2
+\end{bmatrix}$ and $\lambda = -3 \longrightarrow \begin{bmatrix}
+    1\\3
+\end{bmatrix}$
+so 
+\[\begin{bmatrix}
+    u\\v
+\end{bmatrix} = C_1 e^{-t}\begin{bmatrix}
+    1\\2
+\end{bmatrix} + C_2 e^{-3t}\begin{bmatrix}
+    1\\4
+\end{bmatrix}\]
+So as $t \to \infty$, the species also die out!
+
+\textbf{Note:} this is a bad model because it doesn't take into account $x$ at all. 
+
+\textbf{Model 3:} Reaction-Diffusion Model (invented by Alan Turing)
+\[\begin{cases}
+    u_t = u_{xx} + u - v\\
+    v_t = \underbrace{50v_{xx}}_{\text{diffusion}} + \underbrace{8u - 5v}_{\text{reaction}}
+\end{cases}\]
+
+\emph{First guess:}
+Assume 
+\[\begin{bmatrix}
+    u\\v
+\end{bmatrix} = e^{\lambda t} \begin{bmatrix}
+    u_0\\
+    v_0
+\end{bmatrix} \implies \begin{cases}
+    u(x, t) = u_0 e^{\lambda t}\\
+    v(x, t) = v_0e^{\lambda t}
+\end{cases}\] 
+Plugging this into the PDE, we get 
+\[\begin{cases}
+    \lambda u_0 = u_0 - v_0\\
+    \lambda v_0 = 8u_0 - 5v_0
+\end{cases} \implies \begin{bmatrix}
+    1 & -1\\
+    8 & -5  
+\end{bmatrix} \begin{bmatrix}
+    u_0\\v_0
+\end{bmatrix} = \lambda \begin{bmatrix}
+    u_0\\v_0
+\end{bmatrix}\]
+Which is really just an eigenvalue problem!
+
+So $\lambda$ is an eigenvalue of $A = \begin{bmatrix}
+    1 & -1\\
+    8 & -5  
+\end{bmatrix}$ which gives us the same solution as before:
+\[\begin{bmatrix}
+    u\\v
+\end{bmatrix} = C_1e^{-t}\begin{bmatrix}
+    1\\2
+\end{bmatrix} + C_2 e^{-3t}\begin{bmatrix}
+    1\\4
+\end{bmatrix}\]
+But this is no better than model two. 
+
+\textbf{Better guess:}
+\[\begin{bmatrix}
+    u\\v
+\end{bmatrix} = e^{\lambda t}\cos(k x)\begin{bmatrix}
+    u_0\\v_0
+\end{bmatrix} \implies \begin{cases}
+    u= e^{\lambda t}\cos(k x)u_0\\
+    v = e^{\lambda t}\cos(k x)v_0
+\end{cases}\]
+Plugging into PDE, 
+\[\lambda \begin{bmatrix}
+    u_0\\
+    v_0
+\end{bmatrix} = \left(\begin{bmatrix}
+    -k^2 & 0\\
+    0 & -50k^2
+\end{bmatrix} + \begin{bmatrix}
+    1 & -1\\
+    8 & -5
+\end{bmatrix}\right)\begin{bmatrix}
+    u_0\\
+    v_0
+\end{bmatrix}\]
+Then with $k = \frac{1}{2}$ we have the coefficient matrix become $B = \begin{bmatrix}
+    3/4 & -1\\
+    8 & -35/2
+\end{bmatrix}$ which has a positive eigenvalue $\lambda \approx 0.3$! and a solution 
+\[e^{\lambda t} \cos(k x) \begin{bmatrix}
+    u_0\\v_0
+\end{bmatrix} = e^{0.3t}\cos(0.5x)\begin{bmatrix}
+    u_0\\
+    v_0
+\end{bmatrix}\]
+which grows exponentially! So the populations blow up. 
+
+\section*{Lecture 33, April 21: Covid Model}
+\subsection*{Part I - Setting}
+\begin{itemize}
+    \item There are two types of people: healthy/susceptible (S) and infected (I)
+    \item There is no recovery; if you are infected, you die with rate $\gamma$
+    \item An infected person infects a fraction of $b$ people per day
+    \item Healthy people stay in their own place (no diffusion)
+    \item Infected people spread/diffuse randomly with constant $D$
+\end{itemize}
+
+\textbf{Unknowns:}
+$S(x, t)$ is the number of susceptible people at position $(x, t)$
+
+$I(x, t)$ is the number of infected people at position $(x, t)$
+
+\subsection*{Part II - The PDE}
+The more people that are infected, the higher the turnover rate (S to I) so the rate depends on I as well as the infection rate $b$. 
+
+The rate of death does not depend on the number of infected people so it is constant. 
+
+Thus:
+\begin{center}
+    \Large\(\boxed{S} \overset{bI}{\to} \boxed{I} \overset{\gamma}{\to}\)
+\end{center}
+Which gives us:
+\begin{align*}
+    \frac{dS}{dt} &= \text{In} - \text{Out} = 0 - (bI) S = -bIS\\
+    \frac{dI}{dt} &= \text{In} - \text{Out} + \text{Diffusion} = (bI)S - \gamma I + DI_{xx}
+\end{align*} 
+Or 
+\[\begin{cases}
+    S_t = -bSI\\
+    I_t = bSI - \gamma I + DI_{xx}
+\end{cases}\]
+
+\subsection*{Part III - Rescaling}
+\textbf{Goal:} Rescale time variables and our unknowns so that the mean mortality rate is 1. 
+
+\[\tau = 1 \iff t = \frac{1}{\gamma}\]
+
+\[\boxed{\tau = \gamma t}\]
+
+Then we rescale the unknowns by a constant. Let $N$ be the total population. So 
+\[\begin{cases}
+    s = \frac{S}{N}\\
+    i = \frac{I}{n}
+\end{cases}\]
+\[s(x, \tau) = \frac{S(x, t)}{N} = \frac{S(x, \frac{\tau}{\gamma})}{N} \implies S(x, t) = Ns(x, \tau) = Ns(x, \gamma t)\]
+\[I(x, t) = Ni(x, \gamma t)\]
+So by chain rule
+\[S_t = (Ns(x, \gamma t))_t = N\gamma s_\tau(x, \gamma t)\]
+But by the PDE 
+\[S_t = -bS(x, t)I(x, t)\]
+so 
+\[N\gamma s_\tau(x, \gamma t) = -bNs(x, \gamma t)Ni(x, \gamma t)\]
+Which at long last gives 
+\[s_\tau = -\frac{bN}{\gamma}s_i\]
+
+And following the same process for $i_\tau$:
+\[i_\tau = \frac{bN}{\gamma}s_i - i + \frac{D}{\gamma}i_{xx}\]
+
+Now let $R_0 = \frac{bN}{\gamma}$ and $d = \frac{D}{\gamma}$ then the system simplifies to 
+\[\boxed{\begin{cases}
+    s_\tau = -R_0 s_i\\
+    i_\tau = R_0 s_i - i + di_{xx}
+\end{cases}}\]
+where $d$ is the rescaled diffusion constant and $R_0$ is similar to the number of people an infected person infects 
+
+\subsection*{Part IV - Traveling Waves}
+\textbf{Goal:} Convert this PDE system into an ODE by looking for special solutions
+
+\textbf{Definition:} A traveling wave is a solution of the form 
+\[u(x, t) = f(x - ct)\]
+where $f = f(z)$. 
+
+Then we assume that the PDE is of the special form 
+\begin{align*}
+    s(x, \tau) &=f(x - c\tau)\\
+    i(x, \tau) &= g(x - c\tau)
+\end{align*}
+
+So 
+\begin{align*}
+    s_\tau &= -R_0 s_i\\
+    &= (f(x - ct))_\tau\\
+    &= f'(x-c\tau)(-c)\\
+    &= -cf'(x- c\tau)
+\end{align*}
+\[\implies -cf'(x- c\tau) = -R_0 f(x - c\tau)g(x - c\tau)\]
+\[\implies -cf'(z) = -R_0 f(z)g(z)\]
+Similarly with $i_\tau = R_0 si - i + di_{xx}$
+
+which at last gives us the system of ODE:
+\[\boxed{\begin{cases}
+    cf'(z) = R_0f(z)g(z)\\
+    cg'(z) = -R_0 f(z)g(z) + g(z) - dg''(z)
+\end{cases}}\]
+
+\section*{Lecture 34, April 24: SIR Model (II)}
+\subsection*{Part I - Review}
+\begin{itemize}
+    \item $S(x, t)$ is the number of healthy of people
+    \item $I(x, t)$ is the number of infected people 
+\end{itemize}
+This gives the PDE 
+\[\begin{cases}
+    S-t = -bSI\\
+    I_t = bSI - \gamma I + DI_{xx}
+\end{cases}\]
+Where $b$ is the infection rate, $\gamma$ is the death rate, $D$ is the diffusion rate.
+
+By rescaling time such that $\tau = \gamma t$, we get new unknowns:
+\[s = \frac{S}{N} \qquad i = \frac{I}{n}\]
+where $N$ is the total population before the disease (assumed constant)
+
+Which gives new functions 
+\[s(x, \tau) = \frac{S(x, t)}{N} \qquad i(x, \tau) = \frac{I(x, t)}{N}\]
+
+So our rescaled PDE is 
+\[\begin{cases}
+    s_{\tau} = -R_0 si\\
+    i_{\tau} = R_0 si - i + di_{xx}
+\end{cases}\]
+where $R_0 = bN/\gamma$ (which basically represents the number of people a person infects) and $d = D/\gamma$ (a rescaled diffusion constant)
+
+We look for solutions of a special form (traveling waves) such that 
+\[\begin{cases}
+    s(x, \tau) = f(x - ct)\\
+    i(x, \tau) = g(x - ct)
+\end{cases}\]
+
+Substituting into the PDE, 
+\[\begin{cases}
+    cf'(z) = R_0 f(z) g(z)\\
+    cg'(z) = -R_0 f(z)g(z) + g(z) - dg''(z)
+\end{cases}\]
+
+\subsection*{Part II - Left Front}
+\textbf{Assumptions on $f$ and $g$:}
+\begin{enumerate}
+    \item $\lim_{z \to \pm \infty} g(z) = 0$ and $\lim_{z \to \pm \infty} g'(z) = 0$
+    \item $\lim_{z \to +\infty} f(z) = 1$
+    \item $\lim_{z \to -\infty} f(z) = k \quad (0 < k < 1)$
+\end{enumerate}
+
+\textbf{Goal:} Find an equation for $k$ (the number of healthy people after the pandemic)
+
+\textbf{back to the ODE:}
+\[\begin{cases}
+    cf' = R_0 fg\\
+    cg' = -R_0 fg + g - dg''
+\end{cases}\]
+
+Step 1: Solve for g 
+\[g = \frac{c}{R_0}\left(\frac{f'}{f}\right) = \frac{c}{R_0}(\ln f)'\]
+
+Step 2: 
+\begin{align*}
+    cg' &= -R_0 fg + g - dg''\\
+    &= -cf' + \frac{c}{R_0}(\ln f)' - dg''\\
+    (cg)' &= (-cf + \frac{c}{R_0}\ln f - dg')'\\
+    cg &= -cf + \frac{c}{R_0}\ln f - dg' + \underbrace{L}_{\text{constant}}
+\end{align*}
+
+Step 3:
+\[cg(z) = -cf(z) + \frac{c}{R_0}\ln(f(z)) - dg'(z) + L\]
+for all z. 
+
+Plugging in $z = +\infty$:
+\[0 = -c(1) + \frac{c}{R_0}\ln (1) - 0 + L \implies L=c\]
+
+Then at $z = -\infty$:
+\[0 = -ck + \frac{c}{R_0}\ln k - 0 + c\]
+\[ck - \frac{c}{R_0}\ln k = c \implies k - \frac{1}{R_0}\ln k = 1 \implies \ln k = -R_0(1 - k) = R_0(k - 1)\]
+
+So at last, 
+\[\boxed{\ln k = R_0(k - 1)}\]
+
+\subsection*{Part III - Two Cases}
+\textbf{Does the equation above have a nontrivial solution?}
+
+Case 1: $R_0 < 1$ (Good case, no outbreak)
+
+Here, there are no other solutions ($k=1$ is the only solution and no one was ever sick)
+
+Proof: 
+\[f(k) = \ln k - R_0(k - 1)\implies f' = \frac{1}{k} - R_0 = 0 \implies k = \frac{1}{R_0}\] 
+
+
+Case 2: $R_0 > 1$ (bad case, outbreak!)
+There is another solution because the average person is infecting multiple people.
+
+\section*{Lecture 35, April 26: Method of Characteristics}
+\subsection*{Part I - Method of Characteristics Revisited}
+\textbf{Example 1:}
+\[\begin{cases}
+    u_t + x^2 u_x = 0\\
+    u(x, 0) = f(x)
+\end{cases}\]
+You \emph{could} solve this using the slope and the derivative like at the beginning of the course but there is a more effective wave 
+
+\textbf{Step 1:} 
+
+\emph{Motivation:} Take a curve $(x(t), t)$. How does the solution $u(x, t)$ change on this curve. Consider $h(t) = u(x(t), t)$. Then 
+\begin{align*}
+    h'(t) = \frac{d}{dt}u(x(t), t)\\
+    &= u_x(x(t), t)x'(t) + u_t(x(t), t)\\
+    &= u_x(x(t), t)x'(t) - (x(t))^2u_x(x(t), t)\quad (\text{from the PDE})\\
+    &=u_x(x(t), t)[x'(t)- (x(t))^2]
+\end{align*}
+
+So if $x' = x^2$ then $h'(t) = 0$ and $u(x(t), t)$ would be constant!
+
+\textbf{Definition:} The ODE $x' = x^2$ is \emph{characteristic ODE}. The curve $x(t)$ is the \emph{characteristic curve}
+
+\textbf{Step 2:} Solve $x' = x^2$
+
+Using separation of variables, 
+\begin{align*}
+    \frac{dx}{dt} &= x^2\\
+    \frac{1}{x^2}\; dx &= dt\\
+    -\frac{1}{x} &= t + C\\
+    x(t) = -\frac{1}{t + C}
+\end{align*}
+
+\textbf{Note:} $x=0$ is also a solution because $0' =0^2$
+
+\textbf{Step 3:} Since $h(t)$ is constant 
+\begin{align*}
+    h(t) &= h(0)\\
+    u(x(t), u) &= u(x(0), 0)\\
+    u\left(-\frac{1}{t + C}, t\right) &= u\left(-\frac{1}{C}, 0\right)\\
+    u\left(-\frac{1}{t + C}, t\right) &= f(-\frac{1}{C})
+\end{align*}
+
+\textbf{Step 4:}
+\begin{align*}
+    x &= -\frac{1}{t + C}\\
+    t + C &= -\frac{1}{x}\\
+    C &= - t -\frac{1}{x} = -\left(\frac{tx + 1}{x}\right)\\
+    -\frac{1}{C} &= \frac{x}{1 + xt}
+\end{align*}
+Therefore, 
+\[u(x, t) = u\left(-\frac{1}{t + C}, t\right) = f(-\frac{1}{C}) = \boxed{f\left(\frac{x}{1 + xt}\right)}\]
+
+\textbf{Application:} It is possible that characteristic curves intersect. This is quite a problem because how can u have one value on one curve and a different value on another curve, unless u is constant? This phenomenon is called a \emph{shock} and is useful in modeling traffic flow
+
+\subsection*{Part II - More General}
+\textbf{Example 2:}
+\[\begin{cases}
+    u_t + xu_x = 2u\\
+    u(x, 0) = f(x)
+\end{cases}\]
+
+\textbf{Step 1:} Let $h(t) = u(x(t), t)$. Then
+\begin{align*}
+    h'(t) &= u_x x'(t) + u_t\\
+    &= u_x \cdot x' + 2u - xu_x\\
+    &= 2u(x(t), t) + u_x(x(t), t)[x'(t) - x(t)]\\
+    &= 2h(t) + u_x(x(t), t)[x'- x(t)]
+\end{align*}
+
+\textbf{Step 2:} One characteristic ODE is 
+\[x'(t) - x(t) = 0 \implies x'(t) = x(t) \implies x(t) = Ce^t\]
+If $x' - x = 0$ then 
+\[h'(t) = 2h(t) \implies h(t) = h(0)e^{2t}\]
+which is another characteristic ODE. 
+
+\textbf{Step 3:} Now $u$ isn't constant on the curve but we still have an explicit formula:
+\begin{align*}
+    h(t) &= h(0)e^{2t}\\
+    u(x(t), t) &= u(x(0), 0)e^{2t}\\
+    u(Ce^t, t) &= u(Ce^0, 0)e^{2t}\\
+    u(Ce^t, t) &= g(C)e^{2t}
+\end{align*}
+
+\textbf{Step 4:} If $x = Ce^t$ then $C = xe^{-t}$ so 
+\[u(x, t) = f(C)e^{2t} = \boxed{f(xe^{-t})e^{2t}}\]
+
+\section*{Lecture 36, April 28: Fluid Flow Application (I)}
+\subsection*{Part I - Vector Calculus Overview}
+\textbf{Note:} this will be presented in two dimensions but can be generalized to higher dimensions as needed. 
+
+\textbf{Definitions:}
+\begin{enumerate}
+    \item \emph{Vector Field:} a function F with two components. Usually represented by arrows on a field. Ex. 
+    \[F(x, t) = \brak{2x - 3y, x^2 + y^2}\]
+
+    \item \emph{Normal Vector:} a vector $\vec{n}$ that is perpendicular to $\partial \Omega$ and points outwards
+    
+    \item Net Flux:
+    \[\int_{\partial \Omega} F \cdot d\vec{S} = \int_{\partial \Omega} F \cdot n \; ds\]
+    
+    \textbf{Note:} In 2D this is a line integral. In 3D it would be a surface integral. 
+
+    \textbf{Interpretation:} If $F(x, y)$ is water flow, then $\int_{\partial \Omega} F \cdot d\vec{S}$ is the total water in and out of $\partial \Omega$. 
+
+    \item \emph{Divergence:}
+    \begin{center}
+        If $F = \brak{P, Q}$ then $\div (F) = P_x + Q_y$
+    \end{center}
+
+    \textbf{Interpretation:} $\div(F)$ represents how much $F$ spreads out. 
+
+    \item \emph{Divergence Theorem:}
+    \[\int_{\partial \Omega} F \cdot d\vec{S} = \int \int_{\Omega} \div(F) \; dx\, dy\]
+\end{enumerate}
+
+\subsection*{Part II - Incompressibility}
+\textbf{Goal:} derive the Navier-Stokes PDE modeling fluid dynamics 
+
+\textbf{Assumption:} Suppose you have an incompressible fluid with constant density $\rho$.
+
+We want to find a PDE for the velocity field $F = \brak{u(x, y, t), v(x, y, t)}$ of the fluid.
+
+\textbf{Definition:} \emph{Incompressibility} means that the net number of particles entering or exiting $\Omega$ is 0. i.e., 
+\[\int_{\partial \Omega}(\rho F)\cdot d\vec{S} = \rho \int_{\partial \Omega}F \cdot n \; ds = 0 \overset{div}{\implies} \int_{\Omega} F\; dx\, dy = 0\]
+
+If $\int_{\Omega} f = 0$ for all $\Omega$ then $f$ is the zero function. Otherwise, assume $f > 0$ somewhere and take $\Omega = \{f > 0\}$ in the identity above to get a contradiction. Thus, we get 
+\[\div(F) = 0\]
+so with $F = \brak{u, v}$, 
+\[\boxed{u_x + v_y = 0}\]
+
+\subsection*{Part III - Fluid flow}
+\textbf{Definition:} Given a vector field F, the \emph{flow} is the solution $\vec{x}(t)$ of the ODE 
+\[\vec{x}'(t) = F(\vec{x}(t))\]
+
+\textbf{Example:} If $F(x, y) = \brak{2x + 3y, -x^2 + 3y^2}$, then the flow is $\vec{x}(t) = \brak{x(t), y(t)}$ where 
+\[\begin{cases}
+    x'(t) = 2x(t) + 3y(t)\\
+    y'(t) = -(x(t))^2 + 3(y(t))^2
+\end{cases}\]
+
+\textbf{Interpretation:} $\vec{x}(t)$ is the trajectory of a particle that follows the velocity field $F$
+
+\subsection*{Part IV - The Navier Stokes Equation}
+Given the incompressible field $F$ above, consider the flow $\vec{x}' = F(\vec{x})$. This gives the flow equations 
+\[\begin{cases}
+    x'(t) = u(x(t), y(t), t)\\
+    y'(t) = v(x(t), y(t), t)
+\end{cases}\]
+
+We solve via $F = ma$!
+
+\textbf{Acceleration:}
+\begin{align*}
+    x''(t) &= (x'(t))'\\
+    &= (u(x(t), y(t), t))'\\
+    &= u_x(x'(t)) + u_y(y'(t)) + u_t\\
+    &= u_x u + u_y v + u_t \quad (\text{by the flow equations})
+\end{align*}
+Similarly for $y''(t)$. 
+
+\textbf{Force:} We assume the only force is the pressure from outside the fluid. Let $P = P(x, y)$ be the pressure at a given point. 
+
+In 3D, Pressure $= \frac{\text{Force}}{\text{Area}}$ so in 2D, $\text{Force} = \text{Pressure} \times \text{Length}$
+
+\textbf{Assumption:} The outside fluid exerts a force $-Pn\; ds$ onto the fluid (a force of magnitude P applied opposite the normal vector across a small area $ds$).
+
+Thus the total force is 
+\[\int_{\partial \Omega} -Pn\;ds = \int_{\partial \Omega} -P(x, y)\brak{n_1, n_2}\; ds = \int_{\partial \Omega} \brak{-Pn_1, -Pn_2}\; ds\]
+
+The first component is 
+\begin{align*}
+    \int_{\partial \Omega} -Pn_1 \; ds &= \int_{\partial \Omega} -Pn_1 + 0n_2 \; ds\\
+    &= \int_{\partial \Omega} \brak{-P, 0} \cdot \brak{n_1, n_2}\; ds\\
+    &= \int_{\partial \Omega} \brak{-P, 0} \cdot n\; ds\\
+    &= \int_{\partial \Omega} \div \brak{-P, 0}\; dx\, dy \quad (\text{by divergence theorem})\\
+    &= \int_{\partial \Omega} -P_x\; dx \, dy
+\end{align*}
+Similarly for the second component so the total force on $\Omega$ is 
+\[\int_{\Omega} -\brak{P_x, P_y}\; dx\, dy\]
+
+Then rearranging some physics equations:
+\begin{gather*}
+    F = ma\\
+    F = \rho Va\\
+    A\rho = \frac{F}{V}
+\end{gather*}
+So 
+\begin{gather*}
+    \rho x''(t) = -P_x\\
+    u_t + uu_x + vu_y = -\frac{1}{\rho} P_x\\
+    \boxed{u_t + uu_x + vu_y + \frac{1}{\rho} P_x = 0}
+\end{gather*}
 \end{document}     
+
+
 
 
