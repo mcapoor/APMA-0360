@@ -43,7 +43,7 @@
 
 \begin{document}
 \maketitle
-\section*{Lecture 1, Jan 25: Introduction}
+\section{Jan 25: Introduction}
 \subsection*{Part I - Introduction}
 
 \begin{itemize}
@@ -137,7 +137,7 @@ Example 5: $U_{xx} + U = 0$
 Solving by Analogy: this is similar to ODE $y'' + y = 0 \implies y = A\cos x + B \sin x$
 \[\boxed{U(x, y) = A(y)\cos x + B(y)\sin x}\]
 
-\section*{Lecture 2, Jan 27: Classification of PDE}
+\section{Jan 27: Classification of PDE}
 \subsection*{Part I - Simple PDE (Continued)}
 Example 1: $U_{xy} = 0$
 \begin{align*}
@@ -247,7 +247,7 @@ Example 4: $u(x, y) = x^2 - y^2$ and $\vec{v} = (2,3)$
 Solution:
 \[(\Delta u)\cdot \vec{v} = (2x, -2y) \cdot (2, 3) = \boxed{4x-6y}\]
 
-\section*{Lecture 3, Jan 30: First-order Linear PDE}
+\section{Jan 30: First-order Linear PDE}
 \subsection*{Part I - The Constant Coefficient Case}
 \textbf{Goal:} solve a PDE of the form 
 \[au_x + bu_y = 0\]
@@ -307,7 +307,7 @@ ODE:
 Solution:
 \ans{$u(x, y) = f(\frac{y}{x})$}
 
-\section{Lecture 4, Feb 1: Transport Equation}
+\section{Feb 1: Transport Equation}
 \subsection*{Part I - The Chain Rule}
 If $f=f(x, y)$ where $x = x(s, t)$ and $y= y(s, t)$ then, 
 \[\frac{\partial f}{\partial s} = \frac{\partial f}{\partial x} \frac{\partial x}{\partial s} + \frac{\partial f}{\partial y} \frac{\partial y}{\partial s}\]
@@ -376,7 +376,7 @@ Note: this can also be written $f(bx - ay)$ but with different f
 Therefore, 
 \[\ans{u(x, t) = f(x - ct)}\]
 
-\section*{Lecture 5, Feb 3: Heat Equation Derivation}
+\section{Feb 3: Heat Equation Derivation}
 \subsection*{Part I - The Heat Equation}
 \[u_t = Du_{xx}\]
 where $D > 0$ is a diffusion constant
@@ -414,7 +414,7 @@ Note: can also use Fick's law from physics to derive it
     \[\ans{$u_t = Du_{xx}$}\]
 \end{enumerate}
 
-\section{Lecture 6, Feb 6: Fourier Transform}
+\section{Feb 6: Fourier Transform}
 \subsection*{Part I - Behavior of Solutions}
 The Heat Equation:
 \[u_t = Du_{xx}\]
@@ -497,7 +497,7 @@ And same for all derivatives of f.
 
 In other words, f and its derivatives go to 0 at $\pm \infty$ faster than any power function $x^n$. This allows us to ignore the infinite terms in the Fourier integration
 
-\section*{Lecture 7, Feb 8: Fourier Transform and Heat Equation}
+\section{Feb 8: Fourier Transform and Heat Equation}
 \subsection*{Part I - Fourier Transform Example}
 \[\hat{f}(\kappa) = \int_{-\infty}^\infty f(x) e^{i \kappa x}\; dx \]
 
@@ -581,7 +581,7 @@ Solution:
     \textbf{Problem:} But how do we go from $\hat{u}$ to $u$?
 \end{enumerate}
 
-\section*{Lecture 8, Feb 10: Convolution}
+\section{Feb 10: Convolution}
 \subsection*{Part I - Convolution}
 \textbf{Definition:}
 \[(f \star g)(x) = \int_{-\infty}^\infty f(x - y)\, g(y)\; dy\]
@@ -666,7 +666,7 @@ and more generally, the coefficient of $x^k$ in $(a_nx^n + ... a_0)(b_nx^n + ...
 Note the parallel to 
 \[(f \star g)(x) = \int_{-\infty}^\infty f(y)\, g(x -y) \; dy\]
 
-\section*{Lecture 9, Feb 13: Heat Equation Properties}
+\section{Feb 13: Heat Equation Properties}
 \subsection*{Part I - Heat Equation Example}
 \textbf{Example 1:} Solve 
 \[\begin{cases}
@@ -739,7 +739,7 @@ but $u_{xx}$ is also smooth
 
 Suppose $u(x, 1) = |x|$ but by smoothness, $u(x, t)$ must be smooth for all t so $|x|$ must be smooth but this is a contradiction
 
-\section*{Lecture 10, Feb 15: Inverse Fourier Transform}
+\section{Feb 15: Inverse Fourier Transform}
 \subsection*{Part I - Long-time behavior of the heat kernel}
 \[u(x, t) = \frac{1}{\sqrt4\pi D t} \int_{-\infty}^\infty e^{-\frac{(x - y)^2}{4Dt}} f(y) \; dy\]
 
@@ -832,7 +832,7 @@ Solution:
     \end{cases}}\]
 \end{enumerate}
 
-\section*{Lecture 11, Feb 17: Wave Equation Derivation}
+\section{Feb 17: Wave Equation Derivation}
 \subsection*{Part I - The Wave Equation}
 \[u_{tt} = c^2 u_{xx}\]
 where $u = u(x, t)$ gives the displacement of a vibrating string at position x and time t and c is a constant giving the speed of the wave  
@@ -919,7 +919,7 @@ Note: despite the only difference between this and the heat equation is an extra
     \[\boxed{u_{tt} = c^2 u_{xx}}\]
 \end{enumerate} 
 
-\section*{Lecture 12, Feb 22: Wave Equation Solution}
+\section{Feb 22: Wave Equation Solution}
 \textbf{Goal:} Solve $u_{tt} = c^2 u_{xx}$
 \subsection*{Part I - Factoring Method}
 But this kind of looks like 
@@ -990,7 +990,7 @@ Using this operator we can more rigorously "factor" the PDE.
     \[\boxed{u_{\xi \eta} = 0}\]
 \end{enumerate}
 
-\section*{Lecture 13, Feb 24: D'Alembert's Formula}
+\section{Feb 24: D'Alembert's Formula}
 \subsection*{Part I - Solving the wave equation (continued)}
 \[u_{tt} = c^2 u_{xx}\]
 Using the coordinate method with the choices 
@@ -1071,7 +1071,7 @@ Then using D'Alembert's:
 \[\boxed{u(x, t) = \sin(t) \cos(x)}\]
 (Or, the wave takes the shape of cos with amplitude sin)
 
-\section{Lecture 14, Feb 27: Midterm Review}
+\section{Feb 27: Midterm Review}
 \subsection*{Part I  - First Order PDE}
 \[\begin{cases}
     (1 + x^2)u_x + e^y u_y = 0\\
@@ -1154,7 +1154,7 @@ Particular solution:
 \[u(x, t) = G(x - 3t) + \frac{3}{8}F(x - \frac{t}{3})\]
 \[\boxed{u(x, t) = G(x - 3t) + F(x - \frac{t}{3})}\]
 
-\section{Lecture 15, March 3: Energy Methods}
+\section{March 3: Energy Methods}
 \subsection*{Energy Method for Waves}
 \textbf{Example 1: Conservation of Energy}
 Suppose u solves the wave equation $u_{tt} = c^2 u_{xx}$. Then the following is constant 
@@ -1291,7 +1291,7 @@ Then $u(x, t) = 0$ for all x and t
     Therefore $(u(x, t))^2 =0$ so $u(x, t) = 0$ for all x and t
 \end{enumerate}
 
-\section{Lecture 16, March 6: Heat vs Wave Equations}
+\section{March 6: Heat vs Wave Equations}
 \subsection*{Part I - Energy Method Application}
 \textbf{Example:}
 \[\begin{cases}
@@ -1345,7 +1345,7 @@ for some $C > 0$ and $a > 0$ (meaning the PDE is in the Schwartz class)
     \end{tabular}
 \end{center}
 
-\section{Lecture 17, March 8: Separation of Variables I}
+\section{March 8: Separation of Variables I}
 This is the most important PDE technique in the course. 
 
 \subsection*{Part I - Boundary Value Problem}
@@ -1478,7 +1478,7 @@ and
 
 \textbf{Interpretation:} Initially, the solution starts out as the sum of sines but eventually dies down as the exponential terms go to 0
 
-\section*{Lecture 18, March 10: Separation of Variables II}
+\section{March 10: Separation of Variables II}
 \subsection*{Part I - Setting}
 \textbf{Example 1:}
 \[\begin{cases}
@@ -1593,7 +1593,7 @@ and
 At long last,
 \[\boxed{u(x, t) = \left(\cos(2\pi ct) + \frac{2}{\pi c}\right)\sin(2\pi x) + (2\cos(3\pi ct))\sin(3\pi x)}\]
 
-\section*{Lecture 20, March 13: Separation of Variables III}
+\section{March 13: Separation of Variables III}
 \subsection*{Part I - Setting}
 Heat equation but assuming velocity at the endpoints is 0 (``rate in = rate out'')
 \[\begin{cases}
@@ -1738,7 +1738,7 @@ Then
 \[u(x, t) = v(x, t) + f(x) = v(x, t) + \frac{2}{\pi}x + 1\]
 Note: we could in theory also solve the case where $u_x(0, t) = 1$ and $u_x(\pi, t) = 3$ by subtracting a function whose \emph{derivative} is $\frac{2}{\pi}x + 1$ except you would get an inhomogeneous wave equation for v
 
-\section*{Lecture 21, March 15: Fourier Series (I)}
+\section{March 15: Fourier Series (I)}
 \subsection*{Part I - Prelude}
 \textbf{Goal:} given a function $f(x)$ on $(0, \pi)$ find $A_m$ such that 
 \[f(x) = \sum_{m=1}^\infty A_m \sin(mx)\]
@@ -1815,7 +1815,7 @@ so
 Then from the above:
 \[\boxed{u(x, t) = \sum_{m=1}^\infty \frac{2}{m}(-1)^{m+1}e^{-m^2Dt}}\]
 
-\section*{Lecture 22, March 17: Fourier Series (II)}
+\section{March 17: Fourier Series (II)}
 \subsection*{Part I - Fourier Cosine Series}
 \textbf{Goal:} Find $A_m$ such that on the interval $(0, \pi)$
 \[f(x) = \sum_{m=0}^\infty A_m \cos(mx)\]
@@ -1915,7 +1915,7 @@ Which is the sine series!
 
 Note: In fact, this generalizes: If f is odd on $(-\pi, \pi) $ then the Full Fourier series is a sine series, and similar if f is even. But in practice you have to calculate both $A_m$ and $B_m$
 
-\section*{Lecture 23, March 20: Fourier Series (III)}
+\section{March 20: Fourier Series (III)}
 \subsection*{Part I - Complex Fourier Series}
 \textbf{Goal:} find $C_m$ such that 
 \[f(x) = \sum_{m=-\infty}^\infty C_M e^{imx} \quad -\pi < x < \pi\]
@@ -2003,7 +2003,7 @@ so for
 on $(0, \pi)$, then Parseval's says 
 \[2||A_0||^2 + \sum_{m=1}^\infty |A_m|^2 = \frac{2}{\pi}\int_0^\pi (f(x))^2\; dx\]
 
-\section*{Lecture 24, March 22: Laplace Equation (I)}
+\section{March 22: Laplace Equation (I)}
 \subsection*{Part I - Complex Parseval}
 Note that 
 \[||e^{imx}||^2 = e^{imx} \cdot e^{imx} = \int_{-\pi}^\pi e^{imx}e^{-imx}\;dx= \int_{-\pi}^\pi 1 \; dx = 2\pi\]
@@ -2086,7 +2086,7 @@ After a long time, we assume u is becomes constant in t and so $u_t = 0$, Hence
     For which the above has a nonzero solution. Then $\lambda_1$ is the \emph{principal harmonic} and the others are \emph{overtones}
 \end{enumerate}
 
-\section*{Lecture 25, March 24: Laplace Equation (II)}
+\section{March 24: Laplace Equation (II)}
 \subsection*{Part I - Application 3: Music}
 \[\begin{cases}
     -\Delta u = \lambda u \quad \in \Omega\\
@@ -2167,7 +2167,7 @@ So
     &= u_{x'x'} \cos^2(\theta) + 2u_{x'y'}\sin(\theta) \cos(\theta) + u_{y'y'}\sin^2(\theta )
 \end{align*}
 
-\section*{Lecture 26, April 3: Laplace's Equation (III)}
+\section{April 3: Laplace's Equation (III)}
 \subsection*{Part I - Review}
 \textbf{The Laplace Equation in} $\mathbb{R}^2$:
 \[u_{xx} + u_{yy} = 0\]
@@ -2228,7 +2228,7 @@ is a solution to laplace's equation.
 \textbf{Definition:} the \emph{Fundamental Solution} of $u_{xx} + u_{yy} = 0$ is 
 \[\boxed{\Phi(x, y) = -\frac{1}{2\pi} \ln(\sqrt{x^2 + y^2})}\]
 
-\section*{Lecture 27, April 5: Laplace's Equation (IV)}
+\section{April 5: Laplace's Equation (IV)}
 \subsection*{Part I - Setting}
 \textbf{Example 1:} 
 \[\begin{cases}
@@ -2332,7 +2332,7 @@ If one of the boundary conditions were not zero, you would not be able to solve 
 
 \textbf{Trick:} $u = v + w$ where $v$ solves the situation where the left and right are 0 and where $w$ solves the situation where the top and bottom are 0.   
 
-\section{Lecture 28, April 7: Laplace's Equation (V)}
+\section{April 7: Laplace's Equation (V)}
 \subsection*{Fundamental Solution}
 \textbf{Recall:} Polar Laplace 
 \[u_{rr} + \frac{1}{r}u_r + \frac{1}{r^2}u_{\theta \theta} = 0\]
@@ -2408,7 +2408,7 @@ If $\Delta u =0$ in $\Omega$, then $\max u$ and $\min u$ are attained on $\parti
 \[\slashedint_{B(x, r)} u(y)\; dy = u(x) = M\]
 (the highest value is equal to the average value so u is constant)
 
-\section*{Lecture 29, April 10: Midterm 2 Review}
+\section{April 10: Midterm 2 Review}
 \subsection*{Part I - Separation of Variables}
 \textbf{Example 1:}
 \[\begin{cases*}
@@ -2520,7 +2520,7 @@ Starting with energy methods,
 So 
 \[||\nabla u||^2 = 0 \implies \nabla u = 0 \implies u = C \implies u = 0 \quad \blacksquare\]
 
-\section*{Lecture 31, April 14: Calculus of Variations (I)}
+\section{April 14: Calculus of Variations (I)}
 \subsection*{Part I: Laplace Equation Property 2}
 \textbf{Recall:} \emph{Strong Maximum Principle}
 If $\Delta u = 0$ in $\Omega$ then $\max\, u$ is attained on $\partial \Omega$ and only on $\partial \Omega$ except in the trivial constant case. Same with $\min \, u$
@@ -2685,7 +2685,7 @@ So the minimization question just becomes: Among all the graphs $u$ with $u = g$
 
 \textbf{Application:} This is interestingly related to how soap bubbles and soap films behave!
 
-\section*{Lecture 31, April 17: Calculus of Variations (II)}
+\section{April 17: Calculus of Variations (II)}
 \subsection*{Part I - Calculus of Variations}
 \textbf{Goal:} Find a function $f$ such that 
 \[I[f] = \frac{1}{2}\int_0^1 (f'(x))^2 \; dx\]
@@ -2733,7 +2733,7 @@ More generally suppose the Lagrangian $L = L(p, z, x)$ is given then
 \textbf{Fact:}
 \[\min I[f] = \int_a^b L(f', f, x)\; dx \Longrightarrow -(L_p(f', f, x))_x + L_z(f', f, x) = 0\]
 
-\section*{Lecture 32, April 19}
+\section{April 19: Ecology Application}
 \subsection{Part I - Calculus of Variations Redux}
 \textbf{Example:} Minimal surface equation 
 \[\min I[u] = \int_{\Omega} \sqrt{1 + ||\nabla u||^2} \; dx\, dy = \int_{\Omega} \sqrt{1 + (u_x)^2  +(u_y)^2}\; dx\, dy\]
@@ -2871,7 +2871,7 @@ Then with $k = \frac{1}{2}$ we have the coefficient matrix become $B = \begin{bm
 \end{bmatrix}\]
 which grows exponentially! So the populations blow up. 
 
-\section*{Lecture 33, April 21: Covid Model}
+\section{April 21: Covid Model}
 \subsection*{Part I - Setting}
 \begin{itemize}
     \item There are two types of people: healthy/susceptible (S) and infected (I)
@@ -2969,7 +2969,7 @@ which at last gives us the system of ODE:
     cg'(z) = -R_0 f(z)g(z) + g(z) - dg''(z)
 \end{cases}}\]
 
-\section*{Lecture 34, April 24: SIR Model (II)}
+\section{April 24: SIR Model (II)}
 \subsection*{Part I - Review}
 \begin{itemize}
     \item $S(x, t)$ is the number of healthy of people
@@ -3063,7 +3063,7 @@ Proof:
 Case 2: $R_0 > 1$ (bad case, outbreak!)
 There is another solution because the average person is infecting multiple people.
 
-\section*{Lecture 35, April 26: Method of Characteristics}
+\section{April 26: Method of Characteristics}
 \subsection*{Part I - Method of Characteristics Revisited}
 \textbf{Example 1:}
 \[\begin{cases}
@@ -3150,7 +3150,7 @@ which is another characteristic ODE.
 \textbf{Step 4:} If $x = Ce^t$ then $C = xe^{-t}$ so 
 \[u(x, t) = f(C)e^{2t} = \boxed{f(xe^{-t})e^{2t}}\]
 
-\section*{Lecture 36, April 28: Fluid Flow Application (I)}
+\section{April 28: Fluid Flow Application (I)}
 \subsection*{Part I - Vector Calculus Overview}
 \textbf{Note:} this will be presented in two dimensions but can be generalized to higher dimensions as needed. 
 
@@ -3256,8 +3256,478 @@ So
     u_t + uu_x + vu_y = -\frac{1}{\rho} P_x\\
     \boxed{u_t + uu_x + vu_y + \frac{1}{\rho} P_x = 0}
 \end{gather*}
-\end{document}     
 
+\section{May 1: Fluid Flow Applications (II)}
+\subsection*{Part I - Recap: Fluid Flow}
+\textbf{Setting:} Suppose an incompressible fluid with constant density $\rho$ 
+
+\textbf{Goal:} Find a PDE for the velocity field $F = \brak{u(x, y, t),\; v(x, y, t)}$ of the fluid 
+
+From incompressibility we get the PDE
+\[\div(F) = 0 \implies \boxed{u_x + v_y = 0}\]
+
+Considering the fluid flow of $F$, $\vec{x}' = F(\vec{x})$, and looking at the components, we get the flow equations
+\[\begin{cases}
+    x'(t) = u(x(t), y(t), t)\\
+    y'(t) = v(x(t), y(t), t)
+\end{cases}\]
+Then using $F= ma$ we get 
+\[\begin{cases}
+    x''(t) = u_t + uu_x + vu_y\\
+    y''(t) = v_t + uv_x  +vv_y
+\end{cases}\]
+
+Then assuming that the only force is the external pressure $P = P(x, y)$ from outside the fluid on $\partial \Omega$. From the fact that in 1D, pressure is force-by-length, we have 
+\[\text{Force} = \text{Pressure} \times \text{Length}\]
+Assuming that the outside fluid exerts a force opposite the normal vector at a point across a small length, 
+\[F = \int_{\partial \Omega} - P\vec{N} \; ds = \int_{\partial \Omega} \brak{-PN_1,\; -PN_2} \; ds = \bigg \langle\int_{\partial \Omega} -PN_1\; ds, \; \int_{\partial \Omega} -PN_2\; ds \bigg \rangle\]
+
+The components can each be written  
+\[\int_{\partial \Omega} -PN_1\; ds = \int_{\partial \Omega} \brak{-P, 0} \cdot \brak{N_1, N_2}\; ds\]
+which allows us to use the divergence theorem:
+\begin{align*}
+    F &= \bigg \langle \int_{\Omega} \div\brak{-P, 0}\; dx\, dy, \; \int_{\Omega} \div\brak{0, -P}\; dx\, dy\bigg \rangle\\
+    &= \bigg \langle \int_{\Omega} -P_x \; dx\, dy, \; \int_{\Omega} -P_y\; dx\, dy\bigg \rangle\\
+    &= \int_{\Omega} -\brak{P_x, P_y}\; dx\, dy
+\end{align*}
+
+Now we only need the mass to complete $F= ma$ but we only know the density. Notice:
+\begin{align*}
+    \text{Force} &= \text{Mass} \times \text{Acceleration}\\
+    &= \frac{\text{Mass}}{\text{Area}} \times \text{Area} \times \text{Acceleration}\\
+    &= \text{Density}\times \text{Area} \times \text{Acceleration}\\
+    \implies \text{Density}\times \text{Acceleration} = \frac{\text{Force}}{\text{Area}}
+\end{align*}
+So 
+\[\rho \brak{x''(t), y''(t)} = \brak{-P_x, -P_y}\]
+
+Looking at components, 
+\[\begin{cases}
+    \rho x''(t) = -P_x\\
+    \rho y''(t) = -P_y
+\end{cases}\]
+which by the flow equations gives the inviscid Navier-Stokes equations:
+\[\begin{cases}
+    u_t + uu_x + vu_u + \frac{1}{\rho}P_x = 0\\
+    v_t + uv_x + vv_y + \frac{1}{\rho}P_y = 0 
+\end{cases}\]
+
+However we can also add a diffusion-like term $D\Delta u$ and $D\Delta v$ to each equation to account for the viscosity (here friction will cause slow particles to speed up and fast particles to slow down). 
+
+At long last, we have the Navier-Stokes Equations:
+\[\begin{cases}
+    u_t + uu_x + vu_u + \frac{1}{\rho}P_x = D\Delta u\\
+    v_t + uv_x + vv_y + \frac{1}{\rho}P_y = D\Delta v\\
+    u_x + v_y = 0
+\end{cases}\]
+
+Finally, note that we can rewrite this as 
+\[\begin{bmatrix}
+    u_t\\v_t
+\end{bmatrix} + \begin{bmatrix}
+    u_x & u_y\\
+    v_x &v_y
+\end{bmatrix}\begin{bmatrix}
+    u\\v
+\end{bmatrix} + \frac{1}{\rho} \begin{bmatrix}
+    P_x\\P_y
+\end{bmatrix} = D\begin{bmatrix}
+    \Delta u\\ \Delta v
+\end{bmatrix}\]
+so 
+\[\boxed{F_t + (\nabla F)F + \frac{1}{\rho} \nabla P = D\Delta F}\]
+
+\section{May 3: Wealth Distribution}
+\subsection*{Part I - Setting}
+Suppose you have $N=2$ people, Beff Jezos and Melon Usk, who exchange wealth with each other. Let $W_1(t)$ be the wealth of Beff Jezos at time t and $W_2(t)$ be the wealth of Melon Usk. Assume they exchange a fraction $k/2$ of their wealth each day.
+
+\subsection*{Part II - Models}
+\subsubsection*{Chemical Tank (Compartmental) Model:}
+\begin{center}
+    \scalebox{2}{$\boxed{W_1(t)} \overunderset{k/2}{k/2}{\rightleftarrows} \boxed{W_2(t)}$}
+\end{center}
+
+Then we can set up the ODE as the difference of in flow and out flow: 
+\[\begin{cases}
+    W_1'(t) = \frac{k}{2}(W_2(t) - W_1(t))\\
+    W_2'(t) = \frac{k}{2}(W_1(t) - W_2(t))\\
+\end{cases}\]
+
+\textbf{Remarks:}
+\begin{enumerate}
+    \item Here we use $k/2$ because $N=2$. In general, this would be $k/N$
+    \item We can use unequal exchanges but that would be more complicated
+\end{enumerate}
+
+\textbf{Problem:} In real life, wealth fluctuates randomly rather than deterministically (a la the stock market)
+
+\subsubsection*{Stochastic Model:} 
+\textbf{Motivation:} If things were not random we would expect $W_1$ to behave like 
+\[W_1'(t) = \mu W_1(t) \implies W_1 = Ce^{\mu t}\]
+where $\mu > 0$ is the mean growth rate of individual wealth. 
+
+In this model we assume much the same but with random fluctuations:
+\[\begin{cases}
+    W_1'(t) = (\mu + \sigma B(t)) W_1(t)\\
+    W_2'(t) = (\mu + \sigma B(t)) W_2(t)
+\end{cases}\]
+where $B(t)$ is Brownian motion. 
+
+\textbf{Interpretation:} $W_1$ behaves like $Ce^{\mu t}$ but fluctuates randomly with standard deviation $\sigma$
+
+\subsubsection*{Real Model:} 
+We choose to combine both prior models
+\[\begin{cases}
+    W_1'(t) = (\mu + \sigma B(t)) W_1(t) + \frac{k}{2}(W_2(t) - W_1(t))\\
+    W_2'(t) = (\mu + \sigma B(t)) W_2(t) + \frac{k}{2}(W_1(t) - W_2(t))
+\end{cases}\]
+
+\subsection*{Part III - Simplifying the model}
+We define $\overline W(t)$ as the average wealth 
+\[\overline W(t) = \frac{W_1(t) + W_2(t)}{2}\]
+Which lets us rewrite the model in terms of $\overline W(t)$: 
+\begin{align*}
+    \frac{k}{2}(W_2 - W_1) &= k\left(\frac{W_2 - W_1}{2}\right)\\
+    &= k\left(\frac{W_2 + W_1 - W_1 - W_1}{2}\right)\\
+    &= k\left(\frac{W_1 + W_2}{2} - \frac{2W_1}{2}\right)\\
+    &= k(\overline W - W_1)
+\end{align*}
+
+Similarly,
+\[\frac{k}{2}(W_1 - W_2) = k(\overline W - W_2)\]
+
+So the model becomes 
+\[\begin{cases}
+    W_1'(t) = (\mu + \sigma B(t)) W_1(t) + k(\overline W - W_1)\\
+    W_2'(t) = (\mu + \sigma B(t)) W_2(t) + k(\overline W - W_2)
+\end{cases}\]
+
+\textbf{Note:} This is not decoupled as $\overline W$ depends on $W_1$ and $W_2$ 
+
+Now we define 
+\[x_1(t) = \frac{W_1(t)}{W(t)} \qquad x_2(t) = \frac{W_2(t)}{W(t)}\]
+which is like the normalization of the wealth and 
+\[x_1(t) = 1 \implies W_1(t) = \overline W(t)\]
+
+Then using the ODE and $W_1 = x_1(t) \overline W(t)$ and $W_2 = x_2(t) \overline W(t)$ one can show that $x_1(t)$ and $x_2(t)$ satisfy the system 
+\[\begin{cases}
+    x_1'(t) = \sigma B(t)x_1(t) + k(1 - x_1(t))\\
+    x_2'(t) = \sigma B(t)x_2(t) + k(1 - x_2(t))
+\end{cases}\]
+
+Which is good because there is no $\mu$ term and no coupling!
+
+\subsection*{Part IV - Macroeconomic Model}
+Notice that $x_1$ and $x_2$ solve the same equation, namely the general Macroeconomic model measuring the total population wealth:
+\[\boxed{X'(t) = \sigma B(t) X(t) + k(1 - X(t))}\]
+where $X(t)$ is a random variable representing the wealth of the general population at time t. 
+
+Let $u(x, t)$ be the probability density function of $X(t)$ so that $\int_a^b u(x, t)\; dx$ is the fraction of population whose wealth $X(t)$ at time t is in $[a, b]$, i.e.
+\[\int_a^b u(x, t) \; dt = \mathbb{P}(a \leq X(t) \leq b)\]\
+so $u(x, t)$ is the distribution of wealth $X(t)$ in the population 
+
+\textbf{Fact:} $u(x, t)$ solves the Fokker-Planck equation
+\[\boxed{u_t + k((1 - x)u)_x = \frac{\sigma^2}{2}(x^2u)_{xx}}\]
+
+\textbf{Interpretation:} This is a hybrid of transport and heat equations. : $k((1 - x)u)_x$ is a transport term, it comes from the deterministic part $k(1-X(t))$ of the Macro Model, whereas $\frac{\sigma^2}{2}(x^2u)_{xx}$ is a diffusion term coming from the stochastic part $\sigma B(t)X(t)$
+
+\subsection*{Part V - Steady State Solutions}
+We want to find time-invariant solutions $u = u(x)$ corresponding to people whose wealth doesn't change over time. 
+\[u_t = 0 \implies k((1 - x)u)_x = \frac{\sigma^2}{2}(x^2 u)_{xx}\]
+This can be solved via integrating and integrating factors to get 
+\[u(x) = \frac{1}{x^{1 +m}}e^{-\frac{m - 1}{x}}\]
+where $m = 1 + \frac{2k}{\sigma^2}$ is the \emph{Pareto Index}
+
+\subsection*{Part VI - Solving our goal}
+\textbf{Question:} How is the wealth among the super rich distributed? i.e.,
+\[\int_x^\infty u(y)\; dy =\; ? \quad \text{for large } x\]
+
+\textbf{Fact:} For $x$ large enough 
+\[\int_x^\infty u(y)\; dy \approx \frac{1}{x^m}\]
+where $m = 1 + \frac{2k}{\sigma^2}$ (the Pareto index)
+
+\textbf{Interpretation:} If $m$ is large, the distribution is narrower (a smaller fraction of people has wealth $\geq x$ when $x$ is large). If $m$ is small, the distribution is broader and more people have more wealth.
+
+\section{May 5: Peyam's PhD PDE}
+\subsection*{Part I - The Great Debate}
+Consider a chemical reaction $A \rightleftharpoons B$ where a molecule A transforms into B and vice-versa. 
+
+\textbf{Note:} This is not a reaction like $C + O_2 \rightleftharpoons CO_2$ because this is already too complicated. This is just one molecule into another. 
+
+There are two ways of viewing this reaction. 
+
+\subsubsection*{Macroscopic Level}
+\[\begin{cases}
+    \alpha = \alpha(t) = \text{concentration of A at time t}\\
+    \beta = \beta(t) = \text{concentration of B at time t}\\
+\end{cases}\]
+
+These then satisfy the ODE 
+
+\textbf{Reaction-Diffusion System:}
+\[\boxed{\begin{cases}
+    \alpha_t = k(\beta - \alpha)\\
+    \beta_t = k(\alpha - \beta)
+\end{cases}}\]
+where $k > 0$ is the \emph{reaction-rate constant} and determining it is a big deal in chemistry. 
+
+\textbf{Note:} We could add a Laplacian term to this to get $\alpha_t - \Delta \alpha$ to have the diffusion aspect. 
+
+Intuitively, if $\alpha > \beta$ A decreases and B increases until the this switches and the two reach equilibrium. 
+
+\subsubsection*{Microscopic view}
+Instead of just having two states A and B, think of the molecule as having a continuum of states where on the left endpoint you have A and on the right endpoint you have B, with infinitely many hybrid states in between
+
+We can parameterize those states with a chemical variable $x$ where $x = -1 \rightarrow A$ and $x = 1 \rightarrow B$
+
+In an example where this describes protein folding, this $x$ could represent the angle of twist. 
+
+Now we can represent the state via a probabilistic double-well function $H$:
+
+\includegraphics[width=0.8\textwidth]{Images/double well.png}
+
+On the potential, this movement between the states performs Brownian Motion so we can model it with the \emph{Kramers-Smoluchowski PDE} (K-S):
+\[\boxed{\sigma u_t = (\sigma u_x)_x}\]
+where 
+\begin{itemize}
+    \item $u = u(x, t)$ is the density of the particle
+    \item Note: though it has not been included, everything depends on a ``zooming factor'' where $\epsilon = 0$ is the macroscropic view and $\epsilon > 0$ is the microscopic state, 
+    \item $\sigma = \sigma(x) = \exp(-\frac{H(x)}{\epsilon})$
+\end{itemize}
+
+\textbf{Note:} Technically you need to add some constants so the total mass of $\sigma$ is 1 and divide the RHS by $\tau$. If you ignore $\sigma$ and the constants, you get $u_t = u_{xx}$ so this is really just a scaled version of the heat equation! 
+
+Those two models stirred a GREAT debate in the chemical world, because some chemists say that the macroscopic model is better, while others claim that the microscopic one is more accurate.
+
+The paper claims that there shouldn't be a debate at all, because it turns out that the two models are just two different sides of the same coin!
+
+\subsection*{Part II - The main result}
+It turns out that if you take the limit of the Kramers-Smoluchowski PDE as $\epsilon \to 0$ you get the reaction-diffusion system!
+
+\textbf{Problem:} How does this possibly make sense? In K-S you have one function $u(x, t)$ and in R-D you have two function $\alpha(t)$ and $\beta(t)$
+
+\textbf{Main Theorem 1:} As $\epsilon \to 0$,
+\[\boxed{\sigma(x)u(x, t) \to \alpha(t)\delta_{-1} + \beta(t) \delta_1}\]
+where $\delta_i$ is the Dirac Delta at $x = i$.
+
+\textbf{Interpretation:} As the zooming factor goes to 0, the solution to K-S (multiplied by $\sigma$) converges to two spikes of height $\alpha$ and $\beta$
+
+\textbf{Proof:} Energy methods! Multiply K-S by $u$ and IBP to get one identity, then multiply the PDE by $u_t$ to get another identity then use some analysis results. 
+
+\textbf{Main Theoream 2:} $\alpha$ and $\beta$ solve R-D with 
+\[\boxed{k = \frac{\sqrt{-H''(0)H''(1)}}{2\pi}}\]
+
+This is AMAZING because it tells us the PDEs are related and solves the major chemistry problem of finding $k$ because $H$ is easy to approximate with numerical methods. 
+
+\subsection*{Part III - Sketch of the proof of Main Theorem 2}
+\textbf{Step 1:} Start with K-S:
+\[\sigma u_t = (\sigma u_x)_x\]
+The $\sigma$ term blows up near $\pm 1$ so we use energy methods to get rid of it. 
+
+We choose a function whose derivative is $1/\sigma$:
+\[\phi(x) = \int_0^x \frac{1}{\sigma(y)}\; dy\]
+
+\textbf{Step 2:} Energy methods:
+\[\underbrace{\int_{-2}^2 \sigma u_t \phi \; dx}_A = \underbrace{\int_{-2}^2 (\sigma u_x)_x \phi \; dx}_B\]
+
+We choose $\pm 2$ because all the terms behave there. Any number bigger than 1 would suffice. 
+
+\textbf{Step 3:} Study A 
+
+Remember that \[\sigma u \to \alpha \delta_{-1} + \beta \delta_1\]
+But it turns out that 
+\[sigma u_t \to \alpha_t \delta_{-1} + \beta_t \delta_1\]
+too. This means that $\sigma u_t$ concentrates at $\pm 1$ with spikes $\alpha_t$ and $\beta_t$. So 
+\[A = \int_{-2}^2 \sigma u_t \phi \; dx \to \alpha_t \phi(-1) + \beta_t \phi(1)\]
+But 
+\[\phi(1) = \int_0^1 \frac{1}{\sigma} \to \frac{1}{k}\]
+which can be shown with the Maclaurin series and a Laplace expansion near 1 (this is where $H''(0)$ and $H''(1)$ come in). By symmetry,
+\[\phi(-1) = \int_0^{-1} \frac{1}{\sigma}\; dx \to -\frac{1}{k}\]
+
+Hence, 
+\[A \to \alpha_t \left(-\frac{1}{k}\right) + \beta_t \left(\frac{1}{k}\right) = \frac{1}{k}(-\alpha_t + \beta_t)\]
+
+\textbf{Step 4:} Study B 
+\begin{align*}
+    B &= \int_{-2}^2 (\sigma u_x)_x \phi\; dx\\
+    &\overset{IBP}{=} -\int_{-2}^2 \sigma u_x \phi_x\; dx\\
+    &= -\int_{-2}^2 \sigma u_x \frac{1}{\sigma}\; dx \quad (\phi \text{ is an antiderivative of } 1/\sigma)\
+    &= -\int_{-2}^2 u_x\; dx\\
+    &= u(-2, t) - u(2, t)\\
+    &\to 2\alpha - 2\beta\quad (\text{via estimates})
+\end{align*}
+
+\textbf{Step 5:} Combining 
+\begin{align*}
+    &\;\;A = B\\
+    &\implies \frac{1}{k}(-\alpha_t + \beta_t) = 2\alpha - 2\beta\\
+    &\implies \alpha_t - \beta_t = 2k(\beta - \alpha)
+\end{align*}
+
+On the other hand, if you just integrate K-S you get 
+\[\alpha_t + \beta_t = 0\]
+
+So treating these as a system, we get:
+\[\begin{cases}
+    \alpha_t = k(\beta - \alpha)\\
+    \beta_t = k(\alpha - \beta)
+\end{cases}\]
+Which is R-D!!! $\blacksquare$
+
+\subsection*{Part IV - Variations}
+\textbf{Triple Wells:} If $H$ has three wells corresponding to $\alpha, \beta, \gamma$ we get 
+\[\sigma u \to \alpha \delta_{-2} + \beta \delta_0 + \gamma \delta_{2}\]
+where
+\[\begin{cases}
+    \alpha_t = k(\beta - \alpha)\\
+    \beta_t = k(\alpha - 2\beta + \gamma)\\
+    \gamma = k(\beta - \gamma)
+\end{cases}\]
+In other words, each well interacts with its nearest neighbor and $\beta$ has two neighbors.
+
+\textbf{Infinitely Many Wells:} If $H$ has infinitely many wells $\alpha_m$ then 
+\[\sigma u \to \sum_m \alpha_m \delta_{2m}\]
+where 
+\[\begin{cases}
+    (\alpha_m)_t = k(\alpha_{m-1} - 2\alpha_m + \alpha_{m+1})
+\end{cases}\]
+
+\textbf{Higher Dimensions:} Suppose H has wells at $(0, -1)$ and $(0, 1)$ and a saddle at $(0, 0)$
+
+Then K-S becomes:
+\[\sigma u_t = (\sigma u_x)_x + (\sigma u_y)_y\]
+and we get the same result:
+\[\sigma u \to \alpha \delta_{(0, -1)} + \beta \delta_{(0, 1)}\]
+where
+\[\begin{cases}
+    \alpha_t = k(\beta - \alpha)\\
+    \beta_t = k(\alpha - \beta)\\
+\end{cases}\]
+
+This time $k$ is more complicated and depends on the eigenvalues of $D^2H$ at $(0, 0)$
+
+Interestingly, this time $\phi$ is defined with a PDE so you get to use a PDE to solve a PDE. 
+
+\subsection*{Part V - Open Projects}
+In higher dimensional cases with three symmetric potentials we can just adapt the methods above. 
+
+If the wells are at random locations (not symmetric), though, we need to do a lot more work to prove the estimates and convergence. But this can be solved with some probability theory (interpret the wells as states of a Markov process and use some results about metastable random processes)
+
+\textbf{Tooth Problem:} What if you take H, but spin it around the z-axis to look like a tooth?
+
+Now there is a circle of wells, and you can show that $\sigma u$ concentrates on that circle, but the question is: What is the resulting PDE?
+
+\textbf{Beaver Dam:} What if H looks like a (version) of a beaver dam
+
+\includegraphics[width=0.7\textwidth]{Images/beaver dam.png}
+
+Now $\sigma u$ concentrates on a line but the PDE is uncertain because the particle can go left, right, forward, or backward.
+
+\textbf{Conclusion:} For any H, you have a new problem! 
+
+\section{Lecture May 8: Final Exam Review} 
+
+\subsection*{Part I - Fourier Transform}
+\textbf{Example 1:}
+\begin{enumerate}
+    \item Let $h(x)$ be a function with the following property: for all $f(x)$ we have 
+    \[\int_{-\infty}^\infty h(x) f(x)\; dx = f(0)\] 
+    Find $\hat{h}(\kappa)$.
+
+    \textbf{Solution:}
+    \begin{align*}
+        \hat h(\kappa) &= \int_{-\infty}^{\infty} h(x) \; \underbrace{e^{i\kappa x}}_{f(x)} \; dx\\
+        &= f(0) = e^{ik(0)} = \boxed{1}
+    \end{align*}
+
+    \item With $h$ above, solve the PDE 
+    \[u_{tt} - 4u = -h(x)\]
+
+    \textbf{Solution:}
+    \begin{align*}
+        \F(u_{tt}) - 4\F(u) &= -\F{h(x)}\\
+        \frac{d^2}{dt^2}\F(u) - 4\F(u) &= -1\\
+    \end{align*}
+
+    Homogeneous solution:
+    \[y'' - 4y = 0 \implies r = \pm 2 \implies y_0 = Ae^{2t} + Be^{-2t}\]
+
+    Particular Solution:
+    \[y_p = C\]
+    \[(C'') - 4(C) = -1 \implies C = \frac{1}{4}\]
+    \[y_p = \frac{1}{4}\]
+
+    General Solution:
+    \[y = y_0 + y_p\]
+    \[\F(u(\kappa, t)) = A(\kappa)e^{2t} + B(\kappa)e^{-2t} + \frac{1}{4} \]
+
+    Since $A(\kappa)$ and $B(\kappa)$ are arbitrary, $A(\kappa) = \hat f (\kappa)$ for some f and $B(\kappa) = \hat g (\kappa)$ for some g. 
+
+    Then
+    \[\frac{1}{4} = \frac{1}{4} \cdot 1 = \frac{1}{4}\hat{h}\]
+
+    so 
+    \begin{align*}
+        \F(u(\kappa, t)) &= \hat f(\kappa) + \hat g (\kappa) + \frac{1}{4}\hat{h}\\
+        &= \F(f(x)e^{2t} + g(x)e^{-2t} + \frac{1}{4}h(x))
+    \end{align*}
+    and 
+    \[\boxed{u(x, t) = f(x)e^{2t} + g(x)e^{-2t} + \frac{1}{4}h(x)}\]
+    with $f, g$ arbitrary. 
+\end{enumerate}
+
+\subsection*{Part II - Method of Characteristics}
+\textbf{Example 2:} Solve using the characteristic equations 
+\[\begin{cases}
+    u_t + u_x + u = \exp(x + 2t)\\
+    u(x, 0) = 0
+\end{cases}\]
+
+Let $h(t) = u(x(t), t)$. Then 
+\begin{align*}
+    h' &= u_x \cdot x'(t) + u_t\\
+    &=  u_x \cdot x'(t) -u_x - u + \exp(x + 2t)\
+    &= u_x(x' - 1) - u + \exp(x + 2t)
+\end{align*}
+
+We denote $x'(t) - 1 = 0 \implies x'(t) = 1$ as our characteristic ODE. Then 
+\[x(t) = t + C\]
+so 
+\begin{align*}
+    h'(t) &= u_x\cdot 0 - u + \exp((t + C) + 2t)\\
+    &= -u(x(t), t) + \exp(3t + C)\\
+    &= -h(t) + \exp(3t + C)
+\end{align*}
+
+So our second characteristic ODE is $h'(t) + h(t) = \exp(3t + C)$. Thus, by integrating factors,
+\[(h(t)e^t)' = e^t e^{3t+C} = e^{4t + C}\]
+\[h(t)e^t = \frac{1}{4}e^{4t+C} +B \]
+\[h(t) = \frac{1}{4}e^{3t+C} + Be^{-t}\]
+
+Then by the definition of $h$:
+\begin{align*}
+    u(x(t), t) &= \frac{1}{4}\exp(3t  +C) + B\exp(-t)\\
+    &\overset{t=0}{=} u(x(0), 0) = \frac{1}{4}e^{C} + B = 0\implies B = -\frac{1}{4}e^C\\
+    &= \frac{1}{4}\exp(3t  +C) -\frac{1}{4}e^Ce^{-t}\\
+    u(t + C, t) &= \frac{1}{4}\exp(3t  +C) -\frac{1}{4}e^{C-t} \quad (x = t +C)\\
+    u(x, t) &= \frac{1}{4}e^{3t + (x-t)} -\frac{1}{4}e^{(x-t) - t}\quad (C = x - t)\\
+    &= \frac{1}{4}e^{2t + x} - \frac{1}{4}e^{x - 2t}\\
+    &= \boxed{\frac{1}{4}e^x(e^{2t} - e^{-2t})}
+\end{align*}
+
+\textbf{Summary of the Method:}
+\begin{enumerate}
+    \item Let $h(t) = u(x(t), t)$
+    \item Calculate $h'(t)$
+    \item Find the characteristic ODE for $x'$
+    \item Plug in to get the second characteristic ODE in $h'$
+    \item Solve for $h$
+    \item Resub back into definition of $h$
+    \item Use initial condition
+\end{enumerate}
+
+
+\end{document}     
 
 
 
