@@ -1,0 +1,150 @@
+\documentclass[12pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\allsectionsfont{\sffamily\mdseries\upshape} 
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{empheq}
+
+\renewcommand{\L}[1]{\mathcal{L}{#1}}
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+
+\title{Homework 1}
+\author{Milan Capoor}
+\date{3 February 2023}
+
+\begin{document}
+\maketitle
+\textbf{Problem 1:} Find the order of each equation and state if it is linear or non-linear. If it's linear, state if it is homogeneous or inhomogeneous. No justification needed
+\begin{enumerate}
+    \item $u_t - u_{xxt} + uu_x = 0$ - \ans{3rd order, Nonlinear}
+    \item $u_x + e^yu_y = 2$ - \ans{1st order, Linear inhomogeneous}
+    \item $u_{xx} - 2u_{yyy} = 0$ - \ans{3rd order, Linear homogeneous}
+\end{enumerate}
+
+\pagebreak 
+
+\textbf{Problem 2:} Use the definition of linear transformations to show that the following PDE is linear
+\[u_x + x^2 u_{yy} = e^{x+y}\]
+
+Solution:
+\[L(u) = u_x + x^2 u_{yy}\]
+\begin{align*}
+    L(u + v) &= (u + v)_x + x^2 (u+ v)_{yy}\\
+    &= u_x + v_x + x^2 u_{yy} + x^2 v_{yy}\\
+    &= u_x + x^2 u_{yy} + v_x + x^2 v_{yy}\\
+    &= L(u) + L(v) \checkmark
+\end{align*}
+
+\begin{align*}
+    L(cu) &= (cu)_x + x^2 (cu)_{yy}\\
+    &= cu_x + cx^2 u_{yy}\\
+    &= c(u_x + x^2 u_{yy}) = cL(u) \checkmark
+\end{align*}
+
+\pagebreak 
+
+\textbf{Problem 3:} Show that $u(x, y) = f(x) \; g(y)$ solves the PDE 
+\[uu_{xy} = u_x u_y\]
+
+Solution:
+\[(f(x)g(y))(f(x)g(y))_{xy} = (f(x)g(y))_x (f(x)g(y))_y\]
+\[(f(x)g(y))(f'(x)g(y))_y = (f'(x)g(y)(f(x)g(y)))_y\]
+\[(f(x)g(y))(f'(x)g'(y)) = (f'(x)g(y))(f(x)g'(y))\]
+\[(f(x)g(y))(f'(x)g'(y)) = (f'(x)g'(y))(f(x)g(y)) \checkmark\] 
+
+\pagebreak 
+
+\textbf{Problem 4:} Solve and check 
+\[3u_y + u_{xy} = 0\]
+
+Solution:
+\[v = u_y \implies 3v + v_x = 0\]
+
+By ODE analogy:
+\[v= f(y)e^{-3x}\]
+\[u_y = f(y)e^{-3x}\]
+\[u = \int f(y) e^{-3x} \; dy = \ans{$F(y) e^{-3x} + G(x)$}\]
+
+Check:
+\begin{align*}
+    u &= F(y) e^{-3x} + G(x)\\
+    u_y &= f(y) e^{-3x}\\
+    u_{xy} &= -3f(y) e^{-3x}
+    3u_y + u_{xy} = 3f(y) e^{-3x} -3f(y) e^{-3x} = 0 \checkmark
+\end{align*}
+\pagebreak 
+
+\textbf{Problem 5:} Solve 
+\[u_{yy} - 5u_y + 6u = 0\]
+
+By ODE analogy:
+\[r^2 - 5r + 6 = 0 \implies (r - 3)(r - 2) = 0 \implies r = \{2, 3\}\]
+\[\ans{$u(x, y) = A(x)e^{2y} + B(x)e^{3y}$}\]
+
+\pagebreak 
+
+\textbf{Problem 6:} What is the type of the following 2nd order PDE:
+\begin{enumerate}
+    \item $u_{xx} - 4u_{xy} + u_{yy} + 2u_y + 4u = 0$
+    \[D = (-4)^2 - 4(1)(1) = 12 > 0 \implies \ans{ Hyperbolic}\]
+    \item $9u_{xx} + 6u_{xt} + u_{tt} + u_x = x^2$
+    \[D = (-6)^2 + 4(9)(1) = 0 \implies \ans{ parabolic}\]
+\end{enumerate}
+
+\pagebreak 
+
+\textbf{Problem 7:} Find all real numbers $\alpha$ such that 
+\[u(x, y, z) = (x^2 + y^2 + z^2)^\alpha\]
+is a solution of $u_{xx} + u_{yy} + u_{zz} = 0$
+
+Solution:
+\begin{align*}
+    u_x &= 2x\alpha(x^2 + y^2 + z^2)^{\alpha - 1}\\
+    u_y &= 2y\alpha(x^2 + y^2 + z^2)^{\alpha - 1}\\
+    u_z &= 2z\alpha(x^2 + y^2 + z^2)^{\alpha - 1}
+\end{align*}
+\begin{align*}
+    u_{xx} &= 2\alpha(x^2 + y^2 + z^2)^{\alpha - 1} + 4x^2\alpha(\alpha - 1)(x^2 + y^2 + z^2)^{\alpha - 2}\\
+    u_{yy} &= 2\alpha(x^2 + y^2 + z^2)^{\alpha - 1} + 4y^2\alpha(\alpha - 1)(x^2 + y^2 + z^2)^{\alpha - 2}\\
+    u_{zz} &= 2\alpha(x^2 + y^2 + z^2)^{\alpha - 1} + 4z^2\alpha(\alpha - 1)(x^2 + y^2 + z^2)^{\alpha - 2}\\
+\end{align*}
+\begin{align*}
+    0 &= u_{xx} + u_{yy} + u_{zz} \\
+    &= 6\alpha(x^2 + y^2 + z^2)^{\alpha - 1} + 4\alpha(\alpha - 1)(x^2 + y^2 + z^2)^{\alpha - 2}(x^2 + y^2 + z^2)\\
+    &= 6\alpha(x^2 + y^2 + z^2)^{\alpha - 1} + 4\alpha(\alpha - 1)(x^2 + y^2 + z^2)^{\alpha - 1}\\
+    &= (6\alpha + 4\alpha^2 - 4\alpha)(x^2 + y^2 + z^2)^{\alpha - 1}\\
+    &= (2\alpha)(1 + 2\alpha)(x^2 + y^2 + z^2)^{\alpha - 1}\\
+\end{align*}
+
+The above equation is undefined for $\alpha <= 0 \cap (x, y, z) = (0, 0, 0)$ and positive for all other values. Thus, the only real numbers for which $u(x, y, z) = (x^2 + y^2 + z^2)^\alpha$ satisfies $u_{xx} + u_{yy} + u_{zz} = 0$ are
+
+\begin{center}
+    \ans{$\alpha = \{0, -\frac{1}{2}\}$ given that $(x, y, z) \neq (0, 0, 0)$ and $\alpha = -\frac{1}{2}$ otherwise}
+\end{center}
+
+\end{document}

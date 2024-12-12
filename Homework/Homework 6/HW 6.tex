@@ -1,0 +1,342 @@
+\documentclass[12pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\allsectionsfont{\sffamily\mdseries\upshape} 
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{empheq}
+\usepackage{xcolor}
+\renewcommand{\L}[1]{\mathcal{L}\{#1\}}
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+\newcommand{\vecs}[1]{\langle #1\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\F}[1]{\mathcal{F}(#1)}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+
+\title{APMA 0360: Homework 6}
+\author{Milan Capoor}
+\date{17 March 2023}
+
+\begin{document}
+\maketitle
+Note: you do not need to show work for the three cases for boundary value problems except in problem 1.
+
+\section*{Problem 1: Wave equation with mixed conditions} 
+\[\begin{cases}
+    u_{tt}= c^2 u_{xx}\\
+    u_x(0, t) = 0\\
+    u(2, t) = 0
+\end{cases}\]
+\color{blue}
+Assume that $u(x, t) = X(x)T(t)$. Then 
+\[( X(x)T(t))_{tt} = c^2( X(x)T(t))_{xx}\]
+\[XT'' = c^2X''T\]
+\[\frac{T''}{c^2T} = \frac{X''}{X}\]
+Then note that 
+\[\left(\frac{X''}{X}\right)_t = 0\]
+and 
+\[\left(\frac{X''}{X}\right)_x = \left(\frac{T''}{c^2T}\right)_x = 0\]
+so 
+\[\frac{T''}{c^2T} = \frac{X''}{X} = \lambda\]
+for some constant $\lambda$ giving a system of ODE:
+\[\begin{cases}
+    X'' = \lambda X\\
+    T'' = c^2T\lambda
+\end{cases}\]
+Using the boundary conditions:
+\begin{align*}
+    u(2, t) = 0 \implies X(2)T(t) = 0 \implies X(2) = 0\\
+    u_x(0, t) = 0 \implies X'(0)T(t) = 0 \implies X'(0) = 0
+\end{align*}
+Which gives an ODE for X:
+\[\begin{cases}
+    X'' = \lambda X\\
+    X(2) = 0\\
+    X'(0) = 0
+\end{cases}\]
+Auxiliary equation:
+\[r^2 = \lambda \implies r = \pm \omega\]
+Case 1: $\lambda > 0$
+\[X(x) = Ae^{\omega x} + Be^{-\omega x}\]
+\[X'(0) = A\omega e^{\omega (0)} + B\omega e^{\omega (0)} = A\omega + B\omega = 0 \implies B = -A\]
+\[X(x) = Ae^{\omega x} - Ae^{-\omega x}\]
+\[X(2) = Ae^{2\omega} - Ae^{-2\omega} = 0 \implies e^{2\omega} = e^{2\omega} \implies -2\omega = 2\omega \implies \omega = 0\]
+So there are no nonzero solutions
+
+Case 2: $\lambda = 0$
+\[X(x) = A + Bx\]
+\[X(2) = A + 2B = 0 \implies A = -2B\]
+\[X(x) = -2B + Bx\]
+\[X'(x) = B \implies X'(0) = B = 0 \implies X(x) = 0\]
+So there are no nonzero solutions here either 
+
+Case 3: $\lambda < 0$
+\[X(x) = A\cos(\omega x) + B\sin(\omega x)\]
+\[X'(x) = -A\omega\sin(\omega x) + B\omega \cos(\omega x)\]
+\[X'(0) = B\omega = 0\implies B = 0\]
+\[X(x) = A\cos(\omega x)\]
+\[X(2)= A\cos(2\omega) = 0 \implies \cos(2\omega) = 0\]
+So $\omega = \frac{\pi}{4} + \frac{\pi}{2}m \quad (m = 0, 1, 2,...)$ and the eigenvalues are 
+\[\lambda = -(\frac{\pi}{4} + \frac{\pi}{2}m)^2\]
+corresponding to the eigenfunctions
+\[X(x) = \cos((\frac{\pi}{4} +\frac{\pi}{2}m)x)\]
+So back to the T equation:
+\[ T'' = -c^2(\frac{\pi}{4} + \frac{\pi}{2}m)^2T\] 
+\[z^2 + c^2(\frac{\pi}{4} + \frac{\pi}{2}m)^2 = 0\]
+\[z = \pm i(c(\frac{\pi}{4} + \frac{\pi}{2}m))\]
+\[T(t) = A\cos(c(\frac{\pi}{4} + \frac{\pi}{2}m)) + B\sin(c(\frac{\pi}{4} + \frac{\pi}{2}m))\]
+so 
+\[\boxed{u(x, t) =\sum_{m=0}^\infty A_m\cos(c(\frac{\pi}{4} + \frac{\pi}{2}m)) + B_m\sin(c(\frac{\pi}{4} + \frac{\pi}{2}m))\cos((\frac{\pi}{4} +\frac{\pi}{2}m)x) }\]
+\color{black}
+\pagebreak
+\section*{Problem 2: Wave equation with friction} 
+\[\begin{cases}
+    u_{tt} + ru_t = c^2 u_{xx}\\
+    u(0, t) = 0\\
+    u(\pi, t) = 0
+\end{cases}\]
+Note: Assume $0 < r < 2c$
+
+\color{blue}
+Assume $u(x, t) = X(x)T(t)$ so 
+\[(X(x)T(t))_{tt} + r(X(x)T(t))_t = c^2(X(x)T(t))_{xx}\]
+\[XT'' + rXT' = c^2X''T\]
+\[\frac{T'' + rT'}{c^2T} = \frac{X''}{X}\]
+\[\frac{T''}{c^2T} + \frac{rT'}{c^2T} = \frac{X''}{X}\]
+\[\left(\frac{T''}{c^2T} + \frac{rT'}{c^2T}\right)_x + \left(\frac{X''}{X}\right)_t = 0\]
+\[\frac{T''}{c^2T} + \frac{rT'}{c^2T} = \frac{X''}{X} = \lambda\]
+Looking at the X equation:
+\[X'' = \lambda X\]
+\[u(0, t) = X(0)T(t) = 0 \implies X(0) = 0\]
+\[u(\pi, t) = 0 \implies X(\pi) = 0\]
+\[r^2 = \lambda \implies r = \pm \omega\]
+Looking at $\lambda < 0$:
+\[X(x) = A\cos(\omega x) + B\sin(\omega x)\]
+\[X(0) = A = 0 \implies X(x) = B\sin(\omega x)\]
+\[X(\pi) = B \sin(\pi \omega) = 0 \implies \sin(\pi \omega) = 0\]
+so $\omega = m \quad (m = 0, 1, 2, ...)$
+and the eigenvalues are 
+\[\lambda = -m^2 \quad (m = 0, 1, 2, ...)\]
+corresponding to eigenfunction 
+\[X(x) = \sin(mx)\]
+
+Going back to the T equation:
+\[T'' + rT' = c^2T\lambda\]
+\[T'' + rT' = -c^2m^2T\]
+So we have auxiliary equation 
+\[s^2 + rs + c^2m^2 = 0 \implies s = \frac{-r \pm \sqrt{r^2 - 4c^2m^2}}{2}\]
+However, as $r < 2c$ we know that $r^2 < 4c^2 \implies r^2 - 4c^2m^2 < 0$ so the solutions are complex. Then,
+\[ s = \frac{-r \pm i\sqrt{4c^2m^2 - r^2}}{2}\]
+and 
+\[T(t) = e^{-rt}\left(A\cos\left(\frac{\sqrt{4c^2m^2 - r^2}}{2}x\right) + B\sin\left(\frac{\sqrt{4c^2m^2 - r^2}}{2}x\right)\right)\]
+so 
+\[u(x, t) = e^{-rt}\left(A\cos\left(\frac{\sqrt{4c^2m^2 - r^2}}{2}x\right) + B\sin\left(\frac{\sqrt{4c^2m^2 - r^2}}{2}x\right)\right)\sin(mx)\]
+which by linearity gives us 
+\[\boxed{u(x, t) = \sum_{m = 0}^\infty e^{-rt}\left(A_m\cos\left(\frac{\sqrt{4c^2m^2 - r^2}}{2}x\right) + B_m\sin\left(\frac{\sqrt{4c^2m^2 - r^2}}{2}x\right)\right)\sin(mx)}\]
+\color{black}
+\pagebreak
+\section*{Problem 3:}
+\[\begin{cases}
+    tu_{t}= u_{xx} + 2u\\
+    u(0, t) = 0\\
+    u(\pi, t) = 0
+\end{cases}\]
+Note: Define $\lambda' = \lambda - 2$
+
+\color{blue}
+Let $u(x, t) = X(x)T(t)$. Then 
+\[t(X(x)T(t))_t = (X(x)T(t))_{xx} + 2(X(x)T(t))\]
+\[tXT' = X''T + 2XT\]
+\[\frac{tT'}{T} = \frac{X''}{X} + 2\]
+\[\frac{X''}{X} = \frac{tT'}{T} + 2 = \lambda\]
+for some constant $\lambda$ or with $\lambda' = \lambda - 2$,
+\[\frac{X''}{X} = \frac{tT'}{T} = \lambda'\] 
+Then 
+\[\begin{cases}
+    X'' = \lambda' X\\
+    tT' = \lambda' T
+\end{cases}\]
+Then,
+\[u(\pi, t) = 0 \implies X(\pi)T(t) = 0 \implies X(\pi) = 0\]
+\[u(0, t) = 0\implies X(0)T(t) = 0 \implies X(0) = 0\]
+Giving us an ODE for X:
+\[\begin{cases}
+    X'' = \lambda' X\\
+    X(\pi) = 0\\
+    X(0) = 0
+\end{cases}\]
+From the auxiliary equation, with $\lambda' < 0$
+\[r^2 = \lambda \implies r = \pm \omega i \]
+\[X(x) = A\cos(\omega x)+ B\sin(\omega x)\]
+\[X(0) = A = 0 \implies X(x) = B\sin(\omega x)\]
+\[X(\pi) = B\sin(\pi \omega) = 0 \implies \sin(\pi \omega) = 0 \implies \omega = m \quad (m = 0, 1, 2, ...)\]
+So 
+\[\lambda' = -m^2 \quad (m = 0, 1, ...)\]
+\[X(x) = \sin(mx)\]
+Then 
+\[tT' = -m^2T\]
+\[T = e^{\int \frac{m^2}{t}\; dt} = t^{-m^2}\]
+and 
+\[u(x, t) = \sum_{m=0}^\infty A_m\sin(mx) t^{- m^2}\]
+Then making the going back to $\lambda$ from $\lambda'$:
+\[\boxed{u(x, t) = \sum_{m=1}^\infty A_m\sin((m - \sqrt{2})x) t^{2-m^2}}\]
+\color{black}
+\pagebreak
+\section*{Problem 4:}
+\begin{enumerate}
+    \item Solve 
+    \[\begin{cases}
+        u_{tt} = c^2u_{xx}\\
+        u(0, t) = 0\\
+        u(1, t) = 0\\
+        u(x, 0) = 3\sin(2\pi x)\\
+        u_t(x, 0) = 0
+    \end{cases}\]
+    Note: you are allowed to directly use the formula from lecture
+
+    \color{blue} 
+    From lecture,
+    \[u(x, t) = \sum_{m=1}^\infty (A_m\cos(\pi m ct) + B_m\sin(\pi mct)) \sin(\pi m x)\]
+    Then using the new initial conditions,
+    \[u(x, 0) = \sum_{m=1}^\infty A_m\sin(\pi m x) = 3\sin(2\pi x)\]
+    Which suggests that $A_2 = 3$ and $A_m = 0$ for all other values of m. And from the other initial condition, 
+    \[u_t(x, t) = \sum_{m=1}^\infty (-A_m(\pi mc)\sin(\pi m ct) + B_m(\pi mc)\cos(\pi mct))\sin(\pi m x)\]
+    \[u_t(x, 0) = \sum_{m=1}^\infty B_m(\pi mc)\sin(\pi m x) = 0\]
+    which implies that $B_m$ equals 0 for all m. So at last, we have 
+    \[\boxed{u(x, t) = 3\cos(2\pi x)\sin(2\pi x)}\]
+    \color{black}
+    \item Use (1) to solve 
+    \[\begin{cases}
+        u_{tt} = c^2u_{xx}\\
+        u(0, t) = 5\\
+        u(1, t) = 5\\
+        u(x, 0) = 3\sin(2\pi x) + 5\\
+        u_t(x, 0) = 0
+    \end{cases}\]
+
+    \color{blue}
+    Let $v(x, t) = u(x, t) - 5$. Then 
+    \[v_{tt} = (u - 5)_{tt} = u_{tt} = c^2u_{xx} = c^2(v + 5)_{xx} = c^2v_{xx}\]
+    So 
+    \[\begin{cases}
+        v_{tt} = c^2v_{xx}
+        v(0, t) = u(0, t) - 5 = 0\\
+        v(1, t) = u(1, t) - 5 = 0\\
+        v(x, 0) = u(x, 0) - 5 = 3\sin(2\pi x)\\
+        v_t(x, 0) = u_t(x, 0) = 0
+   \end{cases}\]
+    But this system is exactly the same as from part 1! So 
+    \[v(x, t) = 3\cos(2\pi x)\sin(2\pi x)\]
+    And as, $u = v + 5$, 
+    \[\boxed{u(x, t) = 3\cos(2\pi x)\sin(2\pi x) + 5}\]
+   \color{black}
+
+    \item Use (1) to solve 
+    \[\begin{cases}
+        u_{tt} = c^2u_{xx}\\
+        u(0, t) = 3\\
+        u(1, t) = 5\\
+        u(x, 0) = 3\sin(2\pi x) + (2x + 3)\\
+        u_t(x, 0) = 0
+    \end{cases}\]
+    \color{blue}
+    Let $v(x, t) = u(x, t) - f(x)$ where f is a linear function such that $f(0) = 3$ and $f(1) = 5$. Then 
+    \[f(x) = \frac{5 -3}{1 - 0}(x - 0) + 3 = 2x + 3\]
+    and 
+    \[v(x, t) = u(x, t) - 2x - 3\]
+    Which gives us a new PDE
+    \[\begin{cases}
+        v_{tt} = c^2v_{tt}\\
+        v(0, t) = 0\\
+        v(l, t) = 0\\
+        v(x, 0) = 3\sin(2\pi x) + (2x + 3) - (2x+3) = 3\sin(2\pi x)\\
+        v_t(x, 0) = u_t(x, 0) - 2(0) = 0
+    \end{cases}\]
+    Once again, this corresponds to the solution from part 1 so 
+    \[v(x, t) = 3\cos(2\pi x)\sin(2\pi x)\]
+    and 
+    \[\boxed{u(x, t) = 3\cos(2\pi x)\sin(2\pi x) + 2x + 3}\]
+\end{enumerate}
+\pagebreak
+\section*{Problem 5: The Infinity Laplacian}
+\[(u_t)^2 (u_{tt}) + 2(u_x)(u_{t})(u_{xt}) + (u_x)^2(u_{xx}) = 0\]
+\begin{enumerate}
+    \item For separation of variables use $u(x, t) = X(x) + T(t)$ to show that 
+    \[(T')^2T'' = -(X')^2 X''\]
+
+    \color{blue}
+    Let $u(x, t) = X(x) + T(t)$ so 
+    \begin{align*}
+        ((X(x) &+ T(t))_t)^2 ((X(x) + T(t))_{tt})\\ 
+        &+ 2((X(x) + T(t))_x)((X(x) + T(t))_{t})((X(x) + T(t))_{xt}) \\
+        &+ ((X(x) + T(t))_x)^2((X(x) + T(t))_{xx}) = 0
+    \end{align*}
+    \[(T')^2(T'') + 2(X')(T')(0)+ (X')^2(X'') = 0\]
+    \[(T')^2T'' + (X')^2(X'') = 0\]
+    \[(T')^2T'' = -(X')^2(X'') \quad \blacksquare\]
+    \color{black}
+    \item Show both sides are constant, equal to $\lambda$. For simplicity assume $\lambda = 1/3$. Use this to solve for X and T and then for u(x, t) Assume that any constants of integration are 0.
+    
+    \color{blue}
+    \[((T')^2T'')_x = 0\]
+    \[((T')^2T'')_t = (-(X')^2(X''))_t = 0\] 
+    So both sides are constant and 
+    \[(T')^2T'' = -(X')^2(X'') = \lambda = \frac{1}{3}\]
+    This gives us a system of ODEs
+    \[\begin{cases}
+        (T')^2T'' = \frac{1}{3}\\
+        -(X')^2(X'') = \frac{1}{3}
+    \end{cases}\]
+
+    Starting with T, let $v(t) = T'(t)$ so 
+    \begin{align*}
+        v^2v' &= \frac{1}{3}\\
+        v^2 \frac{dv}{dt} &= \frac{1}{3}\\
+        v^2 \; dv &= \frac{1}{3} \; dt\\
+        \frac{1}{3}v^3&= \frac{1}{3}t + C_1\\
+        v &= \sqrt[3]{t + C_1}
+    \end{align*}
+    So 
+    \[T' = (t + C_2)^\frac{1}{3}\]
+    \[T = \frac{3}{4}(t + C_1)^{\frac{4}{3}} + C_2\]
+    but assuming that all the constants of integration are 0,
+    \[T = \frac{3}{4}t^{\frac{4}{3}}\]
+    Similarly, for x let $w(x) = X'(x)$ so 
+    \begin{align*}
+        w^2 w' &= -\frac{1}{3}\\
+        \frac{w^3}{3} &= -\frac{1}{3}x + C_1\\
+        w &= \sqrt[3]{-x + C_1}
+    \end{align*}
+    \[X' = (-x + C_1)^{\frac{1}{3}} \implies X = \frac{3}{4}(-x + C_1)^{\frac{4}{3}}+ C_2 \implies X = \frac{3}{4}x^{\frac{4}{3}}\]
+    so 
+    \[\boxed{u(x, t) = \frac{3}{4}(t^\frac{4}{3} + x^\frac{4}{3})}\]
+\end{enumerate}
+
+\end{document}

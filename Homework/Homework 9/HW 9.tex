@@ -1,0 +1,259 @@
+\documentclass[12pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{empheq}
+\usepackage{xcolor}
+\renewcommand{\L}[1]{\mathcal{L}\{#1\}}
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+\newcommand{\vecs}[1]{\langle #1\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\F}[1]{\mathcal{F}(#1)}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+
+\title{APMA 0360: Homework 9}
+\author{Milan Capoor}
+\date{21 April 2023 }
+
+\begin{document}
+\maketitle
+\section*{Problem 1:}
+Use the Laplacian in polar coordinates to find the radial solution of
+\[u_{xx} + u_{yy} = 1\]
+Such that $u = 0$ on the circles of radius $r = 1$ and $r = 2$
+
+\color{blue}
+In polar coordinates, the Laplacian is 
+\[u_{rr} + \frac{1}{r}u_r + \frac{1}{r^2} u_{\theta \theta} = 1\] 
+
+As the solution is radial, $u_{\theta \theta} = 0$ so 
+\[u_{rr} + \frac{1}{r}u_r = 1\]
+\[ru_{rr} + u_r = r\]
+\[(ru_r)' = r\]
+\[ru_r = \frac{1}{2}r^2 + A\]
+\[u_r = \frac{1}{2}r + \frac{A}{r}\]
+\[u(r) = \frac{r^2}{4} + A\ln r + B\]
+Applying linearity and checking initial conditions:
+\[\begin{cases}
+    u(1) = \frac{1}{4} + A\ln(1) + B = 0 \implies  B = -\frac{1}{4}\\
+    u(2) = 1 + A_m\ln(2) + B = 0 \implies A = -\frac{3}{4\ln 2}
+\end{cases}\]
+so the radial solution of $\Delta u = 1$ such that $u = 0$ on $r^2 = 1$ and $r^2 = 4$ is 
+\[\boxed{u(x, y) = \frac{x^2 + y^2}{4} - \frac{3}{4\ln 2} \ln(x^2 + y^2) - \frac{1}{4}}\]
+
+\color{black}
+\pagebreak
+
+\section*{Problem 2:} 
+\textbf{Note:} In the problem below, you may use without proof the fact that the Laplacian in spherical coordinates is
+\[u_{xx} + u_{yy} + u_{zz} = u_{rr} + \frac{2}{r} u_r + \; ...\]
+where $r = \sqrt{x^2 + y^2 + z^2}$ and the extra terms don't depend on r 
+
+Find all radial solutions of
+\[u_{xx} + u_{yy} + u_{zz} = k^2u \quad k > 0\]
+\textbf{Hint:} see above. To solve the ODE, use $v = ru(r)$
+
+\color{blue}
+Let $v = ru(r)$. Then 
+\[v_r = u + ru_r\]
+\[v_{rr} = 2u_r + ru_{rr}\]
+So 
+\[\frac{v_{rr}}{r} = u_{rr} + \frac{2}{r}u_r = u_{xx} + u_{yy} + u_{zz} = k^2 u\] 
+\[\frac{v_{rr}}{r} = \frac{k^2v}{r}\]
+\[v_{rr} = k^2 v\]
+\[v = Ae^{kr} + Be^{-kr}\]
+\[ru = Ae^{kr} + Be^{-kr}\]
+\[u = \frac{Ae^{kr}}{r} + \frac{Be^{-kr}}{r}\]
+So 
+\[\boxed{u(x, y, z) = \frac{1}{\sqrt{x^2 + y^2 + z^2}}\left(Ae^{k\sqrt{x^2 + y^2 + z^2}} + Be^{-k\sqrt{x^2 +y^2 + z^2}}\right)}\]
+\color{black}
+\pagebreak
+
+\section*{Problem 3:}
+Solve using separation of Variables
+\[\begin{cases}
+    u_{xx} + u_{yy} = 0\\
+    u_y(x, 0) = 0\\
+    u_y(x, \pi) = 0\\
+    u(0, y) = 0\\
+    u(\pi, y) = \cos^2 y = \frac{1}{2}+\frac{1}{2}\cos(2y)
+\end{cases}\]
+
+\color{blue}
+Assume $u(x, y) = X(x)Y(y)$. 
+\begin{gather*}
+    X''Y + XY'' = 0\\
+    -\frac{X''}{X} = \frac{Y''}{Y} = \lambda
+\end{gather*}
+
+\emph{Initial conditions:}
+\begin{gather*}
+    u_y(x, 0) = 0 \implies Y'(0) = 0\\
+    u_y(x, \pi) = 0 \implies Y'(\pi) = 0
+\end{gather*}
+
+\emph{Boundary Value:}
+\[Y'' = \lambda Y\]
+$\lambda > 0$: 
+\[Y = Ae^{\omega x} + Be^{-\omega x}\]
+\[Y' = A\omega e^{\omega y} + B\omega e^{-\omega y}\]
+\[Y'(0) \implies A = - B\]
+\[Y'(\pi) = A\omega e^{\pi \omega} - A\omega e^{-\pi \omega} \implies \omega = -\omega = 0 \implies Y = A - A = 0\]
+
+$\lambda = 0$:
+\[Y = A + By\]
+\[Y'(0) = B = 0\]
+\[Y'(\pi) = 0 = 0\]
+So $\lambda = 0$ is an eigenvalue with $Y = A$. Which means that 
+\[X'' = 0 \implies X = A+ Bx\]
+so $u(x, y) = XY = A + Bx$ for some arbitrary constants.
+
+$\lambda < 0$:
+\[Y(y) = A\cos(\omega y) + B\sin(\omega y)\]
+\[Y'(y) = -A\omega \sin(\omega y) + B\omega\cos(\omega y)\]
+\[Y'(0) = B\omega = 0 \implies B = 0\]
+\[Y'(\pi) = -A\omega \sin(\pi \omega) = 0 \implies \sin(\pi m) = 0 \quad (m=1, 2, ...)\]
+So $Y(y) = \cos(my)$ corresponding to $\lambda = -m^2$
+
+\emph{Back to Laplace:}
+\[X''(X) = -\lambda X(x) = m^2X(x)\]
+\begin{align*}
+    X(x) &= Ae^{mx} + Be^{-mx}\\
+    &= A(\cosh(mx) + \sinh(mx)) + B(\cosh(mx)- \sinh(mx))\\
+    &= (A + B)\cosh(mx) + (A-B)\sinh(mx)\\
+    &= B\cosh(mx) + C\sinh(mx)
+\end{align*}
+
+Then putting this all together
+\[u(x, y) = X(x)Y(y) = A_0 + B_0x + (B\cosh(mx) + C\sinh(mx) )\cos(my)\]
+\[u(x, y) =  A_0 + B_0x + \sum_{m=1}^\infty(A_m\cosh(mx) + B_m\sinh(mx) )\cos(my)\]
+\[u(0, y) = A_0 + \sum_{m=1}^\infty A_m\cos(my) = 0 \implies \sum_{m=0}^\infty A_m\cos(my) = 0 \implies A_m = 0\]
+\[u(\pi, y) = B_0\pi + \sum_{m=1}^\infty \underbrace{B_m\sinh(\pi m)}_{\tilde{B}_m}\cos(my) = \frac{1}{2} + \frac{1}{2}\cos(2y)\]
+\[\begin{cases}
+    \tilde{B}_2 = \frac{1}{2} \implies B_2 = \frac{1}{2\sinh(2\pi)}\\
+    \tilde{B}_m = 0 \qquad (m \neq 2)\\
+    B_0\pi = \frac{1}{2} \implies B_0 = \frac{1}{2\pi}
+\end{cases}\]
+\[\boxed{u(x, y) = \frac{x}{2\pi} + \frac{1}{2\sinh(2\pi)}\sinh(2x)\cos(2y)}\]
+\color{black}
+\pagebreak
+
+\section*{Problem 4:}
+\begin{enumerate}
+    \item Use the energy method to show that if u solves the heat equation in n dimensions
+    \[\begin{cases}
+        u_t = D\Delta u \quad \in \Omega\\
+        u(x, t) = 0 \qquad x \in \partial \Omega\\
+        u(x, 0) = 0 \qquad x \in \Omega
+    \end{cases}\]
+    Then u = 0
+    \color{blue}
+    \begin{align*}
+        u_tu &= D\Delta u\cdot u\\
+        \int_{\Omega} u_t u \; dx &= D \int_{\Omega}\Delta u\cdot u\; dx\\
+        \frac{d}{dt}\int_{\Omega} \frac{1}{2}(u)^2 \; dx &= -D\int_{\Omega} \underbrace{||\nabla u||^2}_{\geq 0}\; dx\\
+        \frac{d}{dt}\int_{\Omega} \frac{1}{2}(u)^2 \; dx &\leq 0
+    \end{align*}
+    So with $E(t) = \int_{\Omega} \frac{1}{2}(u)^2 \; dx \geq 0$, 
+    \[E'(t) \leq 0 \implies 0 \leq E(t) \leq E(0) = \int_{\Omega} \frac{1}{2}(u(x, 0))^2 \; dx = 0 \implies E(t) = 0\]
+    Hence, 
+    \[\int_{\Omega} \frac{1}{2}(u(x, t))^2 \; dx = 0 \implies u(x, t) = 0 \quad \in \Omega\] 
+    and because $u(x, t) = 0$ for $x \in \partial \Omega$, $u = 0 \qed$.
+    \color{black}
+
+    \item Use (i) to show that there is at most one solution to 
+    \[\begin{cases}
+        u_t = D\Delta u + f(x, t) \quad \in \Omega\\
+        u(x, t) = g(x,  t) \qquad x \in \partial \Omega\\
+        u(x, 0) = h(x) \qquad x \in \Omega
+    \end{cases}\]
+   \textbf{Hint:} Use the following integration by parts formula, valid for all $v(x, t)$ with $v(x, t) = 0$ for $x$ on $\partial \Omega$
+   \[\int_{\Omega} (\Delta u) v\; dx = -\int_{\Omega}(\nabla u) \cdot (\nabla v)\; dx\]
+
+   \color{blue}
+   Let $w = u - v$ where $u$ and $v$ are solutions. Then 
+   \begin{align*}
+        w_t &= (u - v)_t\\
+        & = D\Delta u + f(x, t) - D\Delta v - f(x, t) = D(\Delta u - \Delta v) \\
+        &= D((u_{xx} - v_{xx}) + (u_{yy} - v_{yy}))\\
+        &= D(w_{xx} + w_{yy})\\
+        &= D\Delta w
+   \end{align*}
+  
+   and with the initial conditions,
+   \[w(x, t) = u(x, t) - v(x, t) = g(x, t) - g(x, t)= 0\]
+   \[w(x, 0) = u(x, 0) - v(x, 0) = h(x) - h(x) = 0\]
+   Hence, $w$ solves the system from part (i). Thus, $w = 0$ so $u - v = 0 \implies u = v$ and there is only one solution. $\qed$
+   \color{black}
+\end{enumerate}
+\pagebreak
+
+\section*{Problem 5:} Suppose u solves Laplace's equation
+on the disk $x^2 + y^2 \leq 4$ with $u = 3 \sin(2\theta) + 1$ on $x^2 + y^2 = 4$.
+
+Without finding the solution:
+\begin{enumerate}
+    \item Find the maximum value of $u$ on $x^2 + y^2 \leq 4$
+    
+    \color{blue}
+    By the strong maximum principle, because $\Delta u =0$ inside the boundary of $x^2 + y^2 = 4$, its maximum exists on that boundary. Thus it suffices to find the maximum of $u$ on that circle. 
+
+    Thus with $0 \leq \theta \leq 2\pi$:
+    \begin{gather*}
+        \frac{d}{d\theta} u = 6\cos(2\theta) = 0 \implies \theta = \{\frac{\pi}{4}, \frac{3\pi}{4}, \frac{5\pi}{4}, \frac{7\pi}{4}\}\\
+        u(\frac{\pi}{4}) = 4\\
+        u(\frac{3\pi}{4}) = -2\\
+        u(\frac{5\pi}{4}) = 4\\
+        u(\frac{7\pi}{4}) = -2
+    \end{gather*}
+    So the maximum value of $u$ on the disk is 
+    \[\boxed{u(\sqrt{2}, \sqrt{2}) = u(-\sqrt{2}, -\sqrt{2}) = 4}\]
+    \color{black}
+
+    \item Find $u(0,0)$
+    
+    \textbf{Hint:} For (b) the mean value formula also holds if you integrate u on circles/spheres, that is
+    \[\frac{1}{|\partial B(x, r)|} \int_{\partial B(x, r)} u(y) \; dy = u(x)\]
+    Where $\partial B(x, r)$ is the circle/sphere centered at x and radius r. Integrating over a circle means integrating with respect to $\theta$
+
+    \color{blue}
+    By the Mean-Value Formula, as $\Delta u=0$ then forall $x$ and $r > 0$,
+    \[\frac{1}{|\partial B(x, r)|} \int_{\partial B(x, r)} u(y) \; dy = u(x)\]
+    Hence 
+    \[\frac{1}{|x^2 + y^2 = 4|} \int_0^{2\pi} 2u(y)\; d\theta = u(x)\]
+    \[\frac{1}{4\pi}\int_0^{2\pi} 6\sin(2\theta) + 2\; d\theta = \frac{1}{4\pi}[-3\cos(2\theta) + 2\theta]_0^{2\pi} = -\frac{3}{4\pi} + \frac{2\pi}{2\pi} + \frac{3}{4\pi} - 0 = 1 = u(x)\]
+    Which means that the value at the center of the circle is $1$. Or:
+    \[\boxed{u(0,0) = 1}\]
+    \color{black}
+\end{enumerate}
+
+
+
+\end{document}

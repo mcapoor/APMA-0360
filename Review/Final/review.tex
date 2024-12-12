@@ -1,0 +1,1427 @@
+\documentclass[10pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{empheq}
+\usepackage{xcolor}
+\renewcommand{\L}[1]{\mathcal{L}\{#1\}}
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+\newcommand{\vecs}[1]{\langle #1\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\F}{\mathcal{F}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+
+\title{APMA 0360: Final Exam Review}
+\author{Milan Capoor}
+\date{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Things to know}
+\subsection{Trig Identities}
+\begin{enumerate}
+    \item $\sin^2 x + \cos^2 x=1$
+    \item $1  +\tan^2 x = \sec^2 x$
+    \item $\cos(-x) = \cos(x)$
+    \item $\sin(-x) = -\sin(x)$
+    \item $\cos(2x) = \cos^2 x - \sin^2 x$
+    \item $\sin(2x) = 2\cos x \sin x$
+    \item $\cos^2x = \frac{1}{2} + \frac{1}{2}\cos(2x)$
+    \item $\sin^2 x = \frac{1}{2} - \frac{1}{2} \cos(2x)$
+    \item $\int_{-\infty}^{\infty} \cos(x^2)\; dx = \sqrt{\frac{\pi}{2}}$
+    \item $\int_{-\infty}^{\infty} \sin(x^2)\; dx = \sqrt{\frac{\pi}{2}}$
+\end{enumerate}
+
+\subsection{Integrations}
+\begin{enumerate}
+    \item $\int \tan x \; dx = \ln |\sec | + C$
+    \item $\int \sec c\; dx = \ln | \sec x + \tan x| + C$
+    \item $\int \frac{1}{1+x^2} \; dx = \tan^{-1}x + C$
+    \item $\int \sin^2(x) \; dx = \frac{x}{2} - \frac{1}{4}\sin(2x) + C$
+    \item $\int \cos^2(x) \; dx = \frac{x}{2} + \frac{1}{4}\sin(2x) + C$
+\end{enumerate}
+
+\textbf{Integration by parts:}
+\[\int f(x)\, g'(x)\; dx = f(x)g(x) - \int g(x) \, f'(x)\; dx\]
+
+\subsection{Ordinary Differential Equations}
+\subsubsection{Separation of Variables}
+\subsubsection{Integrating Factors}
+\subsubsection{Auxiliary Equations}
+\subsubsection{Undetermined Coefficients}
+
+\section{Introduction}
+\subsection{Check if a functions solves a PDE}
+To check if a given function solves a PDE, simply plug it in and differentiate to get an identity.
+
+\textbf{Example:} Show that $u = f(x)g(y)$ solves $uu_{xy} = u_xu_y$
+
+\begin{align*}
+    (fg)(fg)_{xy} &= (fg)_x(fg)_y\\
+    (fg)(f'g)_y &= (f'g)(fg')\\
+    &=(fg)(f'g') &= f'\cdot f\cdot g'\cdot g\\
+    &= f' \cdot f \cdot g' \cdot g &= f'\cdot f\cdot g'\cdot g\quad \checkmark
+\end{align*}
+
+\subsection{Simple PDEs}
+\begin{itemize}
+    \item $u_x = 0 \implies u(x, y) = f(y)$
+    \item $u_{xx} = 0 \implies u_x = f(y) \implies u(x, y) = xf(y) + g(y)$
+    \item $u_{xx} + u = 0 \overset{y''+y=0}{\implies} u(x, y) = A(y) \cos x + B(y) \sin x$
+    \item $u_{xy} = 0 \implies (u_x)_y = 0 \implies u_x = f(x) \implies u(x, y) = F(x) + G(y)$
+\end{itemize}
+\subsection{Classification}
+\textbf{Order:} highest degree derivative 
+
+\textbf{Example:} The order of $2x^4 u_{xxx} + 5yu_{xy} + 6u_{yyy} + 6u = x^4 + y^5$ is 3
+
+\textbf{Constant coefficient}
+
+\textbf{Linear:} coefficients depend on $x,\; y$ but not $u$
+\begin{itemize}
+    \item $L(u + v) = L(u) + L(v)$
+    \item $L(cu) = cL(u)$
+\end{itemize}
+
+\textbf{Example:} The PDE $e^xu_{xx}+\sin(y)u_{yy} + \ln(xy)u = \cos(x^2 + y^2)$ is linear. 
+
+\textbf{Homogeneous:} RHS is 0
+
+\textbf{Example:} The PDE $u_{xx} + 5u_{xy} = x^2 + y^2$ is Inhomogeneous
+
+\subsection{Conics}
+For a second order PDE of the canonical form
+\[au_{xx} + bu_{xy} + cu_{yy} + du_x + eu_y + fu = g(x, y)\]
+
+Let $D = b^2 - 4ac$. Then the PDE is 
+\begin{itemize}
+    \item elliptic if $D < 0$
+    \item parabolic if $D = 0$
+    \item hyperbolic if $D > 0$
+\end{itemize}
+
+\textbf{Example:} The type of the second-order PDE is $2u_{xx} + 3u_{xy} + 2u_{yy} = 0$ is elliptic because $(3)^2 - 4(2)(2) < 0$. 
+\section{First Order-Linear PDE}
+\subsection{Slope Method}
+\begin{enumerate}
+    \item Write as directional derivative
+    \item Show $u$ is constant on characteristic lines 
+\end{enumerate}
+
+\textbf{Example 1:} $au_x + bu_y = 0$ 
+\begin{gather*}
+    \brak{u_x, u_y} \cdot \brak{a, b} = \nabla u \cdot \vec{v} =0\\
+    m = \frac{b}{a} \implies y = \frac{b}{a}x + C \implies ay-bx =C\\
+    u(x, y) = f(ay - bx)
+\end{gather*}
+
+\textbf{Example 2:} $u_x + yu_y =0$
+\begin{gather*}
+    \nabla u \cdot (1, y) = 0\\
+    \frac{y}{1} = y' \quad (\text{slope = derivative})\\
+    y' = y \implies y = Ce^x \implies ye^{-x} = C\\
+    u(x, y) = f(ye^{-x})
+\end{gather*}
+
+\textbf{Example 3:}
+\[\begin{cases}
+    (2y)u_x + (3x^2 - 1)u_y = 0\\
+    u(0, y) = \cos(y)
+\end{cases}\]
+\begin{gather*}
+    \nabla u \cdot (2y, 3x^2 - 1) = 0\\
+    \frac{3x^2 - 1}{2y} = y'\\
+    3x^2 - 1 \; dx = 2y\; dy\\
+    x^3- x + C = y^2 \\
+    y^2 - x^3 - x = C\\
+    u(x, y) = f(y^2 - x^3 - x)\\
+    u(0, y) = f(y^2) = \cos(y)\\
+    u(x, y) = \cos(\sqrt{y^2 - x^3 + x})  
+\end{gather*}
+
+\subsection{Coordinate Method} 
+\begin{enumerate}
+    \item Define new variables $\xi$ and $\eta$ that are perpendicular 
+    \item Rewrite the chain rule in $\xi$ and $\eta$ 
+    \item Substitute definitions and solve 
+\end{enumerate} 
+
+\textbf{Example 1:} $2u_x + 3u_y$
+\begin{gather*}
+    \begin{cases*}
+        \xi = 2x + 3y \quad(\text{from equation})\
+        \eta = -3x + 2y \quad(\text{perpendicular})
+    \end{cases*}\\
+    u_x = u_\xi \cdot \xi_x + u_\eta \cdot \eta_x = 2u_\xi - 3u_\eta\\
+    u_y = u_\xi \cdot \xi_y + u_\eta \cdot \eta_y = 3u_\xi + 2u_\eta\\
+    2u_x + 3u_y = 2(2u_\xi - 3u_\eta) + 3(3u_\xi + 2u_\eta) = 13u_\xi = 0\\
+    u(\xi, \eta) = f(\eta)\\
+    u(x, y) = f(2y - 3x)
+\end{gather*}
+
+\textbf{Example 2:} $u_x + 2u_y + (2x - y)u = 0$
+\begin{gather*}
+    \begin{cases*}
+        \xi = x + 2y\\
+        \eta = -2x + y
+    \end{cases*}\\
+    u_x = u_\xi \cdot \xi_x + u_\eta\cdot \eta_x = u_\xi - 2u_\eta\\
+    u_y = 2u_\xi + u_\eta\\
+    (u_\xi - 2u_\eta) + 2(2u_\xi + u_\eta) -\eta u = 0\\
+    5u_\xi - \eta u = 0
+\end{gather*}
+Via ODEs, 
+\begin{gather*}
+    u_\xi - \frac{\eta}{5}u = 0\\
+    (u\exp(\int -\frac{\eta}{5}\; d\xi))_\xi = 0\\
+    u\exp(-\frac{1}{5}\xi \eta) = f(\eta)\\
+    u(\xi, \eta) = f(\eta)\exp(\frac{1}{5}\xi \eta)\\
+    u(x, y) = f(-2x + y) \exp(\frac{1}{5}(x + 2y)(-2x + y))
+\end{gather*}
+
+\subsection{Transform Method}
+Rewrite the derivatives of $u$ in terms of a new PDE $v$ and solve. 
+
+\textbf{Example 1:} $au_x + bu_y + cu =0$ where $a, b, c$ are constants, $a \neq 0$ and $v(x, y) = u(x, y)e^{\frac{cx}{a}}$
+
+\begin{gather*}
+    u_x + \frac{c}{a}u = -\frac{b}{a}u_y\\
+    (u\exp(\frac{c}{a}x))_x = - \frac{b}{a}u_y \cdot \exp(\frac{c}{a}x)\\
+    v_x = -\frac{b}{a}u_y \exp(\frac{cx}{a})\\
+    v_x = -\frac{b}{a}v_y\\
+    v(x, y) = f(ay - bx) = u(x, y) \exp(\frac{cx}{a})\\
+    u(x, y) = f(ay - bx)\exp(-\frac{cx}{a})
+\end{gather*}
+
+\section{The Transport Equation}
+\subsection{Derivation}
+The mass on an interval is 
+\[M= \int_0^b u(x, t)\; dx\]
+But mass is conserved so 
+\begin{gather*}
+    M_1 = M_2 = \int_0^b u(x, t)\; dx = \int_{ch}^{b + ch}u(x, t+ h)\; dx\\
+    \frac{d}{db}\int_0^b u(x, t)\; dx = \frac{d}{db} \int_{ch}^{b +ch} u(x, t + h)\; dx\\
+    u(b, t) = u(b+ ch, t+ h)\\
+    0 = u_x \cdot (b+ch)_h + u_t \cdot (t+h)_h = cu_x + u_t\\
+\end{gather*}
+\subsection{Solution}
+\begin{gather}
+    u_t + cu_x = 0 \implies cu_x + u_t = 0\\
+    u(x, t) = f(x - ct) 
+\end{gather}
+
+\section{Fourier Transform}
+\subsection{The Gaussian}
+\[I = \int_{-\infty}^{\infty} e^{-x^2}\; dx\]
+
+\textbf{Derivation:}
+\begin{align*}
+    I^2 &= \left(\int_{-\infty}^{\infty} e^{-x^2}\; dx\right)\left(\int_{-\infty}^{\infty} e^{-y^2}\; dy\right)\\
+    &= \int_{-\infty}^{\infty} \int_{-\infty}^{\infty} e^{-(x^2 + y^2)}\; dx \, dy\\
+    &= 2\pi \int_0^\infty re^{-r^2}\; dt\\
+    &= \pi\\
+    I &= \int_{-\infty}^{\infty} e^{-x^2}\; dx = \sqrt{\pi}
+\end{align*}
+
+\subsection{The Fourier Transform}
+\[\hat{f}(\kappa) = \int_{-\infty}^{\infty} f(x)\; e^{i\kappa x}\; dx\]
+
+\subsection{$\F(e^{-x^2})$}
+\begin{align*}
+    \hat{f}(\kappa) &= \int_{-\infty}^{\infty} e^{-x^2}\; e^{i\kappa x}\; dx\
+    \hat{f}'(\kappa) = i \int_{-\infty}^{\infty} xe^{-x^2}\, e^{i\kappa x}\; dx\\
+    &= i\left[-\frac{1}{2}e^{-x^2}e^{i\kappa x}\right]_{-\infty}^\infty - i \int_{-\infty}^{\infty} -\frac{1}{2}e^{-x^2}\, e^{i\kappa x}\; dx\\
+    &= -\frac{\kappa}{2}\hat{f}(\kappa)
+\end{align*}
+\[\hat{f}'(\kappa) = -\frac{\kappa}{2}\hat{f}(\kappa) \implies C\exp(-\frac{\kappa^2}{4}) \implies \hat{f}(\kappa) = \sqrt{\pi} \exp(-\frac{\kappa^2}{4})\]
+
+\textbf{General Form:}
+\[\F(e^{-ax^2}) = \sqrt{\frac{\pi}{a}}\exp(-\frac{\kappa^2}{4a})\]
+
+\subsection{Derivatives}
+\[\hat{f}'(\kappa) = -i\kappa \hat{f}(\kappa)\]
+
+\textbf{Proof:}
+\begin{align*}
+    \hat{f}'(\kappa) &= \int_{-\infty}^{\infty} f'(x)e^{i\kappa x}\; dx\\
+    &= [f(x)e^{i\kappa x}]_{-\infty}^\infty - \int_{-\infty}^{\infty} f(x)\; \frac{d}{dx}e^{i\kappa x}\; dx\\
+    &= 0 - i\kappa \int_{-\infty}^{\infty} f(x)e^{i\kappa x}\; dx\\
+    &= -i\kappa \hat{f}(\kappa)
+\end{align*}
+
+\subsection{Convolution}
+\[(f * g)(x) = \int_{-\infty}^{\infty} f(x - y)g(y)\; dy\]
+\[\F((f*g)(\kappa)) = \hat{f}(\kappa)\cdot \hat{g}(\kappa)\]
+
+\subsection{Inverse Fourier}
+\[\F^{-1}(x) = \frac{1}{2\pi} \int_{-\infty}^{\infty} f(\kappa) e^{-i\kappa x}\; d\kappa\]
+
+\textbf{Example:} 
+\[\begin{cases}
+    u_t = -2u_{xxxx}\\
+    u(x, 0) = f(x)
+\end{cases}\]
+
+\begin{gather*}
+    \F(u_t) = \F(-2u_{xxxx})\\
+    \frac{d}{dt}\F(u) = -2(-i\kappa)^4 \F(u) = -2\kappa^4 \F(u)\\
+    \F(u) = \hat{f}(\kappa)e^{-2\kappa^4 t}\\
+    \F(u) = \hat{f}(\kappa)\left(\frac{1}{2\pi} \int_{-\infty}^{\infty} e^{-2\kappa^4 t - i\kappa x}\; d\kappa\right)\\
+    u(x, t) = \int_{-\infty}^{\infty} f(y)\left(\frac{1}{2\pi} \int_{-\infty}^{\infty} e^{-2\kappa^4 t - i\kappa (x-y)}\; d\kappa\right)\; dy
+\end{gather*}
+
+\subsection{Shifting}
+If $g(x) = f(x - a)$ then 
+\[\hat{g}(\kappa) = e^{i\kappa a}\hat{f}(\kappa)\]
+
+\textbf{Proof:} 
+\begin{align*}
+    \hat{g}(\kappa) &= \F(f(x-a))\\
+    &= \int_{-\infty}^{\infty} f(x-a)e^{i\kappa(x + a)}\; dx\\
+    &= e^{i\kappa a}\int_{-\infty}^{\infty} f(x-a)e^{i\kappa x}\; dx\\
+    &= e^{i\kappa a} \hat{f}(\kappa)
+\end{align*}
+
+\textbf{Example Application:} Solve the transport PDE 
+\[\begin{cases}
+    u_t + cu_x =0\\
+    u(x, 0) = f(x)
+\end{cases}\]
+
+\begin{align*}
+    \F(u_t) &= \F(-cu_x)\\
+    \frac{d}{dt}\F(u) &= i\kappa c \F(u)\\
+    \F(u) &= \F(u(x, 0))e^{i\kappa ct}\\
+    \F(u) &= \hat{f}(\kappa e^{i\kappa ct})\\
+        &= \F(f(x -ct))\\
+    u(x, t) &= f(x -ct)
+\end{align*}
+
+\section{The Heat Equation}
+\subsection{Solution}
+\textbf{Example:}
+\[\begin{cases}
+    u_t = Du_{xx}\\
+    u(x, 0) = e^{3x}
+\end{cases}\]
+
+\begin{gather*}
+    \F(u_t) = \F(Du_{xx})\\
+    \frac{d}{dt}\F(u) = (-i\kappa)^2D\F(u)\\
+    \F(u) = \F(e^{3x})\exp(-\kappa^2 Dt)\\
+    \F(u) = \F(e^{3x})\F(\frac{1}{\sqrt{4\pi Dt}}\exp(-\frac{x^2}{4Dt}))\\
+    u(x, t) = \frac{1}{\sqrt{4\pi Dt}}\int_{-\infty}^{\infty} \exp(3y - \frac{(x-y)^2}{4Dt}) \; dy
+\end{gather*}
+Looking at the exponent:
+\begin{align*}
+    3y - \frac{(x-y)^2}{4Dt} &= \frac{12Dty -x^2 + 2xy - y^2}{4Dt}\\
+    &= -\frac{y^2 - (12Dt + 2x)y + x^2}{4Dt}\\
+    &= -\frac{y^2 - (12Dt  +2x)y + (6Dt + x)^2 + x^2 - (6Dt + x)^2}{4Dt}\\
+    &= -\frac{(y - 6Dt - x)^2 + x^2 - x^2 + 12Dtx + 36D^2t^2}{4Dt}\\
+    &= -\frac{(y - x-6Dt)^2 + 12Dt(x + 3Dt)}{4Dt}\\
+    &= -\frac{(y - x - 6Dt)^2}{4Dt} + 3(x + 3Dt)
+\end{align*}
+
+Substituting this back in, 
+\begin{align*}
+    u(x, t) &= \frac{1}{\sqrt{4\pi Dt}} \int_{-\infty}^{\infty} \exp( -\frac{(y - x - 6Dt)^2}{4Dt} + 3(x + 3Dt))\; dy\\
+    &= \frac{e^{3(x + 3Dt)}}{\sqrt{4\pi Dt}} \int_{-\infty}^{\infty} \exp(-\left(\frac{y - x - 6Dt}{\sqrt{4Dt}}\right)^2)\; dy
+\end{align*}
+\[p = \frac{y - x - 6Dt}{\sqrt{4Dt}} \implies dp = \frac{dy}{\sqrt{4Dt}} \implies dy = \sqrt{4Dt}\; dp \]\
+and 
+\[u(x, t) = \frac{e^{3(x + 3Dt)}}{\sqrt{4\pi Dt}} \int_{-\infty}^{\infty} e^{-p^2}\, \sqrt{4Dt}\; dp = \frac{\exp(3(x + 3Dt))}{\sqrt{\pi}} \int_{-\infty}^{\infty} e^{-p^2}\; dp\]
+\[u(x, t) = \exp(3x + 9Dt)\]
+
+\subsection{Properties}
+\begin{enumerate}
+    \item Infinite Speed of Propagation: if $f \geq0$ is positive somewhere and continuous, it is positive everywhere 
+    
+    \textbf{Proof:} the exponential function is positive and if $f$ is continuous, it is positive around a region $x_0$ so the full infinite integrand is positive but that subset is strictly positive so $u$ is strictly positive 
+
+    \item Smoothness: $u$ is infinitely differentiable 
+    
+    \textbf{Proof:} the exponential term is infinitely differentiable
+
+    \item Irreversibility: $u(x, 0)$ cannot be determined from $u(x, 1)$ 
+    
+    \textbf{Proof:} $u(x, 1) = |x|$ can be given but is not smooth so this is a contradiction with the earlier property 
+
+    \item Dissipation over time: $\lim_{t\to \infty} u(x, t) = 0$
+    
+    \textbf{Proof:} 
+    \begin{align*}
+        |u(x, t)| &= \left|\frac{1}{\sqrt{4\pi Dt}} \int_{-\infty}^{\infty} \exp(-\frac{(x-y)^2}{4Dt})f(y)\; dy\right|\\
+        &\leq \frac{1}{\sqrt{4\pi Dt}} \int_{-\infty}^{\infty} |f(y)| \underbrace{\exp(-\frac{(x-y)^2}{4Dt})}_{\leq 1} \; dy\\
+        &\leq \frac{1}{\sqrt{4\pi Dt}} \int_{-\infty}^{\infty} |f(y)| \; dy\\
+        &= C \overset{t \to \infty}{\longrightarrow} 0
+    \end{align*}
+
+    \item Boundedness: if $|f(x)| \leq M$ then $|u(x, t)| \leq M$ 
+    
+    \textbf{Proof:}
+    \[|u(x, t)| \leq \frac{1}{\sqrt{4\pi Dt}} \int_{-\infty}^{\infty} |f(y)| \exp(-\frac{(x-y)^2}{4Dt})\; dy \leq M\]
+
+    \item Conservation of mass:
+    \[\int_{-\infty}^{\infty} u(x, t)\; dx = \int_{-\infty}^{\infty} f(x)\; dx\]
+
+    \textbf{Proof:} 
+    \begin{gather*}
+        \frac{d}{dt}\int_{-\infty}^{\infty} u(x, t)\; dx = 0\\
+        \implies \int_{-\infty}^{\infty} u(x, t)\; dx = \int_{-\infty}^{\infty} u(x, 0) \; dx = \int_{-\infty}^{\infty} f(x)\; dx
+    \end{gather*}
+\end{enumerate}
+
+\subsection{Transform Method}
+\textbf{Example 1:} 
+\[\begin{cases}
+    u_t = Du_{xx} + cu_x - au\\
+    u(x, 0) = f(x)
+\end{cases}\]
+
+Let $v(x, t)= u(x- ct, t)e^{at}$. Then, 
+\begin{gather*}
+    u(x - ct, t) = v(x, t)e^{-at}\\
+    u(x, t) = v(x + ct, t)e^{-at}\\
+    \begin{cases}
+        u_x = v_x(x+ct, t)e^{-at}\\
+        u_{xx} = v_{xx}(x+ct, t)e^{-at}\\
+        u_t = cv_x(x + ct, t)e^{-at} + v_t(x+ct, t)e^{-at} -av(x + ct, t)e^{-at}
+    \end{cases}\\
+    cv_x(x + ct, t)e^{-at} + v_t(x+ct, t)e^{-at} -av(x + ct, t)e^{-at} = D v_{xx}e^{-at} + cv(x, t)e^{-at} -av(x + ct, t)e^{-at}\\
+    v_t(x+ct, t)e^{-at} = D v_{xx}(x+ct, t)e^{-at} \\
+    v_t(x + ct, t) = Dv_{xx}(x + ct, t)\\
+    v(x + ct, t) = \frac{1}{\sqrt{4\pi Dt}} \int_{-\infty}^{\infty} f(y) \exp(-\frac{((x + ct) - y)^2}{4Dt})\; dy\\
+    u(x, t) = \frac{e^{-at}}{\sqrt{4\pi Dt}} \int_{-\infty}^{\infty} f(y) \exp(-\frac{((x + ct) - y)^2}{4Dt})\; dy
+\end{gather*}
+
+\section{Wave Equation}
+\[u_{tt} = c^2 u_{xx}\]
+\subsection{Factoring Method}
+\[u_{tt} - c^2u_{xx} = \left(\frac{\partial}{\partial t} - c\frac{\partial}{\partial x}\right)\left(\frac{\partial}{\partial t} + c\frac{\partial}{\partial x}\right) =0\] 
+Then let $v = \left(\frac{\partial}{\partial t} + c\frac{\partial}{\partial x}\right)$ so 
+\begin{gather*}
+    \left(\frac{\partial}{\partial t} - c\frac{\partial}{\partial x}\right)v = v_t - cv_x = 0 \implies v(x, t) = f(x + ct)\\
+    v = \left(\frac{\partial}{\partial t} + c\frac{\partial}{\partial x}\right)u = u_t + cu_x = f(x + ct)\\
+    u_0 = G(x - ct)
+    u_p = h(x + ct)\\
+    (h(x + ct))_t + c(h(x + ct))_x = f(x+ct)\\
+    ch'(x + ct) + ch'(x + ct) = f(x + ct)\\
+    h(x + ct) = \frac{1}{2c}F(x + ct)\\
+    u(x, t) = F(x + ct) + G(x - ct)
+\end{gather*}
+
+\subsection{Coordinate Method}
+Define variables 
+\[\begin{cases}
+    \xi = x - ct\\
+    \eta = x + ct
+\end{cases}\]
+Then 
+\begin{gather*}
+    \begin{cases}
+        u_x = u_\xi \cdot \xi_x + u_\eta \cdot \eta_x = u_\xi + u_\eta\\
+        u_{xx} = (u_\xi + u_\eta)_\xi \cdot \xi_x + (u_\xi + u_\eta)_\eta \cdot \eta_x = u_{\xi \xi} + 2u_{\xi \eta} + u_{\eta \eta}\\
+        u_{tt} = c^2(u_{\xi \xi} - 2u_{\xi \eta} + u_{\eta \eta})
+    \end{cases}\\
+    c^2(u_{\xi \xi} - 2u_{\xi \eta} + u_{\eta \eta}) = c^2( u_{\xi \xi} + 2u_{\xi \eta} + u_{\eta \eta})\\
+    4u_{\xi \eta} = 0\\
+    u_{\xi \eta} = 0 \implies u_{\xi} = f(\xi)\\
+    u(x, t) = F(\xi) + G(\eta)\\
+    u(x, t) = F(x - ct) + G(x + ct)
+\end{gather*}
+
+\textbf{Example:} $u_{xx} + u_{xt} - 20u_{tt} = 0$ with $\xi = 5x -t$ and $\eta = 4x + t$. 
+\begin{gather*}
+    u_x = u_\xi \xi_x + u_\eta \eta_x = 5u_\xi + 4u_\eta\\
+    u_{xx} = (u_x)_\xi \xi_x + (u_x)_\eta \eta_x = 25u_{\xi \xi} + 40u_{\eta \xi} + 16u_{\eta \eta}\\
+    u_{xt} = (u_x)_\xi \xi_t + (u_x)_\eta \eta_t = -5u_{\xi \xi} + u_{\eta \xi} + 4u_{\eta \eta}\\
+    u_{t} = u_\xi \xi_t + u_\eta \eta_t = -u_\xi + u_\eta\\
+    u_{tt} = (u_t)_\xi \xi_t + (u_t)_\eta \eta_t = u_{\xi \xi} - 2u_{\xi \eta} + u_{\eta \eta}
+\end{gather*}
+\[25u_{\xi \xi} + 40u_{\eta \xi} + 16u_{\eta \eta} -5u_{\xi \xi} + u_{\eta \xi} + 4u_{\eta \eta} -20(u_{\xi \xi} - 2u_{\xi \eta} + u_{\eta \eta}) = 0\]
+\[u_{\xi \eta} = 0\]
+\[u_\xi = f(\xi)\]
+\[u = F(\xi) + G(\eta)\]
+\[u(x, t) = F(5x - t) + G(4x + t)\]
+
+\subsection{Fourier Method}
+\begin{gather*}
+    \F(u_{tt}) =\F(c^2u_{xx})\\
+    \frac{d^2}{dt^2}\F(u) = (-i\kappa)^2c^2 \F(u)\\
+    \frac{d^2}{dt^2}\F(u) = -(\kappa c)^2 \F(u)\\
+    \F(u) = \hat{F}(\kappa)e^{i\kappa ct} + \hat{G}(\kappa)e^{-i\kappa ct}\\
+    u(x, t) = F(x - ct) + G(x + ct)
+\end{gather*}
+
+\subsection{D'Alembert's Formula}
+\[\begin{cases}
+    u_{tt} = c^2 u_{xx}\\
+    u(x, 0) = \phi(x)\\
+    u_t(x, 0) = \psi(x)
+\end{cases}\]
+
+The general wave equation solution is 
+\[u(x, t) = F(x - ct) + G(x + ct)\] 
+so 
+\begin{gather*}
+    u(x, 0) = \phi(x) = F(x) + G(x)\\
+    u_t(x, 0) = \psi(x) = -cF'(x) + cG(x) \implies -F'(x) + G'(x) = \frac{\psi(x)}{c}\\
+    \int_0^x - F'(s) + G'(s)\; ds = \int_0^x \frac{\psi(s)}{c}\; ds\\
+    -F(x) + G(x) - (-F(0) + G(0)) = \frac{1}{c}\int_0^x \psi(s)\; ds
+\end{gather*}
+Which gives system of equations 
+\[\begin{cases*}
+    -F(x) + G(x) = A + \frac{1}{c}\int_0^x \psi(s)\; ds\\
+    F(x) + G(x) = \phi(x)\end{cases*}\implies \begin{cases*}
+        G(x) = \frac{\phi(x)}{2} + \frac{A}{2} + \frac{1}{2c}\int_0^x \psi(s)\; ds\\
+        F(x) = \frac{\phi(x)}{2} - \frac{A}{2} - \frac{1}{2c}\int_0^x \psi(s)\; ds
+    \end{cases*}\]
+Which substituted back into the general solution give us D'Alembert's Formula:
+\[\frac{1}{2}(\phi(x - ct) + \psi(x + ct)) + \frac{1}{2c}\int_{x-ct}^{x+ct}\psi(s)\; ds\]
+
+\section{Energy Methods}
+\begin{enumerate}
+    \item Multiply by a clever function (usually $u$ or $u_t$)
+    \item Integrate WRT $x$
+\end{enumerate}
+
+\textbf{Example: Heat Equation} 
+\[\begin{cases}
+    u_t = Du_{xx}\\
+    u(x, 0) = 0\\
+    u(0, t) =0\\
+    u(l, t) = 0
+\end{cases}\]
+\begin{gather*}
+    u_t u = Du_{xx} u\\
+    \int_0^l u_t u\; dx = \int_0^l Du_{xx} u\; dx\\
+    \frac{d}{dt}\left(\int_0^l u^2\; dx\right) = D\left[u_x(l, t) u(l, t) - u_x(0, t) - \int_0^l u_x u_x\; dx\right]\\
+    \frac{d}{dt}\left(\int_0^l u^2 \; dx\right) = -D\int_0^l (u_x)^2\; dx\\
+    -D\int_0^l (u_x)^2\; dx \leq 0 \implies E(t) = \frac{1}{2}\int_0^l u^2\; dx \leq 0\\
+    E(t) = \frac{1}{2}\int_0^l (u(x, t))^2\; dx \leq E(0) = \frac{1}{2}(u(x, 0))^2\; dx = 0\\
+    0 \leq E(t) \leq E(0) = 0 \implies E(t) = 0 \quad \forall\, x, t
+\end{gather*}
+
+\subsection{Uniqueness of Solutions}
+\textbf{Wave Equation:}
+There is at most one solution of 
+\[\begin{cases}
+    u_{tt} = c^2 u_{xx}\\
+    u(x, 0) = \phi(x)\\
+    u_t(x, 0) = \psi(x)
+\end{cases}\]
+
+\emph{Proof:} Let $u$ and $v$ be solutions. Then let $w = u - v$. This also solves the PDE
+\begin{gather*}
+    w_{tt} = c^2 w_{xx}\\
+    w(x, 0) = u(x, 0) - v(x, 0) = \phi(x) - \phi(x) = 0\\
+    w_t(x, 0) = u_t(x, 0) - v_t(x,0) = \psi(x) - \psi(x) = 0
+\end{gather*}
+Then with 
+\begin{gather*}
+    w_{tt} = c^2 w_{xx}\\
+    w_{tt}w_t = c^2 w_{xx}w_t\\
+    \int_{-\infty}^{\infty} w_{tt}w_t\; dx = \int_{-\infty}^{\infty} w_{xx}w_t \; dx\\
+    \frac{d}{dt}\left(\frac{1}{2}\int_{-\infty}^{\infty} (w_t)^2\; dx\right) = [w_xw_t]_{-\infty}^\infty - \int_{-\infty}^{\infty} w_x w_{xt}\; dx\\
+    \frac{d}{dt}\left(\frac{1}{2}\int_{-\infty}^{\infty} (w_t)^2\; dx\right) = -\int_{-\infty}^{\infty} \frac{d}{dt}\left(\frac{1}{2}(w_x)^2\;\right)\; dx\\
+    \frac{d}{dt}\left(\frac{1}{2}\int_{-\infty}^{\infty} (w_t)^2 + c^2(w_x)^2\; dx\right) = 0\\
+    \frac{d}{dt}E(t) = 0
+\end{gather*}
+Therfore, $E(t) = E(0)$ and 
+\[\frac{1}{2}\int_{-\infty}^{\infty} (w_t)^2 + c^2(w_x)^2\; dx = \frac{1}{2}\int_{-\infty}^{\infty} (w_t(x, 0))^2 + c^2(w_x(x, 0))^2\; dx\]
+but $w(x, 0) = 0 \implies (w(x, 0))_x = 0 \implies w_x(x, 0) = 0$ so 
+\[\frac{1}{2}\int_{-\infty}^{\infty} (w_t)^2 + c^2(w_x)^2\; dx = 0\]
+then as $(w_t)^2 + c^2(w_x)^2 \geq 0$ and the total integral is zero, by a Useful Hint $(w_t)^2 + c^2(w_x)^2 = 0$ wo 
+\[\begin{cases}
+    w_t = 0\\
+    w_x =0
+\end{cases} \implies w(x, t) = C\]
+but $w(x, 0) = 0 \implies w(x, t) = 0 = u - v \implies u = v$ and there is at most one solution. 
+
+\subsubsection{Midterm 2 Question}
+Suppose $f$ is a function such that $f(0)=0$ and for all $x$ we have $xf(x) \geq 0$. Show that $u=0$ is the only solution to the PDE 
+\[\begin{cases}
+    u_t = -u_{xxxx} - f(u)\\
+    u(x, 0) = 0\\
+    u(0, t) = 0\\
+    u(L, t) = 0\\
+    u_x(0, t) = 0\\
+    u_x(L, t) = 0
+\end{cases}\]
+
+\textbf{Solution:}
+By energy methods,
+\begin{align*}
+    u_t u &= -u_{xxxx} u - f(u)u\\
+    \int_0^L \frac{d}{dt} \frac{1}{2}(u)^2\; dx &= \int_0^L -u_{xxxx} u - \int_0^L f(u)u\; dx\\
+    \frac{d}{dt}\int_0^L \frac{1}{2}(u)^2\; dx &= [-u_{xxx}u]_{x=0}^{x=L} - \int_0^L -u_{xxx}u_x \; dx - \int_0^L f(u)u\; dx\\
+    &= [u_{xx}u_x]_0^L - \int_0^L (u_{xx})^2\; dx - \int_0^L f(u)u\; dx\\
+    &=-\int_0^L (u_{xx})^2\; dx - \int_0^L f(u)u\; dx\\
+    E(t) &= \int_0^L (u)^2\; dx\\
+    \frac{d}{dt}E(t) &\leq 0 \quad (u_{xx}, f(u)u \geq 0)
+\end{align*}
+Which means that $E(t) \leq E(0)$:
+\[ 0 \leq \int_0^L (u(x, t))^2\; dx \leq \int_0^L (u(x, 0))^2\; dx = 0\]
+so $u(x, t) = 0$ for all $x$ and $t$. So there can only be one solution.
+
+Now observe that for $u = 0$
+\[(0)_t = -(0)_{xxxx} - f(0) \implies f(0) = 0\]
+which is given so $u = 0$ is the only solution.
+\subsection{Monotony}
+\textbf{Monotone:} if $(f(x) - f(y))(x - y) \geq 0$ for all $x$ and $y$. 
+
+\textbf{Claim:} if $f$ is monotone, there is at most one solution to $u_{xx} = f(u)$ where $u(0) = 2$ and $-\infty < x< \infty$. 
+
+\textbf{Proof:} Let $u$ and $v$ be solutions to the PDE with $w = u -v$. Then 
+\[w_{xx} = u_{xx} - v_{xx} = f(u) - f(v)\]
+Then using energy methods, 
+\begin{gather*}
+    w_{xx}w = (f(u) - f(v))w\\
+    \int_{-\infty}^{\infty} w_{xx}w \; dx = \int_{-\infty}^{\infty} (f(u) - f(v))w\; dx\\
+    [w_xw]_{-\infty}^\infty - \int_{-\infty}^{\infty} (w_x)^2\; dx = \int_{-\infty}^{\infty} (f(u) - f(v))w\; dx\\
+    - \int_{-\infty}^{\infty} (w_x)^2\; dx = \int_{-\infty}^{\infty} (f(u) - f(v))(u - v)\; dx
+\end{gather*}
+Then as $f$ is monotone, the RHS is non-negative. But the LHS integrand is positive so the LHS is negative or zero. Hence, $w_x = 0$ and $w(x, t) = C$. 
+\[w(0) = u(0) - v(0) = 2- 2 = 0\implies w(x, t) = 0= u -v \implies u = v\]
+so there is only one solution. 
+
+\subsection{Higher Dimensions}
+\textbf{Example:} n-dimensional Heat Equation
+
+Show that there is at most one solution to 
+\[\begin{cases}
+    u_t = D\Delta u + f(x, t) \quad \in \Omega\\
+    u(x, t) = g(x, t) \quad x \in \partial \Omega\\
+    u(x, 0) = h(x) \quad x\in \Omega
+\end{cases}\]
+
+Let $u, v$ be solutions and $w = u - v$. Then 
+\begin{gather*}
+    w_t = u_t - v_t = D\Delta u + f(x, t) - D\Delta v - f(x, t) = D\Delta w\\
+    w(x, t) = u - v = g - g = 0\\
+    w(x, 0) = u - v = h - h = 0
+\end{gather*}
+So we can use energy methods on 
+\[\begin{cases}
+    w_t = D\Delta w\\
+    w(x, t) = 0\\
+    w(x, 0) = 0
+\end{cases}\]
+
+Using the general integration by parts formula $\int_{\Omega} (\Delta u)v\; dx = -\int_{\Omega}(\nabla u) \cdot (\nabla v)\; dx$,
+\begin{gather*}
+    w_t w = D\Delta w \cdot w\\
+    \frac{d}{dt}\int_{\Omega} \frac{1}{2}(w)^2\; dx = D\int_{\Omega} (\Delta w)(w) \; dx\\
+    \frac{d}{dt}\int_{\Omega} \frac{1}{2}(w)^2\; dx = -D\int_{\Omega} \underbrace{||\nabla w||^2}_{\geq 0} \; dx\\
+    \frac{d}{dt} \int_{\Omega}\frac{1}{2}(w)^2\; dx \leq 0
+\end{gather*}
+so with $E(t) \geq 0$,
+\[E'(t) \leq 0 \implies 0 \leq E(t) \leq E(0) = \int_{\Omega}\frac{1}{2}(w(x, 0))^2\;dx = 0 \implies E(t) = 0\]
+Hence, $w(x, t) = 0 \in \Omega$ and by the initial conditions, $w(x, t) = 0 \in \partial \Omega$. Then with 
+$w = u - v = 0 \implies u = v$ and there is only one solution.
+
+\section{Separation of Variables}
+\subsection{Heat}
+\textbf{Example 2:}
+\[\begin{cases}
+    tu_t = u_{xx} - u\\
+    u(0, t) = 0\\
+    u(\pi, t) = 0\\
+    u(x, 1) = 1
+\end{cases}\]
+
+\begin{gather*}
+    u(x, t) = X(x)T(t)\\
+    tXT' = X''T - XT\\
+    \frac{tT'}{T} = \frac{X'' - X}{X}\\
+    \frac{tT'}{T} + 1 = \frac{X''}{X} =\lambda\\
+    u(\pi, t) = X(\pi)T(t) = 0 \implies X(\pi) = 0\\
+    u(0, t) = 0 \implies X(0) = 0\\
+\end{gather*}
+
+\[\begin{cases}
+    X'' = \lambda X\\
+    X(0) = 0\\
+    X(\pi) = 0
+\end{cases}\]
+$\lambda > 0$:
+\begin{gather*}
+    X = Ae^{\omega x} + Be^{-\omega x}\\
+    X(0) = A + B = 0 \implies X = Ae^{\omega x} -Ae^{-\omega x}\\
+    X(\pi) = Ae^{\omega \pi} - Ae^{-\omega \pi} = 0 \implies \omega = 0\\
+    X = 0
+\end{gather*}
+$\lambda = 0$:
+\begin{gather*}
+    X = Ax + B\\
+    X(0) = B = 0\\
+    X(\pi) = A\pi = 0 \implies A = 0\\
+    X = 0
+\end{gather*}
+$\lambda < 0$:
+\begin{gather*}
+    X = A\cos(\omega x) + B\sin(\omega x)\\
+    X(0) = A = 0\\
+    X(\pi) = B\sin(\omega \pi) = 0\\
+    \sin(\pi \omega) = 0\\
+    \omega = m = \{1,2,\, ...\}
+\end{gather*}
+$\lambda = -m^2$ and $X(x) = \sin(mx)$
+
+\begin{gather*}
+    t\frac{T'}{T} = \lambda - 1 = -m^2 - 1\\
+    \frac{T'}{T} = \frac{-m^2 - 1}{t}\\
+    (\ln |T|)' = \frac{-m^2 - 1}{t}\\
+    \ln |T| = -(m^2 + 1)\ln|t| + C\\
+    T = Ct^{-(m^2 + 1)}\\
+    u = XT = Ct^{-(m^2 + 1)}\sin(mx)
+    u = \sum_{m=1}^\infty A_mt^{-(m^2 + 1)}\sin(mx)\\
+    u(x, 1) = \sum_{m=1}^\infty A_m \sin(mx)\\
+    A_m = \frac{2}{\pi} \int_0^\pi \sin(mx)\; dx = \frac{2}{\pi}(-\frac{\cos(\pi m)}{m} + \frac{\cos(0)}{m}]\\
+    A_m = \frac{2}{\pi m}[(-1)^{m+1} + 1]
+\end{gather*}
+\[u(x, t) = \sum_{m=1}^\infty \frac{2}{\pi m}[(-1)^{m+1} + 1]t^{-(m^2 + 1)}\sin(mx)\]
+
+\subsection{Wave}
+\[\begin{cases}
+    u_{tt} = c^2 u_{xx}\\
+    u(0, t) = 0\\
+    u(1, t) = 0\\
+    u(x, 0) = x^2\\
+    u_t(x, 0) = e^x
+\end{cases}\]
+
+\begin{gather*}
+    u(x, t) = X(x)T(t)\\
+    XT'' = c^2 X''T\\
+    \frac{T''}{c^2T} = \frac{X''}{X} = \lambda\\
+    \begin{cases}
+        X'' = \lambda X\\
+        X(0) = 0\\
+        X(1) = 0
+    \end{cases}
+\end{gather*}
+$\lambda >0$: 
+\[X(0) = A + B = 0\]
+\[X(1) = Ae^{\omega} - Ae^{-\omega} = 0 \implies \omega = -\omega \implies X = 0\]
+$\lambda = 0$:
+\[X(0) = B = 0\]
+\[X(1) = A = 0\]
+\[X = 0\]
+$\lambda <0$:
+\begin{gather*}
+    X = A\cos(\omega x) + B\sin(\omega x)\\
+    X(0) = A = 0\\
+    X(1) = B\sin(\omega) = 0 \implies \omega = \pi m\
+    \lambda = -(\pi m)^2\\
+    X = \sin(\pi mx)
+\end{gather*}
+\begin{gather*}
+    T'' = \lambda c^2T = -(\pi mc)^2 T\\
+    T = A\exp(\pi mct) + B\sin(\pi mct)\\
+    u(x, t) = \sum_{m=1}^\infty (A_m\cos(\pi mct) + B_m\sin(\pi mct))\sin(\pi mx)\\
+    u(x, 0) = \sum_{m=1}^\infty A_m\sin(\pi mx) = x^2\\
+    A_m = \frac{2}{\pi}\int_0^1 x^2\sin(\pi mx)\; dx = \frac{2}{\pi}\left[-x^2\frac{\cos(\pi mx)}{\pi m}+ 2x\frac{\sin(\pi mx)}{(\pi m)^2} - 2\frac{\cos(\pi mx)}{(\pi m)^3}\right]_0^1\\
+    A_m = \frac{2}{\pi}\left[\frac{(-1)^{m+1}}{\pi m}+ \frac{2(-1)^{m+1}}{(\pi m)^3} - \frac{2}{(\pi m)^3}\right] = \frac{2}{\pi^2m}(-1)^{m+1} + \frac{4}{\pi^4m^3}[(-1)^{m+1} - 1]\\
+    u(x, t) = \sum_{m=1}^\infty \left[\left(\frac{2}{\pi^2m}(-1)^{m+1} + \frac{4}{\pi^4m^3}[(-1)^{m+1} - 1]\right)\cos(\pi mct) + B_m\sin(\pi mct)\right]\sin(\pi mx)\\
+    u_t(x, 0) = \sum_{m=1}^\infty B_m \pi mc\sin(\pi mx) = e^x
+\end{gather*}
+\begin{align*}
+    B_m &= \frac{2}{\pi}\int_0^1 e^x \sin(\pi mx)\; dx\\
+    &= \frac{2}{\pi}\left[\frac{\pi m + e\sin(\pi m - e\pi m\cos(\pi m))}{\pi^2m^2 + 1}\right]\\
+    B_m &= \frac{2}{\pi^2 mc }\left[\frac{\pi m + e\sin(\pi m - e\pi m\cos(\pi m))}{\pi^2m^2 + 1}\right]\\
+\end{align*}
+\begin{align*}
+    u(x, t) = \sum_{m=1}^\infty &\left(\frac{2}{\pi^2m}(-1)^{m+1} + \frac{4}{\pi^4m^3}[(-1)^{m+1} - 1]\right)\cos(\pi mct)\sin(\pi m x)\\
+    &+ \frac{2}{\pi^2 mc }\left[\frac{\pi m + e\sin(\pi m - e\pi m\cos(\pi m))}{\pi^2m^2 + 1}\right]\sin(\pi mct)\sin(\pi mx) 
+\end{align*}
+
+\subsection{Laplace}
+\[\begin{cases*}
+    u_{xx} + u_{yy} = 0\\
+    u(0, y) = 0\\
+    u(\pi, y) = 0\\
+    u(x, 0) = x\\
+    u(x, 1) = 3
+\end{cases*}\]
+\begin{gather*}
+    X''Y + XY'' =0\\
+    \frac{X''}{X} = -\frac{Y''}{Y} =\lambda\\
+    \begin{cases*}
+        X'' = \lambda X\\
+        X(0) = 0\\
+        X(\pi) = 0
+    \end{cases*}
+\end{gather*}
+$\lambda > 0$:
+\begin{gather*}
+    X(0) = A + B = 0\\
+    X(\pi) = Ae^{\omega \pi} - Ae^{-\omega \pi} = 0 \implies \omega = -\omega\\
+    X = 0
+\end{gather*}
+$\lambda = 0$:
+\begin{gather*}
+    X(0) = B= 0\\
+    X(\pi) = A\pi = 0 \implies A= 0\\
+    X = 0
+\end{gather*}
+$\lambda < 0$:
+\begin{gather*}
+    X = A\cos(\omega x) + B\sin(\omega x)\\
+    X(0) = A = 0\\
+    X(\pi) = B\sin(\pi \omega) = 0\\
+    m = \{1, 2, \,...\}\\
+    \lambda = -m^2\\
+    X = \sin(mx)
+\end{gather*}
+\[Y'' = m^2Y \implies Y = Ae^{my} + Be^{-my} = A\cosh(my) + B\sinh(my)\]
+\[u(x, y) = \sum_{m=1}^\infty \left(A\cosh(my) + B\sinh(my)\right)\sin(mx)\] 
+\begin{gather*}
+    u(x, 0) = \sum_{m=1}^\infty A_m\sin(mx) = x\\
+    A_m = \frac{2}{\pi} \int_0^\pi x\sin(mx)\; dx = \frac{2}{\pi} [-x\frac{\cos(mx)}{m} + \frac{\sin(mx)}{m^2}]_0^{\pi} = \frac{2}{\pi}(\frac{\pi}{m}(-1)^{m+1}) = \frac{2}{m}(-1)^{m+1}\\
+    u(x, 1) = \sum_{m=1}^\infty \left(\frac{2}{m}(-1)^{m+1}\cosh(m) + B_m\sinh(m)\right)\sin(mx) = 3\\
+    \frac{2}{m}(-1)^{m+1}\cosh(m) + B_m\sinh(m) = \frac{2}{\pi}\int_0^\pi 3\sin(mx)\; dx = \frac{6}{\pi m}[(-1)^{m+1} + 1]\\
+    B_m = \frac{\frac{6}{\pi m}[(-1)^{m+1} + 1] - \frac{2}{m}(-1)^{m+1}\cosh(m)}{\sinh(m)}
+\end{gather*}
+\[u(x, y) = \sum_{m=1}^\infty \left(\frac{2}{m}(-1)^{m+1}\cosh(my) + \frac{\frac{6}{\pi m}[(-1)^{m+1} + 1] - \frac{2}{m}(-1)^{m+1}\cosh(m)}{\sinh(m)}\sinh(my)\right)\sin(mx)\] 
+\section{Fourier Series}
+\subsection{Fourier Sine}
+Because $\{\sin(mx) |\; m =1,2,\, ...\}$ is orthogonal, for 
+\[f(x) = \sum_{m=1}^\infty A_m \sin(mx)\]
+on $(0, \pi)$ we have 
+\[A_m = \frac{f \cdot \sin(mx)}{\sin(mx) \cdot \sin(mx)} = \frac{\int_0^\pi f(x)\sin(mx)\; dx}{\int_0^\pi \sin^2(mx)\; dx} = \frac{2}{\pi}\int_0^\pi f(x)\sin(mx)\; dx\]
+
+More generally, for $f(x) = \sum_{m=1}^\infty A_m \sin(\frac{\pi mx}{L})$ on $(0, L)$ 
+\[A_m = \frac{2}{L}\int_0^L f(x)\sin(\frac{\pi mx}{L})\; dx\]
+
+\subsection{Fourier Cosine}
+For 
+\[f(x) = \sum_{m=0}^\infty A_m \cos(\frac{\pi mx}{L})\] 
+on $(0, L)$
+\begin{gather*}
+    A_m = \frac{2}{L}\int_0^L f(x)\cos(\frac{\pi mx}{L})\; dx\\
+    A_0 = \frac{1}{L}\int_0^L f(x)\; dx
+\end{gather*}
+
+\subsection{Full Fourier}
+We redefine the dot product to 
+\[f\cdot g = \int_{-L}^L f(x)g(x)\; dx\]
+so on the interval $(-L, L)$, the coefficients of 
+\[f(x) = \sum_{m=0}^\infty A_m \cos(\frac{\pi mx}{L}) + B_m \sin(\frac{\pi mx}{L})\]
+are 
+\begin{align*}
+    A_m &= \frac{1}{L}\int_{-L}^L f(x)\cos(\frac{\pi mx}{L})\; dx\\
+    B_m &= \frac{1}{L}\int_{-L}^L f(x)\sin(\frac{\pi mx}{L})\; dx\\
+    A_0 &= \frac{1}{2L}\int_{-L}^L f(x)\; dx\\
+    B_0 &= 0
+\end{align*}
+
+\subsection{Complex Fourier}
+For complex numbers we redefine the dot product such that 
+\[f\cdot g = \int_{-L}^L f(x)\overline{g(x)}\]
+where $\overline{a +bi} = a-bi$. 
+
+So on $(-L, L)$ the coefficients of 
+\[f(x) = \sum_{m=-\infty}^\infty C_m \exp(i(\frac{\pi mx}{L}))\]
+are 
+\[C_m = \frac{1}{2L}\int_{-L}^L f(x)\exp(-i(\frac{\pi mx}{L}))\; dx\]
+
+\subsection{Parseval's Identity}
+\textbf{Definition:} $||u|| = \sqrt{u \cdot u}$ and $||cu|| = \text{abs}(c) \; ||u||$
+
+\textbf{Pythagorean Theorem:} If $\{u, v, w\}$ is orthogonal,
+\[||u + v + w||^2 = ||u||^2 + ||v||^2 + ||w||^2\]
+
+Then on $(0, \pi)$ because $\{\sin(mx)\}$ is orthogonal, 
+\begin{align*}
+    f(x) &= \sum_{m=1}^\infty A_m \sin(mx)\\
+    ||f||^2 &= \left|\left|\sum_{m=1}^\infty A_m \sin(mx)\right|\right|^2\\
+    &= \sum_{m=1}^\infty ||A_m \sin(mx)||^2\\
+    &= \sum_{m=1}^\infty |A_m|^2\; ||\sin(mx)||^2\\
+    \int_0^\pi (f(x))^2\; dx &= \sum_{m=1}^\infty |A_m|^2\; \int_0^\pi\sin^2(mx)\; dx\\
+    &= \frac{\pi}{2}\sum_{m=1}^\infty |A_m|^2\
+\end{align*}
+This gives Parseval's identity:
+\[\sum_{m=1}^\infty |A_m|^2= \frac{2}{\pi} \int_0^\pi (f(x))^2\; dx\]
+
+\subsubsection{Midterm 2 Question} 
+Suppose $\{f_n\}_{n=1}^\infty$ is an orthogonal family of nonzero real functions on $(0, L)$ with the dot product $f\cdot g =\int_0^L f(x)g(x)\;dx$ such that for all $n = 1, 2, \, ...$ 
+\[\int_0^L(f_n)^2\; dx = 3L \quad \text{and} \quad \int_0^: x^3 f_n(x)\; dx = \frac{2L^4}{\sqrt{n}}\] 
+Derive Parseval's identity for $x^3=\sum_{n=1}^\infty A_n f_n(x)$ on $(0, L)$ and calculate $\sum_{n=1}^\infty \frac{1}{n}$
+
+\textbf{Solution:}
+\begin{align*}
+    x^3 &= \sum_{n=1}^\infty A_n f_n(x)\\
+    ||x^3||^2 &= \left|\left|\sum_{n=1}^\infty A_n f_n(x) \right|\right|^2\\
+    \int_0^L x^6\; dx &= \sum_{n=1}^\infty |A_n|^2\; ||f_n(x)||^2 \quad \text{(by orthogonality)}\\
+    \frac{L^7}{7} &= \sum_{n=1}^\infty |A_n|^2\; \int_0^L (f_n)^2\; dx\\
+    &= \sum_{n=1}^\infty 3L\, |A_n|^2\\
+    &= 3L \sum_{n=1}^\infty |A_n|^2\\
+    \frac{L^6}{21} &= \sum_{n=1}^\infty |A_n|^2\\
+    A_n &= \frac{\int_0^L x^3 f_n \;dx}{\int_0^L (f_n)^2\; dx} = \frac{1}{3L} \cdot \frac{2L^4}{\sqrt{n}} = \frac{2L^3}{3\sqrt{n}}\\
+    |A_n|^2 &= \frac{4L^6}{9n}\\
+    \sum_{n=1}^\infty \frac{4L^6}{9n} &= \frac{L^6}{21}\\
+    \sum_{n=1}^\infty \frac{1}{n} &= \frac{9}{4(21)} = \frac{3}{28}
+\end{align*}
+\section{Laplace Equation}
+\subsection{Derivation}
+From the 2D heat equation, $u_t = D(u_{xx} + u_{yy})$, we assume that $\lim_{t\to\infty} = 0$ so 
+\[u_{xx} + u_{yy} = 0\]
+
+\subsection{Rotational Invariance}
+\textbf{Theorem:} for some constant $\theta$ where 
+\[\begin{bmatrix}
+    x'\\y'
+\end{bmatrix} = \begin{bmatrix}
+    \cos \theta & -\sin \theta\\
+    \sin \theta & \cos \theta
+\end{bmatrix} \begin{bmatrix}
+    x\\y
+\end{bmatrix}\]
+\[u_{x'x'} + u_{y'y'} = u_{xx}+ u_{yy} = 0\]
+
+\textbf{Proof:} 
+\[\begin{cases}
+    x' = \cos(\theta)x - \sin(\theta) y\\
+    y' = \sin(\theta)x + \cos(\theta)y
+\end{cases}\]
+\begin{align*}
+    u_x &= u_{x'} \cdot x'_x + u_{y'} \cdot y'_x = (u_{x'})\cos(\theta) + (u_{y'})\sin(\theta)\\
+    u_{xx} &= (u_x)_{x'}\cdot x'_x + (u_y)_{y'} \cdot y'_x = u_{x'x'}\cos^2(\theta) +2u_{y'x'}\sin(\theta)\cos(\theta) + (u_{y'y'})\sin^2(\theta)\\
+    u_y &= u_{x'} \cdot x'_y + u_{y'} \cdot y'_y = -(u_{x'})\sin(\theta) + (u_{y'})\cos(\theta)\\
+    u_{yy} &= (u_x)_{x'}\cdot x'_yx + (u_y)_{y'} \cdot y'_y = u_{x'x'}\sin^2(\theta) - 2u_{y'x'}\sin(\theta)\cos(\theta) + (u_{y'y'})\cos^2(\theta)\\
+\end{align*}
+\[u_{xx} + u_{yy} = u_{x'x'}+u_{y'y'}\quad \blacksquare\]
+
+\subsection{Polar Laplace}
+\begin{gather*}
+    \begin{cases}
+        x = r\cos \theta\\
+        y = r\sin \theta
+    \end{cases}\implies r = \sqrt{x^2 + y^2}\\
+    r_x = \frac{x}{\sqrt{x^2 + y^2}} = \cos(\theta)\\
+    r_y = \sin \theta\\
+    \theta_x = -\frac{\sin \theta}{r}\\
+    \theta_y = \frac{\cos \theta}{r}
+\end{gather*}
+\begin{align*}
+    u_x &= u_r\cdot r_x + u_\theta \cdot \theta_x = u_r\cos\theta + u_\theta\left(-\frac{\sin \theta}{r}\right)\\
+    u_{xx} &= (u_x)_r \cdot r_x + (u_x)_\theta \cdot \theta_x\\
+    &= u_{rr}\cos^2\theta - 2u_{r\theta}\frac{\sin \theta \cos \theta}{r} + 2u_\theta \frac{\sin \theta \cos \theta}{r^2} + u_r \frac{\sin^2 \theta}{r + u_{\theta\theta}}\frac{\sin^2 \theta}{r^2}\\
+    u_{yy} &= u_{rr}\sin^2\theta + 2u_{r\theta}\frac{\sin \theta \cos \theta}{r} - 2u_\theta \frac{\sin \theta \cos \theta}{r^2} - u_r \frac{\sin^2 \theta}{r + u_{\theta\theta}}\frac{\sin^2 \theta}{r^2}
+\end{align*}
+\[u_{xx}+u_{yy} = u_{rr} + \frac{u_r}{r} + \frac{u_{\theta\theta}}{r^2}\]
+so the polar laplace is 
+\[u_{rr} + \frac{u_r}{r} + \frac{u_{\theta\theta}}{r^2} = 0\]
+
+\subsection{Fundamental Solution}
+We look for radial solutions such that $u_{\theta}= 0$, so the polar laplace equation takes the form 
+\[u_{rr} + \frac{1}{r}u_r = 0\]
+with constants $A = -\frac{1}{2\pi}$ and $B =0$ 
+
+By integrating factors, 
+\begin{gather*}
+    u_{rr} + \frac{1}{r}u_r = 0\\
+    ru_{rr} + u_r =0\\
+    (ru_r)_r = 0\\
+    ru_r = A\\
+    u_r = \frac{A}{r}\\
+    u = A\ln r + B\\
+    u = A\ln(\sqrt{x^2 + y^2})
+\end{gather*}
+\[\Phi(x, y) = -\frac{1}{2\pi}\ln(\sqrt{x^2 + y^2})\]
+
+\subsection{Subharmonics}
+\textbf{Definition:} $u(x, y)$ is subharmonic if 
+\[-(u_{xx} + u_{yy}) \leq 0\]
+
+\textbf{Example 1:} Suppose $u$ is harmonic and $f'' \geq 0$. Let $v = f(u)$. Show that $v$ is subharmonic. 
+\[\begin{cases*}
+    v_x = f'(u)\cdot u_x\\
+    v_{xx} = f''(u)\cdot u_x + f'(u)\cdot u_{xx}\\
+    v_y = f'(u)\cdot u_y\\
+    v_{yy} = f''(u)\cdot u_y + f'(u)\cdot u_{yy}
+\end{cases*}\]
+\begin{align*}
+    v_{xx} + v_{yy} &= f''(u)\cdot u_x + f'(u)\cdot u_{xx} + f''(u)\cdot u_y + f'(u)\cdot u_{yy}\\
+    &= f''(u)(u_x + u_y) + f'(u)(u_{xx} + u_{yy})
+\end{align*}
+If $u$ is harmonic, $\Delta u = 0$ so 
+\[v_{xx} + v_{yy} = \underbrace{f''(u)(u_x + u_y)}_{\geq 0}\]
+so 
+\[-(v_{xx} + v_{yy}) \leq 0\]
+and $v$ is subharmonic. \quad $\blacksquare$
+
+\textbf{Example 2:} Suppose $u$ is harmonic and let $w = (u_x)^2 + (u_y)$. Show $w$ is subharmonic.
+\begin{align*}
+    w_x &= 2u_x\cdot u_{xx} + u_{xy}\\
+    w_{xx} &= 2u_{xx}^2 + 2u_x\cdot u_{xxx} + u_{xxy}\\
+    w_y &= 2u_x\cdot u_{xy} + u_{yy}\\
+    w_{yy}&= 2u_{xy}^2 + 2u_x\cdot u_{xyy} + u_{yyy}\\
+\end{align*} 
+\begin{align*}
+    w_{xx} + w_{yy} &= 2u_{xx}^2 + 2u_x\cdot u_{xxx} + u_{xxy} + 2u_{xy}^2 + 2u_x\cdot u_{xyy} + u_{yyy}\\
+    &= 2u_{xx}^2 + 2u_{xy}^2 + 2u_x(u_{xxx} + u_{xyy}) + (u_{xxy} + u_{yyy})\\
+    &= 2u_{xx}^2 + 2u_{xy}^2 + 2u_x(u_{xx} + u_{yy})_x + (u_{xx} + u_{yy})_y\\
+    &= 2u_{xx}^2 + 2u_{xy}^2
+\end{align*}
+Both of these are non-negative so the RHS is non-nonnegative. Thus, 
+\[-(w_{xx} + w_{yy}) \leq 0\]
+and $w$ is sub-harmonic. \quad $\blacksquare$
+
+\subsection{Mean-Value Formula}
+If $\Delta u =0$ then for every $x$ and every $r > 0$ we have 
+\[\frac{1}{|B(x, r)|}\int_{B(x, r)} u(y)\; dy\ = u(x)\] 
+which means that the average value over the ball $B$ centered at $(x,r)$ is just the value at the center. 
+
+\textbf{Consequences:}
+\begin{enumerate}
+    \item Solutions to $\Delta u =0$ are infinitely differentiable (this integral just gets one level smoother)
+    \item \emph{Liouville's theorem:} If $\Delta u= 0$ and $|u|\leq c$ then $u$ must be constant
+    \item Corollary: if $u$ is not constant, it must blow up somewhere 
+\end{enumerate}
+
+\textbf{General form:} the mean value formula holds if you integrate on circles/spheres:
+\[\frac{1}{|\partial B(x, r)|}\int_{\partial B(x, r)} u(y)\; dy = u(x)\]
+where $\partial B(x, r)$ is the circle/sphere centered at $(x, r)$.  
+
+\textbf{Example:} Suppose $u$ solves Laplace's equation on the disk $x^2 + y^2 \leq 4$ with $u = 3\sin(2\theta) + 1$ on $x^2 + y^2 = 4$. Find $u(0, 0)$. 
+
+Because $\Delta u = 0$, 
+\begin{gather*}
+    \frac{1}{|\partial B(x, r)|}\int_{\partial B(x, r)} u(y)\; dy = u(x)\\
+    \frac{1}{|x^2 + y^2 = 4|}\int_0^{2\pi} 2u(y)\; d\theta = u(x)\\
+    \frac{1}{4\pi} \int_0^{2\pi} 6\sin(2\theta) + 2\; d\theta = \frac{1}{4\pi}[-3\cos(2\theta) +2\theta]_0^{2\pi} = u(x)\\
+    -\frac{3}{4\pi} + 1 + \frac{3}{4\pi} - 0 = 1 = u(x)
+\end{gather*}
+So the value at the centre is $1$: $u(0, 0)=1$.
+
+\subsection{Strong Maximum Principle}
+If $\Delta u =0$ in $\Omega$ then $\max u$ and $\min u$ are attained on $\partial \Omega$ and only on $\partial \Omega$ (unless $u$ is constant).
+
+\subsubsection{Proof} 
+Suppose $u$ has a max M at some point $x$ in $\Omega$. But then the mean value formula gives 
+\[\not \!\!\!\int_{B(x, r)} u(y)\; dy = u(x) = M\]
+which means that the highest value is also the average value and $u$ is constant. 
+
+\subsubsection{Finding the maximum}
+\textbf{Example:} Suppose $u$ solves Laplace's equation on the disk $x^2 + y^2 \leq 4$ with $u = 3\sin(2\theta) + 1$ on $x^2 + y^2 = 4$. Find the maximum of $u$ on the disk. 
+
+By the strong-max principle, because $\Delta u= 0$ inside the boundary, the max exists on the boundary. Thus we just need to find the max of $u = 3\sin(2\theta + 1)$ which is $4$ by the range of $\sin$. 
+
+\subsubsection{Uniqueness of Poisson's Equation}
+Suppose $u$ and $v$ both solve 
+\[\begin{cases}
+    \Delta u = f \quad\, \in \Omega\\
+    u = g \qquad \in \partial \Omega
+\end{cases}\]
+Let $w = u - v$. Then $w$ solves 
+\[\begin{cases}
+    \Delta w = \Delta u - \Delta v= f - f = 0 \quad \in \Omega\\
+    w = u - v = g - g = 0 \quad \in \partial \Omega 
+\end{cases} \implies \begin{cases}
+    \Delta w = 0\quad \in \Omega\\
+    w = 0 \quad \in \partial \Omega
+\end{cases}\]
+But by the strong-max principle, 
+\[\max_{\Omega} w = \max_{\partial \Omega} w = 0\]
+similarly, 
+\[\min{\Omega} w = \min{\partial \Omega} w = 0\]
+so 
+\[w = u - v = 0 \implies u = v \quad \blacksquare\]
+
+\subsubsection{Positivity of Solutions}
+Suppose $u$ solves 
+\[\begin{cases}
+    \Delta u = 0\quad\, \in \Omega\\
+    u = g \qquad \in \partial \Omega
+\end{cases}\]
+When $g \geq 0$ and $g(x_0) > 0$ for some $x_0$ on $\partial \Omega$. Then $u > 0$ on all of $\Omega$.
+
+\textbf{Proof:}
+\[\min_{\Omega} u = \min_{\partial \Omega} u = \min_{\partial \Omega} g \geq 0\]
+but for some $x_0$, $g > 0$ so if $u = 0$ at some point in $\Omega$, the new minimum will not be on $\partial \Omega$, leading to a contradiction. Hence, $u > 0 \in \Omega$. 
+
+\subsection{Midterm 2 Problem}
+\[\begin{cases}
+    u_{xx} + u_{yy} = 0\\
+    u(x, 0) = 0\\
+    u(x, \pi) = 0\\
+    u(0, y) = 2y\\
+    u(2, y) = 0
+\end{cases}\]
+
+\begin{gather*}
+    u = X(x)Y(y)\\
+    X''Y + XY'' = 0\\
+    \frac{Y''}{Y} = -\frac{X''}{X} = \lambda\\
+    \begin{cases}
+        Y'' = \lambda Y\\
+        Y(0) = 0\\
+        Y(\pi) = 0
+    \end{cases}
+\end{gather*}
+$\lambda < 0$:
+\begin{gather*}
+    Y = A\cos(\omega y) + B\sin(\omega y)\\
+    Y(0) = A = 0\\
+    Y(\pi) = B\sin(\pi \omega) = 0 \implies \omega = m = \{1, 2, \, ...\}\\
+    \lambda = -m^2\\
+    Y = \sin(my)
+\end{gather*}
+\[X'' = m^2X \implies X = Ae^{mx} + Be^{-mx} = A\cosh(mx) + B\sinh(mx)\]
+\[u(x, y) = \sum_{m=1}^\infty (A_m\cosh(mx) + B_m\sinh(mx))\sin(my)\]
+\begin{align*}
+    u(0, y) &= \sum_{m=1}^\infty A_m \sin(my)\\
+    A_m &= \frac{2}{\pi}\int_0^\pi 2y\sin(my)\; dy \\
+    &= \frac{2}{\pi}\left[-2y\frac{\cos(my)}{m} - 2\frac{\sin(my)}{m}\right]_0^\pi\\
+    &= \frac{4}{m}(-1)^{m+1}
+\end{align*}
+\begin{gather*}
+    u(x, y) = \sum_{m=1}^\infty (\frac{4}{m}(-1)^{m+1}\cosh(mx) + B_m\sinh(mx))\sin(my)\\
+    u(2, y) = \sum_{m=1}^\infty (\frac{4}{m}(-1)^{m+1}\cosh(2m) + B_m\sinh(2m))\sin(my)\\
+    \frac{4}{m}(-1)^{m+1}\cosh(2m) + B_m\sinh(2m) = 0\\
+\end{gather*}
+\begin{align*}
+    B_m &= -\frac{\frac{4}{m}(-1)^{m+1}\cosh(2m)}{\sinh(2m)}\\
+    &= \frac{4}{m}(-1)^m\coth(2m)
+\end{align*}
+\[u(x, y) = \sum_{m=1}^\infty (\frac{4}{m}(-1)^{m+1}\cosh(mx) + \frac{4}{m}(-1)^m\coth(2m)\sinh(mx))\cos(my)\]
+
+\section{Calculus of Variations}
+Calculus of Variations turns minimization problems into differential equations 
+
+\textbf{Trick:} If 
+\[\int_0^1 f(x)\, g(x)\; dx =0\]
+for all $g$ with $g(0) = g(1) = 0$ then $f = 0$ (when $f$ and $g$ are continuous)
+
+\subsection{Derivation of the Euler-Lagrange Equations}
+Suppose $f$ minimizes 
+\[I[f] = \frac{1}{2}\int_0^1 (f'(x))^2\; dx\]
+Let $f$ be arbitrary with $g(0) = g(1) = 0$ and $f(0) = 0, \; f(1) = 1$. 
+
+Consider 
+\[h(t) = I[f + tg] = \frac{1}{2}\int_0^1 (f'(x) + tg'(x))^2\; dx\]
+
+Note that $h(0) = I[f]$ so $h$ has a min at $t= 0$. Thus $h'(0) = 0$.
+
+\begin{align*}
+    h'(t) = \frac{d}{dt}\left[\frac{1}{2}\int_0^1(f'(x) + tg'(x))^2\; dx\right]\\
+    &= \frac{1}{2}\int_0^1 \frac{d}{dt}(f'(x)+ tg'(x))^2\; dx\\
+    &= \frac{1}{2}\int_0^1 2(f'(x) + tg'(x))g'(x)\; dx\\
+    &= \int_0^1 (f' + tg')'\; dx\\
+    &= [(f' + tg')]_0^1 - \int_0^1(g' + tg')' g\; dx\\
+    &= -\int_0^1 (f'' + tg'')g\; dx
+\end{align*}
+\begin{gather*}
+    h'(0) = -\int_0^1f''g\; dx = 0 \implies -f''(x) \quad (\text{by the trick above})\\
+    f(0) = 0 \implies B =0\\
+    f(1) = 1 \implies A = 1\\
+\end{gather*}
+So the Euler-Lagrange associated to this min problem is $f(x) = x$
+
+\textbf{General Lagrangian:} $L = L(p,z,x)$ 
+\[\min I[f] = \int_a^b L(f', f, x)\; dx = -(L_p(f', f, x))_x + L_z(f', f, x) = 0\]
+
+\textbf{Higher Dimensional Lagrangian:} In 2D, $L = l(p, q, z, x, y)$
+\[\min I[u] = \int_{\Omega}L(u_x, u_y, u, x, y)\; dx\, dy\]
+with $u = g$ on $\partial \Omega$ corresponds to the Euler-Lagrange equation 
+\[-(L_p)_x - (L_q)_y + L_z =0\]
+(evaluated at $(u_x, u_y, u, x, y)$)
+
+\subsection{Apply the Euler-Lagrange Equations}
+\textbf{Example 1:} 
+\[\min I[u] = \int_{\Omega} \frac{1}{2}||\nabla u||^2 - F(u)\; dx\, dy\]
+where $G$ is an antiderivative of a given function $f$
+
+\begin{gather*}
+    \min I[u] = \int_{\Omega} \frac{1}{2}(u_x)^2 + \frac{1}{2}(u_y)^2 - F(u)\; dx\,dy\\
+    L(p, q, z, x, y) = \frac{1}{2}p^2 + \frac{1}{2}q^2 - F(z)\\
+    L_p = p, \quad L_q = q, \quad L_z = -f(z)\\
+\end{gather*}
+So by the Euler-Lagrange equation $-(L_p)_x - (L_q)_y + L_z = 0$,
+\[-(u_x)_x - (u_y)_y - f(u) =0 \implies -(u_{xx} + u_{yy}) = f(u)\]
+
+\textbf{Example 2:} 
+\[\min I[u] = \int_{\Omega}\exp(-w(x, y)) \left(\frac{1}{2}||\nabla u||^2 - uf(x, y)\right)\; dx\, dy\]
+
+\begin{gather*}
+    \min I[u] = \int_{\Omega}\exp(-w(x, y)) \left(\frac{1}{2}(u_x)^2 + \frac{1}{2}(u_y)^2 - uf(x, y)\right)\; dx\, dy\\
+    L(p, q, z, x, y) = L(u_x, u_y, u,x, y) = \frac{1}{2}u_x^2\exp(-w(x,y)) + \frac{1}{2}u_y^2\exp(-w(x,y)) - uf(x, y)\exp(-w(x, y))\\
+    L_p = u_x\exp(-w(x, y))\\
+    L_q = u_y\exp(-w(x, y))\\
+    L_z = -f(x, y)\exp(-w(x, y))
+\end{gather*}
+Using the E-L equation $-(L_p)_x - (L_q)_y + L_z = 0$, 
+\begin{gather*}
+    -(u_x\exp(-w(x, y)))_x - (u_y\exp(-w(x, y)))_y - f(x, y)\exp(-w(x, y)) = 0\\
+    -(u_{xx}e^{-w} - u_x w_x e^{-w}) -(u_{yy}e^{-w} - u_y w_y e^{-w}) = f(x, y)e^{-w}\\
+    -u_{xx} -u_{yy} + u_x w_x + u_y w_y = f(x, y)
+\end{gather*}
+
+\section{Ecology Application}
+\textbf{Example:} Given a linearized PDE of the form 
+\[\begin{bmatrix}
+    u_t\\v_t
+\end{bmatrix} = \begin{bmatrix}
+    D_1u_{xx}\\D_2v_{xx}
+\end{bmatrix} + \begin{bmatrix}
+    -(b + 1)+2u_* v_* & (u_*)^2\\
+    b - 2u_* v_* & -(u_*)^2
+\end{bmatrix} \begin{bmatrix}
+    u\\v
+\end{bmatrix}\]
+plug in $u(x, t) = e^{\lambda t} \cos(\kappa x)u_0$ and $v(x, t) = e^{\lambda t}\cos(\kappa x)v_0$ to get an equation of the form $B \begin{bmatrix}
+    u_0\\v_0
+\end{bmatrix} = \lambda \begin{bmatrix}
+    u_0\\v_0
+\end{bmatrix}$
+
+Given $u_* = a$ and $v_* = b/a$, the system reduces to 
+\[\begin{bmatrix}
+    u_t\\v_t
+\end{bmatrix} = \begin{bmatrix}
+    D_1u_{xx}\\
+    D_2v_{xx}
+\end{bmatrix} + \begin{bmatrix}
+    b - 1 & a^2\\
+    -b & -a^2
+\end{bmatrix}\begin{bmatrix}
+    u\\v
+\end{bmatrix}\]
+
+Taking the derivatives of the solutions 
+\[\begin{cases}
+    u_t = \lambda e^{\lambda t} \cos(\kappa x)u_0\\
+    v_{t} = \lambda e^{\lambda t} \cos(\kappa x)v_0\\
+    u_{xx} = -\kappa^2 e^{\lambda t}\cos(\kappa x) u_0\\
+    v_{xx} = -\kappa^2 e^{\lambda t}\cos(\kappa x) v_0
+\end{cases}\]
+\begin{align*}
+    \begin{bmatrix}
+        \lambda e^{\lambda t} \cos(\kappa x)u_0\\
+        \lambda e^{\lambda t} \cos(\kappa x)v_0
+    \end{bmatrix} &= \begin{bmatrix}
+        -D_1\kappa^2 e^{\lambda t}\cos(\kappa x) u_0\\
+        -D_2\kappa^2 e^{\lambda t}\cos(\kappa x) v_0
+    \end{bmatrix} + \begin{bmatrix}
+        b - 1 & a^2\\
+        -b & -a^2
+    \end{bmatrix}\begin{bmatrix}
+        e^{\lambda t} \cos(\kappa x)u_0\\
+        e^{\lambda t} \cos(\kappa x)v_0
+    \end{bmatrix}\\
+    \lambda \begin{bmatrix}
+        u_0\\v_0
+    \end{bmatrix} &= \begin{bmatrix}
+        -D_1\kappa^2 u_0\\
+        -D_2 \kappa^2 v_0
+    \end{bmatrix} + \begin{bmatrix}
+        b - 1 & a^2\\
+        -b & -a^2
+    \end{bmatrix}\begin{bmatrix}
+        u_0\\
+        v_0
+    \end{bmatrix}\\
+    &= \begin{bmatrix}
+        -D_1\kappa^2 u_0\\
+        -D_2 \kappa^2 v_0
+    \end{bmatrix} + \begin{bmatrix}
+        (b - 1)u_0 & a^2v_0\\
+        -bu_0 & -a^2v_0
+    \end{bmatrix}\\
+    &= \begin{bmatrix}
+        (-D_1\kappa^2 + b - 1)u_0 + a^2v_0\\
+        -bu_0 + (-D_2 \kappa^2 -a^2)v_0
+    \end{bmatrix} \\
+    &= \begin{bmatrix}
+        -D_1\kappa^2 + b - 1 & a^2\\
+        -b & -D_2 \kappa^2 -a^2
+    \end{bmatrix}\begin{bmatrix}
+        u_0\\v_0
+    \end{bmatrix}
+\end{align*}
+
+\section{COVID Application}
+\textbf{Reaction-Diffusion Model:}
+\[\begin{cases}
+    S_t = -bSI\\
+    I_t = bSI - \gamma I + DI_{xx}
+\end{cases}\]
+where:
+\begin{itemize}
+    \item $S$ is the number of susceptible people
+    \item $I$ is the number of infected people 
+    \item $\gamma$ is the death rate
+    \item $b$ is the infection rate
+    \item $D$ is the diffusion rate
+\end{itemize}
+
+\subsection{Rescaling}
+\textbf{Goal:} Rescale the time variables and unknowns so the mean mortality rate $(\tau)$ is 1
+\[\tau = \gamma t\]
+We rescale by the total population so 
+\[\begin{cases}
+    s = \frac{S}{N}\\
+    i = \frac{I}{N}
+\end{cases}\]
+\[s(x, \tau) = \frac{S(x, t)}{N} = \frac{S(x, \frac{\tau}{\gamma})}{N} \implies S(x, t) = Ns(x, \gamma t)\]
+\[I(x, t) = Ni(x, \gamma t)\]
+
+By chain rule, 
+\[S_t = (Ns(x, \gamma t))_t = N\gamma s_\tau(\gamma t)\]
+Which by the PDE, 
+\[N\gamma s_\tau(\gamma t) = -bNs(x, \gamma t)Ni(x, \gamma t)\]
+so 
+\[s_\tau = -\frac{bN}{\gamma}s_i\]
+similarly, 
+\[i_\tau = \frac{bN}{\gamma}s_i - i + \frac{D}{\gamma}i_{xx}\]
+
+Let $R_0 = \frac{bN}{\gamma}$ and $d = \frac{D}{\gamma}$ so
+\[\begin{cases}
+    s_\tau = -R_0 s_i\\
+    i_\tau = R_0s_i - i + di_{xx}
+\end{cases}\]
+
+\subsection{Traveling Waves}
+We assume the PDE is of the special form 
+\begin{align*}
+    s(x, \tau) &= f(x - ct)\\
+    i(x, \tau) &= g(x - ct)
+\end{align*}
+So 
+\begin{align*}
+    s_\tau &= -R_0 s_i\\
+    &= (f(x - ct))_\tau\\
+    &= -cf'(x- ct)\\
+    &= -R_0 f(x - c\tau)g(c - c\tau)\\
+    &= -cf'(z) = - R_0 f(z)g(z)
+\end{align*}
+
+Similarly with $i_\tau = R_0 si - i + di_{xx}$, 
+\[\begin{cases}
+    c'f(z) = R_0 f(z)g(z)\\
+    cg'(z) = -R_0f(z)g(z) + g(z) - dg''(z)
+\end{cases}\]
+
+\section{Method of Characteristics}
+\begin{enumerate}
+    \item Let $h(t) = u(x(t), t)$
+    \item Calculate $h'$
+    \item Solve for $x$
+    \item Plug in to get the second characteristic ODE in $h'$
+    \item Solve for $h$
+    \item Substitute for $u$
+    \item Initial Condition
+\end{enumerate}
+
+\textbf{Example 1:} 
+\[\begin{cases}
+    u_t + u_x + u = \exp(x + 2t)\\
+    u(x, 0)= 0 
+\end{cases}\]
+
+\begin{align*}
+    h(t) &= u(x(t), t)\\
+    h'(t) &= u_x \cdot x'(t) + u_t\\
+        &= u_x \cdot x'(t) + \exp(x + 2t) - u_x  - u\\
+        &= u_x (x' - 1) - u + \exp(x + 2t)\\
+\end{align*}
+$x'(t) - 1 = 0 \implies x'(t) = 1$ is our characteristic ODE with $x(t) = t + C$ so 
+\begin{align*}
+    h'(t) &= -u(x(t), t) + \exp(3t+ C)\\
+    &= -h(t) + \exp(3t + C)\\
+    h'(t) + h(t) &= \exp(3t + C)\\
+    (he^t)' &= \exp{4t+C}\\
+    h(t)e^t &= \frac{1}{4}\exp(4t+C) + B\\
+    h(t) &= \frac{1}{4}exp(3t+C) + Be^{-t}\\
+    u(x(t), t) &= \frac{1}{4}\exp(3t+C) + Be^{-t}\\
+    u(x(0), 0) &= \frac{e^C}{4} + B = 0 \implies B = -\frac{e^C}{4}\\
+    u(x(t), t) &= \frac{1}{4}\exp(3t+C) -\frac{1}{4}e^{C-t}\\
+    u(t + C, t)&= \frac{1}{4}\exp(3t+C) -\frac{1}{4}e^{C-t}\\
+    u(x, t) &= \frac{1}{4}\exp(x + 2t) - \frac{1}{4}e^{x - 2t}\\
+    &= \frac{1}{4}e^x(e^{2t} - e^{-2t})\\
+    &= \frac{1}{2}e^x \sinh(2t)
+\end{align*}
+
+\textbf{Example 2:} 
+\[\begin{cases}
+    u_t + x^2 u_x = 0\\
+    u(x, 0) = f(x)
+\end{cases}\]
+\begin{align*}
+    h(t) &= u(x(t), t)\\
+    h' &= u_x\cdot x' + u_t\\
+    &=  u_x\cdot x' - x^2u_x\\
+    &= (x' - x^2)u_x\\
+    &= 0\\
+\end{align*}
+\begin{gather*}
+    x' = x^2\\
+    \frac{1}{x^2} \; dx = dt\\
+    -\frac{1}{x} = t + C\\
+    x(t) = -\frac{1}{t + C}
+\end{gather*}
+\begin{gather*}
+    h'(t) = 0 \implies h(t) = C\\
+    h(t) = h(0)\\
+    u(x(t), t) = u(x(0), 0)\\
+    u(-\frac{1}{t + C}, t) = u(-\frac{1}{C}, 0)\\ = f(-\frac{1}{C})\\
+    \\
+    x = - \frac{1}{t + C} \implies t + C = -\frac{1}{x}\\
+    C = -t - \frac{1}{x} = -(\frac{tx + 1}{x})\\
+    -\frac{1}{C} = \frac{x}{1 + xt}\\
+    u(x, t) = f(-\frac{1}{C}) = f(\frac{x}{1 + xt})
+\end{gather*}
+
+\textbf{Example 3:}
+\[\begin{cases}
+    u_t + xu_x = 2u\\
+    u(x, 0) = f(x)
+\end{cases}\]
+
+\begin{align*}
+    h(t) &= u(x(t), t)\\
+    h'(t) &= u_x x' + 2u - xu_x\\
+    &= (x' - x)u_x + 2u\\
+    &= 2u\\
+    &= 2h(t)
+\end{align*}
+\[x' = x \implies x = Ae^t\]
+\[h'(t) = 2h(t) \implies h(t) = h(0)e^{2t}\]
+\begin{gather*}
+    u(x(t), t) = u(x(0), 0)e^{2t}\\
+    u(Ae^t, t) = u(A, 0)e^{2t}\\
+    u(Ae^t, t) = f(A)e^{2t}
+    u(x, t) = f(xe^{-t})e^{2t}
+\end{gather*}
+\end{document}

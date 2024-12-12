@@ -1,0 +1,204 @@
+\documentclass[12pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\allsectionsfont{\sffamily\mdseries\upshape} 
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{empheq}
+\usepackage{xcolor}
+\renewcommand{\L}[1]{\mathcal{L}\{#1\}}
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+\newcommand{\vecs}[1]{\langle #1\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\F}[1]{\mathcal{F}(#1)}
+\title{APMA 0360: Homework 3}
+\author{Milan Capoor}
+\date{17 February 2023}
+
+\begin{document}
+\maketitle
+\section*{Problem 1}
+Verify the following statements:
+\[u(x, t) = \frac{1}{\sqrt{4\pi Dt}}e^{-\frac{x^2}{4Dt}}\]
+\begin{enumerate}
+    \item $u(x, t)$ solves the heat equation $u_t = Du_{xx}$
+    
+    \color{blue}
+    \begin{align*}
+        u_t &= \frac{d}{dt} \frac{1}{\sqrt{4\pi Dt}}e^{-\frac{x^2}{4Dt}}\\
+        &= -\frac{2\pi D}{(4\pi Dt)^{\frac{3}{2}}}e^{-\frac{x^2}{4Dt}} + \left(\frac{1}{\sqrt{4\pi Dt}}\right) \left(\frac{x^2}{4Dt^2}\right) e^{-\frac{x^2}{4Dt}}\\
+        &= -\frac{2\pi D}{(4\pi Dt)^{\frac{3}{2}}}e^{-\frac{x^2}{4Dt}} + \frac{Dx^2}{8\sqrt{\pi}(Dt)^{5/2}}e^{-\frac{x^2}{4Dt}}\\
+        &= -\frac{2\pi D}{(4\pi Dt)^{\frac{3}{2}}}e^{-\frac{x^2}{4Dt}} + \frac{Dx^2}{8\sqrt{\pi} (Dt)^{5/2}}e^{-\frac{x^2}{4Dt}}\\
+        u_x &= \frac{d}{dx} \frac{1}{\sqrt{4\pi Dt}}e^{-\frac{x^2}{4Dt}} = \left(\frac{1}{\sqrt{4\pi Dt}}\right)\left(\frac{-2x}{4Dt}\right)e^{-\frac{x^2}{4Dt}} \\
+        u_{xx} &= \left(\frac{1}{\sqrt{4\pi Dt}}\right)\left(\frac{-2}{4Dt}\right)e^{-\frac{x^2}{4Dt}} + \left(\frac{1}{\sqrt{4\pi Dt}}\right)\left(\frac{-2x}{4Dt}\right)^2 e^{-\frac{x^2}{4Dt}}\\
+        &= -\frac{1}{4\sqrt{\pi}(Dt)^{3/2}}e^{-\frac{x^2}{4Dt}} + \frac{x^2}{8\sqrt{\pi}(Dt)^{5/2}}e^{-\frac{x^2}{4Dt}}
+    \end{align*}
+
+    \[u_t = Du_{xx}\]
+    \[-\frac{2\pi D}{(4\pi Dt)^{\frac{3}{2}}}e^{-\frac{x^2}{4Dt}} + \frac{Dx^2}{8\sqrt{\pi} (Dt)^{5/2}}e^{-\frac{x^2}{4Dt}} = D(-\frac{1}{4\sqrt{\pi}(Dt)^{3/2}}e^{-\frac{x^2}{4Dt}} + \frac{x^2}{8\sqrt{\pi}(Dt)^{5/2}}e^{-\frac{x^2}{4Dt}})\]
+    \[-\frac{2\pi D}{(4\pi Dt)^{\frac{3}{2}}} + \frac{Dx^2}{8\sqrt{\pi} (Dt)^{5/2}} = D(-\frac{1}{4\sqrt{\pi}(Dt)^{3/2}} + \frac{x^2}{8\sqrt{\pi}(Dt)^{5/2}})\]
+    \[D(-\frac{1}{4\sqrt{\pi}(Dt)^{3/2}} + \frac{x^2}{8\sqrt{\pi} (Dt)^{5/2}}) = D(-\frac{1}{4\sqrt{\pi}(Dt)^{3/2}} + \frac{x^2}{8\sqrt{\pi}(Dt)^{5/2}}) \quad \checkmark\]
+
+    \color{black}
+    \item $\int_{-\infty}^\infty u(x, t) \; dx = 1$ for all t 
+    
+    \color{blue}
+    \[\int_{-\infty}^\infty \frac{1}{\sqrt{4\pi Dt}}e^{-\frac{x^2}{4Dt}} \; dx = 1\]
+    \[\frac{1}{\sqrt{4\pi Dt}}\int_{-\infty}^\infty e^{-\frac{x^2}{4Dt}} \; dx = 1 \]
+
+    Now let 
+    \[I = \int_{-\infty}^\infty e^{-\frac{x^2}{4Dt}} \; dx = \int_{-\infty}^\infty e^{-\frac{x^2}{4Dt}} \; dx \]
+    So 
+    \begin{align*}
+        I^2 &= \left(\int_{-\infty}^\infty e^{-\frac{x^2}{4Dt}} \; dx \right)\left(\int_{-\infty}^\infty e^{-\frac{y^2}{4Dt}} \; dy \right)\\
+        &= \int_{0}^\pi \int_{0}^\infty re^{-\frac{r^2}{4Dt}} \; dr \, d\theta\\
+        &= 2\pi \int_{0}^\infty re^{-\frac{r^2}{4Dt}} \; dr\\
+        u &= -\frac{r^2}{4Dt} \implies du = -\frac{2r}{4Dt}\; dr\\
+        I^2 &= 2\pi \left[-2Dt e^{-\frac{r^2}{4Dt}}\right]_0^\infty\\
+        &= 2\pi(0 + 2Dt) = 4\pi Dt
+    \end{align*}
+    Therefore, 
+    \[I = \sqrt{4\pi Dt}\]
+    and 
+    \[\int_{-\infty}^\infty u(x, t) \; dx = \frac{\sqrt{4\pi Dt}}{\sqrt{4\pi Dt}} = 1 \quad \checkmark\]
+\end{enumerate}
+
+\pagebreak
+\section*{Problem  2}
+Consider the Korteweg-De Vries equation
+\[\begin{cases}
+    u_t = u_{xxx}\\
+    u(x, 0) = f(x)
+\end{cases}\]
+Find a formula for $\hat{u}(\kappa, t)$ in terms of $\hat{f}(\kappa)$
+
+\color{blue}
+\[\F{u_t} = \F{u_{xxx}}\]
+By the derivative properties of  the fourier transform,
+\[\F{u_{xxx}} = (-i\kappa)^3 \hat{u}(\kappa, t) = i\kappa^3 \hat{u}(\kappa, t)\]
+and then 
+\[\F{u_t} = \frac{d}{dt}\hat{u}(\kappa, t)\]
+Thus,
+\[\frac{d}{dt}\hat{u}(\kappa, t) =  i\kappa^3 \hat{u}(\kappa, t)\]
+Solving by ODE analogy ($y' = ay$),
+\[\hat{u}(\kappa, t) = \hat{u}(\kappa, 0)e^{i\kappa^3t}\]
+But from the initial condition
+\[u(x, 0) = f(x) \longrightarrow \hat{u}(\kappa, 0) = \hat{f}(\kappa)\]
+So,
+\[\ans{$\hat{u}(\kappa, t) = \hat{f}(\kappa)e^{i\kappa^3t}$}\]
+
+
+\pagebreak
+\color{black}
+\section*{Problem 3}
+In this problem, a and c are real numbers
+\begin{enumerate}
+    \color{black}
+    \item Show that if $g(x) = f(x - a)$ then $\hat{g}(\kappa) = e^{i\kappa a}\hat{f}(\kappa)$
+    
+    \color{blue}
+    \begin{align*}
+        \hat{g}(\kappa) &= \hat{f}(x - a)\\
+        &= \int_{-\infty}^\infty f(x - a) e^{i\kappa(x + a)}\; dx\\
+        &= e^{i\kappa a}\int_{-\infty}^\infty f(x - a) e^{i\kappa x}\; dx\\
+        &= e^{i\kappa a}\hat{f}(\kappa) \quad \checkmark
+    \end{align*}
+    \color{black}
+    \item Use the Fourier transform and (1) to solve the transport PDE
+    \[\begin{cases}
+        u_t + cu_x = 0\\
+        u(x, 0) = f(x)
+    \end{cases}\]
+
+    \color{blue}
+    \[\hat{u}(\kappa)_t = \F{-cu_x}\]
+    \[\frac{d}{dt}\hat{u}(\kappa, t) = i\kappa c\hat{u}(\kappa, t)\]
+    \begin{align*}
+        \hat{u}(\kappa, t) &= \F{u(x, 0)} e^{i\kappa c}\\
+        &= \hat{f}(\kappa)e^{i\kappa ct}\\ 
+        &= \hat{f}(x - ct)
+    \end{align*}
+    \[\boxed{u(x, t) = f(x - ct)}\]
+\end{enumerate}
+
+\pagebreak
+\section*{Problem 4}
+Use the Fourier transform to solve the PDE
+\[\begin{cases}
+    u_t = Du_{xx} - au\\
+    u(x, 0) = f(x)
+\end{cases}\]
+Here $D > 0$ and a is any real number.\footnote{Write the answer in the form
+\[u(x, t) = e^{-at} \times \text{ Some integral}\]}
+
+\color{blue}
+\[\hat{u}_t = \F{Du_{xx}} - \F{au}\]
+\[\frac{d}{dt}\hat{u}(\kappa, t) = -D\kappa^2\hat{u}(\kappa, t) - a\hat{u}(\kappa, t) = -(D\kappa^2 + a)\hat{u}(\kappa, t)\]
+Via ODEs, 
+\[\hat{u}(\kappa, t) = \hat{u}(\kappa, 0)e^{-(D\kappa^2 + a)t} = e^{-at} \hat{f}(\kappa) e^{-D\kappa^2t} = \]
+Now to set up the convolution:
+\[\F{e^{-D\kappa^2t}} = \hat{g}(\kappa, t) \quad g(x, t) = \frac{1}{\sqrt{4\pi Dt}}e^{-\frac{x^2}{4Dt}}\]
+Therefore, 
+\[\hat{u}(\kappa, t) = e^{-at} \hat{f}(\kappa) \hat{g}(\kappa, t)\]
+\[\hat{u}(\kappa, t) = e^{-at}\F{(f \star g)(\kappa, t)}\]
+\[\boxed{u(x, t) = \frac{e^{-at}}{\sqrt{4\pi Dt}}\int_{-\infty}^\infty f(y) e^{-\frac{(x-y)^2}{4Dt}}\; dy}\]
+
+
+\pagebreak 
+\color{black}
+\section*{Problem 5}
+Solve the PDE 
+\[\begin{cases}
+    u_t = Du_{xx} + cu_x - au\\
+    u(x, 0) = f(x)
+\end{cases}\]
+Here $D > 0$ and a, c are real numbers \footnote{Hint: Let $v(x, t) = u(x - ct, t)e^{at}$ and find a PDE for v}
+
+\color{blue}
+Let 
+\[v(x, t) = u(x - ct, t)e^{at}\]
+so 
+\[u(x - ct, t) = v(x, t)e^{at}\]
+and 
+\[u(x, t) = v(x + ct, t)e^{at}\]
+Taking the partials we have:
+\[\begin{cases}
+    u_x = v_x(x + ct, t)e^{at}\\
+    u_{xx} = v_{xx}(x + ct, t)e^{at}\\
+    u_t = \frac{\partial v}{\partial x}\frac{\partial x}{\partial t} + \frac{\partial v}{\partial t}\frac{\partial t}{\partial t} = cv_x(x + ct, t)e^{at} + v_t(x + ct, t)e^{at} + av(x + ct, t)e^{at}
+\end{cases}\]
+and substituting these into the original PDE, 
+\[cv_x(x + ct, t)e^{at} + v_t(x + ct, t)e^{at} + av(x + ct, t)e^{at} = Dv_{xx}(x + ct, t)e^{at} + cv_x(x + ct, t)e^{at} - av(x + ct, t)e^{at}\]
+But this is just 
+\[v_t(x + ct, t) = Dv_{xx}(x + ct, t)\]
+And this is simply the heat equation so 
+\[v(x + ct, t) = \frac{1}{\sqrt{4\pi Dt}} \int_{-\infty}^\infty f(y)\, e^{-\frac{((x + ct) - y)^2}{4Dt}}\; dy\]
+and as 
+\[v(x + ct, t) = u(x, t)e^{-at}\]
+we have  
+\[\boxed{u(x, t) = \frac{e^{at}}{\sqrt{4\pi Dt}} \int_{-\infty}^\infty f(y)\, e^{-\frac{((x + ct) - y)^2}{4Dt}}\; dy}\]
+\end{document}

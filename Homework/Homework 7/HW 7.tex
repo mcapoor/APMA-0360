@@ -1,0 +1,344 @@
+\documentclass[12pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\allsectionsfont{\sffamily\mdseries\upshape} 
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{empheq}
+\usepackage{xcolor}
+\renewcommand{\L}[1]{\mathcal{L}\{#1\}}
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+\newcommand{\vecs}[1]{\langle #1\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\F}[1]{\mathcal{F}(#1)}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+
+\title{APMA 0360: Homework 7}
+\author{Milan Capoor}
+\date{24 March 2023}
+
+\begin{document}
+\maketitle
+\vspace*{-1.2cm}
+\section*{Problem 1:}
+\begin{enumerate}
+    \item Use the trig identity $\sin A \sin B = \frac{1}{2}\cos(A - B) - \frac{1}{2}\cos(A + B)$ to show that if $m \neq n$ then 
+    \[\int_{0}^\pi \sin(mx)\sin(nx) \; dx =0\]
+    \vspace*{-0.5cm}
+    \color{blue}
+    \begingroup 
+    \allowdisplaybreaks
+    \begin{align*}
+        &\int_{0}^\pi \sin(mx)\sin(nx) \; dx \\
+        &= \int_0^\pi \frac{1}{2}\cos(mx - nx) - \frac{1}{2}\cos(mx + nx)\; dx \qquad (\text{by identity})\\
+        &= \int_0^\pi \frac{1}{2}\cos(mx - nx)\; dx - \int_0^\pi \frac{1}{2}\cos(mx + nx)\; dx\\
+        &= \frac{1}{2}\int_0^\pi \cos((m-n)x)\; dx - \frac{1}{2}\int_0^\pi \cos((m+n)x)\; dx\\
+        &= \frac{1}{2}\left(\left[\frac{1}{m-n}\sin((m-n)x)\right]_0^\pi - \left[\frac{1}{m+n}\sin((m+n)x)\right]_0^\pi\right)\\
+        &= \frac{1}{2}\left(\frac{\sin((m- n)\pi)}{m - n} - \frac{\sin((m + n)\pi)}{m + n}\right)\\
+        &= \frac{1}{2}\cdot \frac{(m + n)\sin(m\pi - n\pi) - (m -n)\sin(m\pi + n\pi)}{m^2 - n^2}\\
+        &= \frac{1}{2}\cdot \frac{(m + n)(\sin(m\pi)\cos(n\pi) - \sin(n\pi)\cos(m\pi))}{m^2 - n^2}\\
+        &\qquad -\frac{1}{2}\frac{(m -n)(\sin(m\pi)\cos(n\pi) + \sin(n\pi)\cos(m\pi))}{m^2 - n^2}
+    \end{align*}
+    But as $m$ and $n$ are integers greater than , the functions $\sin(m\pi)$ and $\sin(n\pi)$ will be zero for all values of $m$ and $n$ so all terms will be 0 and thus the integral equals 0. $\quad \blacksquare$
+    \endgroup
+    \color{black}
+    \item Show that 
+    \[\int_0^\pi \sin^2 (mx)\; dx = \frac{\pi}{2}\]
+    
+    \color{blue}
+    Using the same identity above but with $A = B = mx$,
+    \begin{align*}
+        \int_0^\pi \sin^2 (mx)\; dx &= \int_0^\pi \frac{1}{2}\cos(mx - mx) - \frac{1}{2}\cos(mx +mx)\;dx\\
+        &= \int_0^\pi \frac{1}{2} - \frac{1}{2}\cos(2mx)\; dx\\
+        &= \frac{\pi}{2} -\frac{1}{2}\int_0^\pi \cos(2mx)\; dx\\
+        &= \frac{\pi}{2} - \frac{1}{2}\left[\frac{\sin(2mx)}{2m}\right]_0^\pi\\
+        &= \frac{\pi}{2} - \frac{1}{2}\left(\frac{\sin(2\pi m)}{2m} - \frac{\sin(0)}{2m}\right)
+    \end{align*}
+    and as $m = 1, 2, 3...$, $\sin(2\pi m) = 0$ for all m so 
+    \[\int_0^\pi \sin^2 (mx)\; dx = \frac{\pi}{2} \quad \blacksquare\]
+    
+    \color{black}
+    \item Show that $\{e^{imx} | m \in \mathbb{Z}\}$ is orthogonal on $(-\pi, \pi)$ where 
+    \[f \cdot g = \int_{-\pi}^\pi f(x) g(x) \; dx\]
+
+    \color{blue}
+    The sequence is orthogonal if for all $m \neq n$, 
+    \[e^{imx} \cdot e^{inx} = 0\]
+    where the function dot product is defined as 
+    \[f \cdot g = \int_{-\pi}^\pi f(x) g(x) \; dx.\]
+    Then the proof amounts to showing that 
+    \[\int_{-\pi}^\pi e^{imx} e^{inx} \; dx = 0\]
+    Which can be seen as follows:
+    \begin{align*}
+        \int_{-\pi}^\pi e^{imx} &e^{inx} \; dx = \int_{-\pi}^\pi e^{(m+n)ix} \; dx\\
+        &= \int_{-\pi}^\pi \cos((m+n)x) + i\sin((m+n)x)\; dx\\
+        &= \left[\frac{1}{m+n}\sin(mx +nx)\right]_{-\pi}^\pi - i\left[\frac{1}{m+n}\cos((m+n)x)\right]_{-\pi}^\pi\\
+        &= \left(\frac{\sin((m+n)\pi)}{m + n} - \frac{\sin(-(m+n)\pi)}{m+n}\right) -i \left(\frac{\cos((m+n)\pi)}{m + n} - \frac{\cos(-(m +n)\pi)}{m + n}\right)\\
+        &= \left(\frac{\sin((m+n)\pi)}{m + n} + \frac{\sin((m+n)\pi)}{m+n}\right) -i \left(\frac{\cos((m+n)\pi)}{m + n} - \frac{\cos((m +n)\pi)}{m + n}\right)\\
+        &= 2\left(\frac{\sin((m+n)\pi)}{m + n}\right)
+    \end{align*}
+    And because m and n are both integers, the product $(m +n)\pi$ will always be an integer multiple of $\pi$ so $\sin$ will be zero and thus 
+    \[\int_{-\pi}^\pi e^{imx} e^{inx} \; dx  = 2\left(\frac{\sin((m+n)\pi)}{m + n}\right) =0 \]
+    for all $m$ and $n$. $\quad \blacksquare$
+    \color{black}
+\end{enumerate}
+
+\pagebreak
+\section*{Problem 2:}
+By showing all your steps, including the 3 cases, solve the following wave equation with Neumann boundary conditions
+\[\begin{cases}
+    u_{tt} = c^2u_{xx}\\
+    u_x(0, t) = 0\\
+    u_x(\pi, t) = 0\\
+    u(x, 0) = x^2\\
+    u_t(x, 0) = \cos(3x)
+\end{cases}\]
+Note: answer in video 
+
+\color{blue}
+Assume that $u(x, t) = X(x)T(t)$ so
+\begin{gather*}
+    ( X(x)T(t))_{tt} = c^2( X(x)T(t))_{xx}\\
+    XT'' = c^2 X'' T\\
+    \frac{T''}{c^2T} = \frac{X''}{X}
+\end{gather*}
+Then notice that 
+\begin{align*}
+    \left(\frac{T''}{c^2T}\right)_x &= 0\\
+    \left(\frac{T''}{c^2T}\right)_t &= \left(\frac{X''}{X}\right)_t = 0\\
+\end{align*}
+so 
+\[\frac{T''}{c^2T} = \frac{X''}{X} = \lambda\]
+Looking at the X terms, we have the ODE 
+\[\begin{cases}
+    X'' = \lambda X\\
+    u_x(0, t) = 0 \implies X'(0) = 0\\
+    u_x(\pi, t) = 0\implies X'(\pi) = 0
+\end{cases}\]
+so 
+\[r^2 = \lambda \implies r = \pm \omega\]
+Case 1: $\lambda > 0$
+\begin{gather*}
+    X = Ae^{\omega x} + Be^{-\omega x}\\
+    X' = A\omega e^{\omega x} - B\omega e^{-\omega x}\\
+    X'(0) = A\omega - B\omega = 0 \implies A - B = 0 \implies A = B\\
+    X' = A\omega e^{\omega x} - A\omega e^{-\omega x}\\
+    X'(\pi) = A\omega e^{\pi \omega} - A\omega e^{-\pi\omega} = 0 \implies 2\pi\omega = 0
+\end{gather*}
+But then $\lambda = 0$ which contradicts $\lambda > 0$ so there are no nonzero solutions
+
+Case 2: $\lambda = 0$
+\[r = 0 \implies X(x) = A + Bx \implies X'(0) = B = 0 \implies X(x) = A\]
+\[X'(\pi) = 0\]
+So $\lambda = 0$ is an eigenvalue with eigenfunction $X(x) = A$
+
+Case 3: $\lambda < 0$ 
+\[r = \pm \omega i \implies X(x) = A\cos(\omega x) + B\sin(\omega x)\]
+\[X'(x) = -A\omega\sin(\omega x) + B\omega \cos(\omega x) \]
+\[X'(0) = B\omega = 0 \implies B = 0\]
+\[X'(\pi) = -A\omega\sin(\omega \pi) = 0 \implies \sin(\omega \pi) = 0 \implies \omega = m\]
+So the eigenvalues are $\lambda = \{-m^2 | m = 0, 1, 2...\}$ corresponding to eigenfunction $X(x) = \cos(mx) \quad (m = 0, 1, 2...)$
+
+Going back to the T equation, 
+\[T'' = -c^2m^2 T\]
+\[r^2 = -c^2m^2 \implies r = \pm cmi\]
+so 
+\[T(t) = A\cos(cmt) + B\sin(cmt)\]
+and 
+\[u(x, t) = (A\cos(cmt) + B\sin(cmt))\cos(mx)\]
+which by linearity gives 
+\[u(x, t) = At + B + \sum_{m=1}^\infty (A_m\cos(cmt) + B_m\sin(cmt))\cos(mx)\]
+Then with initial conditions:
+\[u(x, 0) = B + \sum_{m=1}^\infty A_m \cos(mx) = x^2\]
+Which amounts to finding the cosine series of $x^2$ on $(0, \pi)$:
+For 
+    \[x^2 = \sum_{m=0}^\infty A_m \cos(\pi mx)\]
+    \[B = A_0 = \frac{1}{\pi}\int_0^\pi x^2 \;dx = \frac{\pi^2}{3}\]
+    and 
+    \[A_m = \frac{2}{\pi}\int_0^\pi x^2 \cos( mx)\; dx\]
+    which via tabular integration:
+    \[\begin{array}{ccc}
+        x^2 & & \cos( mx)\\
+        & \searrow & \\
+        -2x & & \sin( mx)/( m)\\
+        & \searrow & \\
+        2 & & -\cos( mx)/( m)^2\\
+        & \searrow & \\
+        -0 & & -\sin( mx)/( m)^3 
+    \end{array}\]
+    is 
+    \begin{align*}
+        A_m &= \frac{2}{\pi}\left[x^2 \left(\frac{\sin( mx)}{m}\right) + 2x\left(\frac{\cos( mx)}{m^2}\right) - 2\left(\frac{\sin( mx)}{m^3}\right)\right]_0^\pi\\
+        &= \frac{2}{\pi}\left[\pi^2 \left(\frac{\sin( m\pi)}{m}\right) + 2\pi\left(\frac{\cos( m\pi)}{m^2}\right) - 2\left(\frac{\sin( m\pi)}{m^3}\right)\right]\\
+        &= \frac{2}{\pi}\left(\frac{2\pi}{m^2}\right)(-1)^m\\
+        &= \frac{4}{m^2}(-1)^m
+    \end{align*}
+and then with the other initial condition, 
+\[u_t(x, 0) = \sum_{m=1}^\infty (-A_mcm\sin(cm(0)) + B_mcm\cos(cm(0)))\cos(mx) = \sum_{m=1}^\infty B_m cm \cos(mx) = \cos(3x)\]
+which tells us that 
+\[3B_3c = 1 \implies B_3 = \frac{1}{3c}\]
+and all other $B_m = 0$.
+Then, after an eternity, 
+\begin{empheq}[box=\fbox]{align*}
+    u(x, t) = \frac{\pi^2}{3} &+ \sum_{m=1}^2 \left(\frac{4}{m^2}(-1)^m\cos(mct)\right)\cos(mx) \\
+    &-\left(\frac{4}{9}\cos(3ct) + \frac{1}{3c} \sin(3ct)\right)\cos(3x) \\
+    &+ \sum_{m=4}^\infty\left(\frac{4}{m^2}(-1)^m\cos(mct)\right)\cos(mx)
+\end{empheq}
+
+\color{black}
+
+\pagebreak
+\section*{Problem 3:}
+\begin{enumerate}
+    \item Find the Fourier sine series of $f(x) = x^2$ on (0, 1)
+    
+    \color{blue}
+    For 
+    \[x^2 = \sum_{m=0}^\infty A_m\sin(mx)\]
+    on $(0, 1)$, 
+    \[A_m = 2 \int_0^1 x^2 \sin(\pi mx)\; dx.\]
+    Then using tabular integration, 
+    \[\begin{array}{ccc}
+        x^2 & & \sin(\pi mx)\\
+        & \searrow & \\
+        -2x & & -\cos(\pi mx)/(\pi m)\\
+        & \searrow & \\
+        2 & & -\sin(\pi mx)/(\pi m)^2\\
+        & \searrow & \\
+        -0 & & \cos(\pi mx)/(\pi m)^3 
+    \end{array}\]
+    \begin{align*}
+        A_m &= 2\left[-x^2 \left(\frac{\cos(\pi mx)}{\pi m}\right) + 2x\left(\frac{\sin(\pi mx)}{(\pi m)^2}\right) + 2\left(\frac{\cos(\pi mx)}{(\pi m)^3}\right)\right]_0^1\\
+        &= 2\left[-\frac{\cos(\pi m)}{\pi m} + 2\frac{\sin(\pi m)}{(\pi m)^2} + 2\frac{\cos(\pi m)}{(\pi m)^3} - \frac{2}{(\pi m)^3}\right]\\
+        &= -\frac{2}{\pi m}(-1)^m + \frac{4}{(\pi m)^3}((-1)^m - 1)
+    \end{align*}
+    The second term is $-2$ for odd m and $0$ for even so the fourier series is 
+    \[A_m = \begin{cases}
+        \frac{2}{\pi m}(-1)^{m+1}\qquad \qquad \; \,m \text{ even}\\
+        \frac{2}{\pi m}(-1)^{m+1} - \frac{4}{(\pi m )^3} \quad m \text{ odd}
+    \end{cases}\]
+    so
+    \[\boxed{x^2 = \sum_{m=1}^\infty \left(\frac{2}{\pi m}(-1)^{m+1} + \frac{4}{(\pi m)^3}((-1)^m - 1)\right)\sin(\pi mx)}\]
+
+    \color{black}
+    \item Find the Fourier cosine series of $f(x) = x^2$ on (0, 1)
+    
+    \color{blue}
+    For 
+    \[x^2 = \sum_{m=0}^\infty A_m \cos(\pi mx)\]
+    \[A_0 = \int_0^1 x^2 \;dx = \frac{1}{3}\]
+    and 
+    \[A_m = 2\int_0^1 x^2 \cos(\pi mx)\; dx\]
+    which via tabular integration:
+    \[\begin{array}{ccc}
+        x^2 & & \cos(\pi mx)\\
+        & \searrow & \\
+        -2x & & \sin(\pi mx)/(\pi m)\\
+        & \searrow & \\
+        2 & & -\cos(\pi mx)/(\pi m)^2\\
+        & \searrow & \\
+        -0 & & -\sin(\pi mx)/(\pi m)^3 
+    \end{array}\]
+    is 
+    \begin{align*}
+        A_m &= 2\left[x^2 \left(\frac{\sin(\pi mx)}{\pi m}\right) + 2x\left(\frac{\cos(\pi mx)}{(\pi m)^2}\right) - 2\left(\frac{\sin(\pi mx)}{(\pi m)^3}\right)\right]_0^1\\
+        &= 2\left(\frac{\sin(\pi m)}{\pi m}\right) + 4\left(\frac{\cos(\pi m)}{(\pi m)^2}\right) -4\left(\frac{\sin(\pi m)}{(\pi m^3)}\right)\\
+        &= \frac{4}{(\pi m)^2} (-1)^m
+    \end{align*}
+    so 
+    \[\boxed{x^2 = \frac{1}{3} + \sum_{m=1}^\infty \frac{4}{(\pi m)^2} (-1)^m \cos(\pi mx)}\]
+    \color{black}
+\end{enumerate}
+
+\pagebreak
+\section*{Problem 4:} 
+\begin{enumerate}
+    \item Find the Fourier sine series of $f(x) = x$ on $(0, L)$
+    
+    \color{blue}
+    For 
+    \[x = \sum_{m=1}^\infty A_m \sin(mx)\]
+    \begin{align*}
+        A_m &= \frac{2}{L}\int_0^L x \sin(\frac{\pi m x}{L})\; dx\\
+        &= \frac{2}{L} \left[x \left(-\frac{L}{\pi m} \cos(\frac{\pi mx}{L})\right) - \left(-(\frac{L}{\pi m})^2 \sin(\frac{\pi mx}{L})\right)\right]_0^L\\
+        &= \frac{2}{L}\left[-\frac{L^2}{\pi m } \cos(\pi m) + \frac{L^2}{(\pi m)^2}\sin(\pi m)\right]\\
+        &= \frac{2L}{\pi m}(-1)^{m+1}
+    \end{align*}
+    so
+    \[\boxed{x = \frac{2L}{\pi}\sum_{m=1}^\infty \frac{(-1)^{m+1}}{m}}\sin(\frac{\pi mx}{L})\]
+
+    \color{black}
+    \item Integrate the series in (1) term-by-term (assume this is allowed) to find the Fourier cosine series of $x^2$
+    Note: For the $A_0$ term you have to do it directly using the definition, because of the constant of integration.
+
+    \color{blue}
+    First doing $A_0$:
+    \[A_0 = \int_0^L x \; dx = \frac{L^2}{2}\] 
+    then for all other $m$,
+    \[\int \frac{2L(-1)^{m+1}}{\pi m}\sin(mx) \; dx = -\frac{2L(-1)^{m+1}}{\pi m^2}\cos(mx)\]
+    so 
+    \[\boxed{x^2 = \frac{L^2}{2} - \frac{2L}{\pi}\sum_{m=1}^\infty \frac{(-1)^{m+1}}{m^2}\cos(mx)}\]
+    \color{black}
+    \item Plug in $x = 0$ in your result from (2) to find
+    \[\sum_{n=1}^\infty \frac{(-1)^{n+1}}{n^2} = 1 - \frac{1}{4} + \frac{1}{9} - ...\]
+
+    \color{blue}
+    \[f(x) = x^2 = \frac{L^2}{2} - \frac{2L}{\pi}\sum_{m=1}^\infty \frac{(-1)^{m+1}}{m^2}\cos(mx)\] 
+    \[f(0) = 0 = \frac{L^2}{2} - \frac{2L}{\pi}\sum_{m=1}^\infty \frac{(-1)^{m+1}}{m^2}\]
+    so 
+    \[\frac{2L}{\pi}\sum_{m=1}^\infty \frac{(-1)^{m+1}}{m^2} = \frac{L^2}{2}\]
+    and 
+    \[\boxed{\sum_{m=1}^\infty \frac{(-1)^{m+1}}{m^2} = \frac{\pi}{4}L}\]
+\end{enumerate}
+
+\pagebreak
+\section*{Problem 5:}
+Find the complex Fourier series of $e^{ax}$ on $(-\pi, \pi)$ where $a > 0$ 
+
+\color{blue}
+If 
+\[f(x) = e^{ax} = \sum_{-\infty}^\infty C_m e^{imx}\]
+then 
+\begin{align*}
+    C_m &= \frac{1}{2\pi}\int_{-\pi}^\pi e^{ax} e^{-imx} \; dx\\
+    &=\frac{1}{2\pi}\int_{-\pi}^\pi e^{(a- im)x}\\
+    &=\frac{1}{2\pi}\left[\frac{e^{(a- im)x}}{a - im}\right]_{-\pi}^\pi\\
+    &= \frac{1}{(2\pi)(a- im)} \left(e^{\pi a}e^{-im\pi} - e^{-\pi a} e^{im\pi}\right)
+\end{align*}
+But notice that 
+\begin{align*}
+    e^{\pi mi} &= \cos(\pi m) + i\sin(\pi m) = (-1)^m\\
+    e^{-\pi mi} &= \cos(-\pi m) + i\sin(-\pi m) = -\cos(\pi m) = (-1)^m
+\end{align*}
+so 
+\[C_m = \frac{1}{\pi(a- im)} \left(\frac{e^{\pi a}- e^{-\pi a}}{2}\right)(-1)^m = \frac{(-1)^m \sinh(\pi a)}{\pi(a - im)}\]
+and 
+\[\boxed{e^{ax} = \sum_{m=-\infty}^\infty \left(\frac{(-1)^m}{\pi(1 - \pi m)}\sinh(\pi a)\right)e^{imx}}\]
+\end{document}

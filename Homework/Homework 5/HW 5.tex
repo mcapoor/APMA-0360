@@ -1,0 +1,266 @@
+\documentclass[12pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+%%% SECTION TITLE APPEARANCE
+\allsectionsfont{\sffamily\mdseries\upshape} 
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{empheq}
+\usepackage{xcolor}
+\renewcommand{\L}[1]{\mathcal{L}\{#1\}}
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+\newcommand{\vecs}[1]{\langle #1\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\F}[1]{\mathcal{F}(#1)}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+
+\title{APMA 0360: Homework 5}
+\author{Milan Capoor}
+\date{10 March 2023}
+
+\begin{document}
+\maketitle
+\section*{Problem 1}
+Solve 
+\[\begin{cases}
+    u_{xx} - 3u_{xt} - 4u_{tt} = 0\\
+    u(x, 0) = x^2\\
+    u_t(x, 0) = e^x
+\end{cases}\]
+\textbf{Note:} you may assume without proof that the general solution is 
+\[u(x, t) = F(4x  +t) + G(x - t)\]
+\color{blue}
+\begin{align*}
+    u(x, 0) &= F(4x) + G(x) = x^2\\
+    u_t(x, t) &= F'(4x + t) - G'(x - t)\\
+    u_t(x, 0) &= F'(4x) - G'(x) = e^x
+\end{align*}
+
+Integrating with respect to x and incorporating the constant into arbitrary function G, 
+\[\frac{1}{4}F(4x) = e^x + G(x) + C\]
+Giving a system of equations for F and G:
+\[\begin{cases}
+    F(4x) + G(x) = x^2\\
+    \frac{1}{4}F(4x) - G(x) = e^x + C
+\end{cases}\]
+\[\frac{5}{4}F(4x) = x^2 + e^x + C \implies F(4x) = \frac{4}{5}x^2 + \frac{4}{5}e^x + C \implies F(x) = \frac{4}{5}\left(\frac{x}{4}\right)^2 + \frac{4}{5}e^{x/4} + C \]
+\[ \frac{4}{5}x^2 + \frac{4}{5}e^x + C + G(x) = x^2 \implies G(x) = \frac{1}{5}x^2 - \frac{4}{5}e^x - C\]
+Then looking at the general solution
+\begin{align*}
+    u(x, t) &= F(4x + t) + G(x - t)\\
+    &= \frac{4}{5}\left(\frac{4x + t}{4}\right)^2 + \frac{4}{5}e^{\frac{4x + t}{4}} + C + \frac{1}{5}(x -t)^2 - \frac{4}{5}e^{x - t} - C\\
+    &= 
+\end{align*}
+\[\boxed{u(x, t) = \frac{4}{5}\left(\frac{4x + t}{4}\right)^2 + \frac{4}{5}e^{\frac{4x + t}{4}} +\frac{1}{5}(x -t)^2 - \frac{4}{5}e^{x - t}}\]
+\color{black}
+\pagebreak
+
+\section*{Problem 2:}
+Check by differentiating that 
+\[u(x, t) = \frac{1}{2}(\phi(x - ct) + \phi(x + ct)) + \frac{1}{2c}\int_{x - ct}^{x+ ct} \psi(s) \; ds\]
+solves 
+\[\begin{cases}
+    u_{tt} = c^2 u_{xx}\\
+    u(x, 0) = \phi(x)\\
+    u_t(x, 0) = \psi(x)
+\end{cases}\]
+\textbf{Note:} it may help to write the integral as 
+\[\Psi(x + ct) - \Psi(x -ct)\]
+where $\Psi$ is the antiderivative of $\psi$
+
+\color{blue}
+\[u(x, t) = \frac{1}{2}(\phi(x - ct) + \phi(x + ct)) + \frac{1}{2c}(\Psi(x + ct) - \Psi(x -ct))\]
+
+Derivatives:
+\begin{align*}
+    u_t &= -\frac{1}{2}c\phi'(x - ct) + \frac{1}{2}c\phi'(x + ct) + \frac{1}{2}\psi(x + ct) + \frac{1}{2}\psi(x - ct)\\
+    u_{tt} &= \frac{1}{2}c^2 \phi''(x- ct) + \frac{1}{2}c^2\phi''(x + ct) + \frac{1}{2}c\psi'(x + ct) - \frac{1}{2}c\psi'(x -ct)\\
+    u_x &= \frac{1}{2}\phi'(x - ct) + \frac{1}{2}\phi'(x + ct) + \frac{1}{2c}\psi(x + ct) - \frac{1}{2c}\psi(x -ct)\\
+    u_{xx} &= \frac{1}{2}\phi''(x - ct) + \frac{1}{2}\phi''(x + ct) + \frac{1}{2c}\psi'(x + ct) - \frac{1}{2c}\psi'(x -ct)
+\end{align*}
+
+PDE:
+\[u_{tt} = c^2 u_{xx}\]
+\[c^2u_{xx} = \frac{1}{2}c^2 \phi''(x- ct) + \frac{1}{2}c^2\phi''(x + ct) + \frac{1}{2}c\psi'(x + ct) - \frac{1}{2}c\psi'(x -ct) = u_{tt} \quad \checkmark\]
+
+First initial condition:
+\[u(x, 0) = \frac{1}{2}(\phi(x) + \phi(x)) + \frac{1}{2c}(\Psi(x) - \Psi(x)) = \frac{1}{2}(2\phi(x)) = \phi(x) \quad \checkmark\]
+
+Second initial condition:
+\[u_t(x, 0) = -\frac{1}{2}c\phi'(x) + \frac{1}{2}c\phi'(x) + \frac{1}{2}\psi(x) + \frac{1}{2}\psi(x) = \psi(x) \quad \checkmark\]
+\pagebreak
+\color{black}
+\section*{Problem 3:} 
+Show there is at most one solution to the following wave equation, where $0 < x < l$
+\[\begin{cases}
+    u_{tt} = c^2u_{xx} + f(x, t)\\
+    u_x(0, t) = g(t)\\
+    u_x(l, t) = h(t)\\
+    u(x, 0) = \phi(x)\\
+    u_t(x, 0) = \psi(x)\\
+\end{cases}\]
+\color{blue}
+Let u and v be solutions to the PDE such that $w = u - v$.
+Then 
+\begin{align*}
+    w_{tt} &= u_{tt} - v_{tt}\\
+    &= (c^2 u_{xx} + f(x, t)) - (c^2 v_{xx} + f(x, t))\\
+    &= c^2u_{xx} - c^2v_{xx}\\
+    &= c^2 w_{xx}
+\end{align*}
+
+Multiply by $u_t$ and integrate WRT x:
+\[\int_0^l w_{tt}w_t \; dx = c^2\int_0^l w_{xx}w_t\; dx\]
+
+LHS:
+\[\int_0^l w_{tt}w_t \; dx = \frac{d}{dt}\left(\frac{1}{2}\int_0^l (u_t)^2\; dx\right) \] 
+
+RHS:
+\begin{align*}
+    c^2\int_0^l w_{xx}w_t\; dx &= \left[w_xw_t\right]_{0}^l - \int_0^l w_x w_{xt} \; dx\\
+    &= (w_x(l, t)w_t(l,t)- w_x(0)w_l(0))- c^2\int_0^l w_x w_{xt}\; dx\\
+    &= (u_x(l, t) - v_x(l, t))(u_t(l, t) - v_t(l,t)) - (u_x(0, t) - v_x(0, t))(u_t(0, t) - v_t(0,t)) \\
+    &\quad - c^2\int_0^l \frac{d}{dt}\left(\frac{1}{2}(w_x)^2\right)\; dx\\
+    &= (h(t) - h(t))(u_t(l, t) - v_t(l,t)) - (g(t) - g(t))(u_t(0, t) - v_t(0,t)) \\
+    &\quad -c^2\frac{d}{dt}\left(-\frac{1}{2}\int_0^l(w_x)^2\; dx\right)\\
+    &= -c^2\frac{d}{dt}\left(-\frac{1}{2}\int_0^l(w_x)^2\; dx\right)
+\end{align*}
+Then 
+\[\frac{d}{dt}\left(\frac{1}{2}\int_0^l (w_t)^2\; dx\right) = -c^2\frac{d}{dt}\left(-\frac{1}{2}\int_0^l(w_x)^2\; dx\right)\]
+\[\frac{d}{dt}\left(\frac{1}{2}\int_0^l (w_t)^2 + c^2(w_x)^2 \; dx\right) = 0\]
+where energy is constant for 
+\[E(t) = \frac{1}{2}\int_0^l (w_t)^2 + c^2(w_x)^2 \; dx\]
+
+As the energy is constant, $E(t) = E(0)$ and 
+\begin{align*}
+    \frac{1}{2}\int_0^l (w_t)^2 + c^2(w_x)^2 \; dx &= \frac{1}{2}\int_0^l (w_t(x, 0))^2 + c^2(w_x(x, 0))^2 \; dx\\
+    &= \frac{1}{2}\int_0^l (u_t(x, 0) - v_t(x, 0))^2 + c^2(u_t(x, 0) - v_t(x, 0))^2 \; dx\\
+    &= \frac{1}{2}\int_0^l (\phi(x) - \phi(x))^2 + c^2(u_x(x, 0) - v_x(x, 0))^2 \; dx\\
+    &= \frac{1}{2}\int_0^l c^2(u_x(x, 0) - v_x(x, 0))^2 \; dx\\
+\end{align*}
+Then,
+\begin{align*}
+    \frac{1}{2}\int_0^l c^2(u_x(x, 0) - v_x(x, 0))^2 \; dx &= \frac{1}{2} \left[\frac{1}{3}c^2(u(x, 0) - v(x, 0))^3\right]_0^l \\
+    &= \frac{c^2}{6}((u(l, 0) - v(l, 0)) - (u(0, 0) - v(0, 0)))\\
+    &=\frac{c^2}{6}((\phi(l) - \phi(l)) - (\phi(0) - \phi(0)))\\
+    &= 0 
+\end{align*}
+
+So at long last 
+\[E(t) = E(0) = 0\]
+which means that 
+\[\frac{1}{2}\int_0^l (w_t)^2 + c^2(w_x)^2 \; dx = 0\]
+Deriving WRT x, 
+\[\frac{1}{2}(w_t)^2 + \frac{1}{2}c^2(w_x)^2 = 0\]
+so $w_t$ and $w_x$ are zero. Hence $w(x, t) = C$ but at $t = 0$, 
+\[w(x, 0) = u(x, 0) - v(x, 0) = 0 - 0 = 0\]
+so w is 0 for all x, t and 
+\[u = v\]
+showing there is only one solution. $\qed$
+\pagebreak
+\color{black}
+\section*{Problem 4:}
+Suppose u solves the following heat-like PDE where $0 < x < l$
+\[\begin{cases}
+    u_t = Du_{xx} - u^3\\
+    u(0, t) = u(l, t)\\
+    u_x(0, t) = u_x(l, t)\\
+    u(x, 0) = 0
+\end{cases}\]
+Show that $u(x, t) = 0$ for all x and t 
+
+\color{blue}
+Multiply by u to get 
+\[u_tu = Du_{xx}u - u^4\]
+Integrate with respect to x on $[0, l]$
+\[\int_0^l u_tu \; dx = \int_0^l Du_{xx}u - u^4 \; dx \]
+Looking at the LHS, 
+\[\int_0^l u_tu \; dx = \int_0^l \frac{d}{dt}\left(\frac{1}{2}u^2\right)\; dx = \frac{1}{2}\frac{d}{dt} \int_0^l u^2 \; dx\]
+Then the RHS:
+\[\int_0^l Du_{xx}u - u^4 \; dx = D\int_0^l u_{xx}u \; dx - \int_0^l u^4 \; dx\]
+\begin{align*}
+    D\int_0^l u_{xx}u \; dx &\overset{\text{IBP}}{=} u_x(l, t)u(l, t)- u_x(0, t)u(0, t) - \int_0^l u_x u_x \; dx\\
+    &= u_x(l, t)u(l, t) - u_x(l, t)u(l, t) - \int_0^l (u_x)^2 \; dx\\
+    &= - \int_0^l (u_x)^2 \; dx
+\end{align*}
+So 
+\[\frac{d}{dt} \frac{1}{2}\int_0^l u^2 \; dx = - \int_0^l (u_x)^2 \; dx - \int_0^l u^4 \; dx\]
+Then define an energy function E such that 
+\[E(t) = \frac{1}{2}\int_0^l u^2 \; dx\]
+so 
+\[E'(t) = \frac{d}{dt} \frac{1}{2}\int_0^l u^2 \; dx = - \int_0^l (u_x)^2 \; dx - \int_0^l u^4 \; dx\]
+which is negative because both integrands are positive, showing that energy is decreasing. But then $E(t) \leq E(0)$ so 
+\begin{align*}
+    E(t) = \frac{1}{2}\int_0^l u(x,t)^2 \; dx &\leq \frac{1}{2}\int_0^l u(x, 0)^2 \; dx\\
+    &= \frac{1}{2}\int_0^l 0^2 \; dx \\
+    &= 0 
+\end{align*}
+so because $E(t) \geq 0$ by definition
+\[0 \leq E(t) \leq E(0) = 0 \implies E(t) = 0\]
+or 
+\[\frac{1}{2}\int_0^l u(x,t)^2 \; dx = 0\]
+so 
+\[u(x, t)^2 = 0 \implies u(x, t) = 0\]
+for all x and t. $\quad \blacksquare$
+\color{black}
+\pagebreak
+\section*{Problem 5:}
+\fbox{Definition: f is \emph{monotone} if $(f(x) - f(y))(x - y) \geq 0$ for all x and y}
+
+Show that if f is monotone, then there is at most one solution to the following PDE (ODE) where $u = u(x)$ and
+$-\infty < x < \infty$. Assume any terms are $\pm \infty$ are 0
+\[\begin{cases}
+    u_{xx} = f(u)\\
+    u(0) = 2
+\end{cases}\]
+\textbf{Note:} Do the usual subtraction trick. The definition above should give you an idea what to multiply your PDE by
+
+\color{blue}
+If f is monotone
+Let u and v be solutions to the PDE and $w = u - v$. 
+Then 
+\[w_{xx} = u_{xx} - v_{xx} = f(u) - f(v)\]
+Using energy methods,
+\[w_{xx}w = (f(u) - f(v))w\]
+\[\int_{-\infty}^{\infty} w_{xx}w \;dx= \int_{-\infty}^{\infty}(f(u) - f(v))(u - v)\; dx\] 
+Looking at the LHS,
+\begin{align*}
+    \int_{-\infty}^{\infty} w_{xx}w \;dx &= \left[w_xw\right]_{-\infty}^\infty -\int_{-\infty}^{\infty} w_xw_x \; dx\\
+    &= -\int_{-\infty}^{\infty} (w_x)^2\; dx
+\end{align*}
+So 
+\[-\int_{-\infty}^{\infty} (w_x)^2\; dx = \int_{-\infty}^{\infty} (f(u) - f(v))(u - v)\; dx \]
+Then because f is monotone, the integrand of the RHS is greater than or equal to zero, and so must be the RHS integral. However, $(w_x)^2$ is positive so the LHS must be negative or zero. Thus $w_x$ must be equal 0 for all x and w is then constant. 
+Then from the initial conditions,
+\[w(0) = u(0) - v(0) = 2 - 2 = 0\]
+so w is 0 for all x and t and 
+\[u = v\]
+showing that there is only one solution. $\quad \blacksquare$
+
+\end{document}

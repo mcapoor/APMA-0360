@@ -1,0 +1,390 @@
+\documentclass[12pt]{article} 
+\usepackage[utf8]{inputenc}
+\usepackage{geometry}
+\geometry{letterpaper}
+\usepackage{graphicx} 
+\usepackage{parskip}
+\usepackage{booktabs}
+\usepackage{array} 
+\usepackage{paralist} 
+\usepackage{verbatim}
+\usepackage{subfig}
+\usepackage{fancyhdr}
+\usepackage{sectsty}
+
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt} 
+\lhead{}\chead{}\rhead{}
+\lfoot{}\cfoot{\thepage}\rfoot{}
+
+
+%%% ToC (table of contents) APPEARANCE
+\usepackage[nottoc,notlof,notlot]{tocbibind} 
+\usepackage[titles,subfigure]{tocloft}
+\renewcommand{\cftsecfont}{\rmfamily\mdseries\upshape}
+\renewcommand{\cftsecpagefont}{\rmfamily\mdseries\upshape} %
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{empheq}
+\usepackage{xcolor}
+\renewcommand{\L}[1]{\mathcal{L}\{#1\}}
+\newcommand{\ans}[1]{\boxed{\text{#1}}}
+\newcommand{\vecs}[1]{\langle #1\rangle}
+\renewcommand{\hat}[1]{\widehat{#1}}
+\newcommand{\F}[1]{\mathcal{F}(#1)}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\qed}{\quad \blacksquare}
+\newcommand{\brak}[1]{\langle #1 \rangle}
+
+\title{APMA 0360: Homework 10}
+\author{Milan Capoor}
+\date{28 April 2023}
+
+\begin{document}
+\maketitle
+\section*{Problem 1:} In 1 dimensions, suppose the Lagrangian
+$L = L(p, z, x)$ is given. Mimic the proof given in lecture to show that the Euler-Lagrange equation associated to the min problem
+\[\min I[f] = \int_a^b L(f', f, x)\; dx\]
+is 
+\[-(L_p(f', f, x))_x + L_z(f', f, x) = 0\]
+
+\color{blue}
+Let $g$ be an arbitrary function with $g(a) = g(b) = 0$. Consider 
+\[h(t) = I[f + tg] = \int_a^b L(f' + tg', f + tg, x)\; dx \] 
+Note that $h(0) = I[f]$ so $h(0)$ is a minimum which implies that $h'(0) = 0$. 
+
+Then, 
+\begin{align*}
+    h'(t) &= \frac{d}{dt}\left[\int_a^b L(f' + tg', f + tg, x)\; dx\right]\\
+    &= \int_a^b \frac{d}{dt} L(f' + tg', f + tg, x)\; dx\\
+    &= \int_a^b L_p(f' + tg', f + tg, x)(\frac{d}{dt}(f' + tg'))\\
+    &\qquad \qquad +  L_z(f' + tg', f + tg, x)(\frac{d}{dt}(f + tg)) \\
+    &\qquad \qquad + L_x(f' + tg', f + tg, x)(\frac{d}{dt}(x))\; dx\\
+    &= \int_a^b g'L_p(f' + tg', f + tg, x) + gL_z(f' + tg', f + tg, x)\; dx\\
+    &= [gL_p(f' + tg', f + tg, x)]_a^b - \int_a^b g(L_p(f' + tg', f + tg, x))_x \; dx\\
+    &\qquad \qquad + \int_a^b gL_z(f' + tg', f + tg, x)\; dx\\
+    &= \int_a^b g [-(L_p(f' + tg', f+ tg, x))_x + L_z(f' + tg', f + tg, x)]\; dx\\
+\end{align*}
+Setting $t = 0$ we get 
+\[h'(0) = \int_a^b g [-(L_p(f, f, x))_x + L_z(f', f, x)]\; dx = 0\]
+Because $g(a) = g(b) = 0$, by a Useful Fact, we know that 
+\[-(L_p(f, f, x))_x + L_z(f', f, x) = 0\]
+Which is the Euler-Lagrange Equation we sought. $\qed$
+\color{black}
+\pagebreak
+
+\section*{Problem 2:} Same setting as in above, and moreover assume
+that for all real numbers $\xi$ and $\eta$ we have
+\[L_{pp}(f', f, x)\xi^2 + 2L_{pz}(f', f, x)\xi \eta + L_{zz}(f' ,f, x)\eta^2 \geq 0\] 
+
+This is sometimes called L is convex
+
+Calculate $h''(t)$ where $h$ is as in your proof of the E-L equation and set $t = 0$ to show that if $L$ is convex, then \[h''(0) \geq 0\]
+This means that if L is convex and f solves the Euler-Lagrange equation (= critical point of h) then f has to be a minimizer.
+
+\color{blue}
+From above, 
+\[h'(t) = \int_a^b g [-(L_p(f' + tg', f+ tg, x))_x + L_z(f' + tg', f + tg, x)]\; dx\]
+So taking the t-derivative:
+\begin{align*}
+    h''(t) &= \frac{d}{dt}\int_a^b g'L_p(f' + tg', f + tg, x) + gL_z(f' + tg', f + tg, x)\; dx\\
+    &= \int_a^b \frac{d}{dt}g'L_p(f' + tg', f + tg, x)\; dx\\
+    &\qquad \qquad + \int_a^b \frac{d}{dt}gL_z(f' + tg', f + tg, x)\; dx\\
+    &= \int_a^b g' \cdot \frac{d}{dt} L_p(f' + tg', f + tg, x)\; dx\\
+    &\qquad \qquad + \int_a^b g\cdot \frac{d}{dt}L_z(f' + tg', f + tg, x)\; dx
+\end{align*}
+Looking at the first lagrangian derivative:
+\begin{align*}
+    \frac{d}{dt} L_p(f' + tg', f + tg, x) &= L_{pp}(f' + tg', f + tg, x)(\frac{d}{dt})(f' + tg') \\
+    &\qquad \qquad + L_{pz}(f' + tg', f + tg, x)(\frac{d}{dt})(f + tg)\\
+    &\qquad \qquad + L_{px}(f' + tg', f + tg, x)(\frac{d}{dt})(x)\\
+    &= g'L_{pp}(f' + tg', f + tg, x) + gL_{pz}(f' + tg', f + tg, x)
+\end{align*}
+Now the second lagrangian:
+\begin{align*}
+    \frac{d}{dt}L_z(f' + tg', f + tg, x) &= L_{pz}(f' + tg', f + tg, x)(\frac{d}{dt} f'+ tg')\\
+    &\qquad \qquad + L_{zz}(f' + tg', f + tg, x)(\frac{d}{dt} f+ tg)\\
+    &\qquad \qquad + L_{zx}(f' + tg', f + tg, x)(\frac{d}{dt} x)\\
+    &= g'L_{zp}(f' + tg', f + tg, x) + g L_{zz}(f' + tg', f + tg, x)
+\end{align*}
+Combining, we have 
+\begin{align*}
+    h''(t) &= \int_a^b g'(g'L_{pp}(f' + tg', f + tg, x) + gL_{pz}(f' + tg', f + tg, x))\\
+    &\qquad \qquad + g(g'L_{zp}(f' + tg', f + tg, x) + g L_{zz}(f' + tg', f + tg, x))\; dx
+\end{align*}
+Setting $t=0$:
+\[h''(0) = \int_a^b (g')^2 L_{pp}(f', f, x) + 2g'gL_{pz}(f', f, x) + (g)^2 L_{zz}(f', f, x)\; dx\]
+Then denote $\xi = g'(x)$ and $\eta = g(x)$ for all x. Thus, 
+\[h''(0) = \int_a^b L_{pp}(f', f, x)\xi^2 + 2L_{pz}(f', f, x)\xi \eta + L_{zz}(f' ,f, x)\eta^2\; dx\]
+But if $L$ is convex, then the integrand is non-negative by definition so 
+\[h''(0) \geq 0 \qed\]
+\color{black}
+\pagebreak
+
+\section*{Problem 3:}
+This time in 2 dimensions, suppose the Lagrangian $L = L(p, q, z, x, y)$ is given and consider the min problem
+\[\min I[u] = \int_{\Omega} L(u_x, u_y, u, x, y)\; dx\, dy\]
+Show that the Euler-Lagrange equation in that case is
+\[-(L_p)_x - (L_q)_y + L_z = 0\]
+Where the expression is evaluated at $(u_x, u_y, u, x, y)$
+
+Hint: Here instead of $g$ you take an arbitrary function $v$ such that $v = 0$ in $\partial \Omega$. You will also need the following integration by parts formula, valid for all $v$ with $v = 0$ on $\partial \Omega$:
+\[\int_{\Omega} u_x v \; dx\, dy = -\int_{\Omega}uv_x\; dx\, dy\]
+And similar for $u_y$. Assume the Useful Fact from lecture is still true in higher dimensions.
+
+\color{blue}
+Let $v$ be a function where $v = 0$ for all x in $\partial \Omega$. Then observe 
+\[h(t) = I[u + tv] = \int_\Omega L(u_x + tv_x, u_y + tv_y, u + tv, x, y)\; dx\, dy\]
+Then as above, $h(0) = I[u]$ and $h'(0) = 0$. Taking the derivative:
+\begin{align*}
+    h'(t) &= \frac{d}{dt}\int_\Omega L(u_x + tv_x, u_y + tv_y, u + tv, x, y)\; dx\, dy\\
+    &= \int_\Omega \frac{d}{dt} L(u_x + tv_x, u_y + tv_y, u + tv, x, y)\; dx\, dy\\
+    &= \int_{\Omega} v_xL_{p}(u_x + tv_x, u_y + tv_y, u + tv, x, y)\\
+    &\qquad \qquad + v_y L_{q}(u_x + tv_x, u_y + tv_y, u + tv, x, y)\\
+    &\qquad \qquad + vL_{z}(u_x + tv_x, u_y + tv_y, u + tv, x, y)\; dx\, dy
+\end{align*}
+Then as $v = 0$ on $\partial \Omega$,
+\[\int_{\Omega} u_x v \; dx\, dy = -\int_{\Omega}uv_x\; dx\, dy\]
+we have 
+\begin{align*}
+    h'(t) &= \int_{\Omega} -v(L_{p}(u_x + tv_x, u_y + tv_y, u + tv, x, y))_x\\
+    &\qquad \qquad -v(L_{q}(u_x + tv_x, u_y + tv_y, u + tv, x, y))_y\\
+    &\qquad \qquad + vL_{z}(u_x + tv_x, u_y + tv_y, u + tv, x, y)\; dx\, dy 
+\end{align*}
+
+With $t = 0$:
+\[\!\!\!\!\!\!\!\!\!\!\!\!h'(0) = \int_{\Omega} v[(-L_p(u_x, u_y, u, x, y))_x + (-L_q(u_x, u_y, u, x, y))_y + (L_z(u_x, u_y, u, x, y))]\; dx\,dy = 0\]
+As $v=0$ everywhere on the boundary, the Useful Fact holds and we know that 
+\[(-L_p(u_x, u_y, u, x, y))_x + (-L_q(u_x, u_y, u, x, y))_y + (L_z(u_x, u_y, u, x, y)) = 0\]
+which is simply the Euler-Lagrange equation 
+\[-(L_p)_x - (L_q)_y + L_z = 0\]
+evaluated at $(u_x, u_y, u, x, y) \qed$
+\color{black}
+
+
+\pagebreak
+\section*{Problem 4:} 
+Find the Euler-Lagrange equations of the following minimization problems. You're allowed to directly use the Euler-Lagrange equations here, no need to reprove it!
+
+\begin{enumerate}
+    \item \[\min I[u] = \int_{\Omega} \frac{1}{2}||\nabla u||^2 - F(u)\; dx\, dy\]
+    Where F is an antiderivative of a given function f. Here $F(u)$ means “F of u” not “F times u”
+
+    \color{blue}
+    \[\int_{\Omega} \frac{1}{2}||\nabla u||^2 - F(u)\; dx\, dy = \int_{\Omega} \frac{1}{2}(u_x)^2 + \frac{1}{2}(u_y)^2 - F(u)\; dx\, dy\]
+    So 
+    \[L(p, q, z, x, y) = \frac{1}{2}p^2 + \frac{1}{2}q^2 - F(z)\]
+    Which means that 
+    \begin{gather*}
+        L_p = p\\
+        L_q = q\\
+        L_z = -f(z)
+    \end{gather*}
+    So by the Euler-Lagrange equation $-(L_p)_x - (L_q)_y + L_z = 0$
+    \[-(u_x)_x - (u_y)_y -f(u) = 0\]
+    or 
+    \[\boxed{-(u_{xx} + u_{yy}) = f(u)}\]
+    \color{black}
+    \pagebreak
+
+    \item Here $w$ and $f$ are given 
+    \[\min I[u] = \int_{\Omega}e^{-w(x, y)} \left(\frac{1}{2}||\nabla u||^2 - uf(x, y)\right)\; dx\, dy\]
+
+    \color{blue}
+    \[\min I[u] = \int_{\Omega}e^{-w(x, y)} \left(\frac{1}{2}(u_x)^2 + \frac{1}{2}(u_y)^2 - uf(x, y)\right)\; dx\, dy\]
+    So 
+    \[L(p, q, z, x, y) = L(u_x, u_y, u, x, y) = \frac{1}{2}u_x^2 e^{-w(x, y)} + \frac{1}{2}u_y^2e^{-w(x, y)} - uf(x, y)\]
+    and as the Euler-Lagrange equation is $-(L_p)_x -(L_q)_y + L_z = 0$, we have 
+    \begin{align*}
+        L_p &= u_xe^{-w(x, y)}\\
+        L_q &= u_ye^{-w(x, y)}\\
+        L_z &= -f(x, y)e^{-w(x, y)}
+    \end{align*} 
+    so 
+    \[-(u_xe^{-w(x, y)})_x - (u_ye^{-w(x, y)})_y- f(x, y)e^{-w(x, y)} = 0\]  
+    \[-(u_{xx}e^{-w} - u_xw_xe^{-w}) - (u_{yy}e^{-w} - u_yw_y e^{-w}) = f(x, y)e^{-w(x, y)}\]
+    \[\boxed{-u_{xx} - u_{yy} + u_xw_x + u_y w_y = f(x, y)}\]
+    \color{black}
+\end{enumerate}
+
+\pagebreak 
+\section*{Problem 5:} Consider the following system
+called the Brusselator model
+\[\begin{cases}
+    u_t = D_1u_{xx} + a - (b + 1)u + u^2v\\
+    v_t = D_2v_{xx} + bu - u^2v
+\end{cases}\]
+Where $a, b, D_1, D_2$ are positive constants 
+
+\begin{enumerate}
+    \item Find all constants $u_*$ and $v_*$ for which 
+    \[\begin{cases}
+        u(x, t) = u_*\\
+        v(x, t) = v_*
+    \end{cases}\]
+    solves the PDE above 
+
+    \color{blue}
+    For $u$ and $v$ having constant solutions, the PDE above becomes 
+    \[\begin{cases}
+        0 = a - (b+1)u_* + u_*^2 v_*\\
+        0 = bu_* - u_*^2 v_*
+    \end{cases}\]
+    Taking the second equation:
+    \[(b - u_* v_*)u_* = 0 \implies u_* = \{0,\; \frac{b}{v_*}\}\]
+
+    \emph{Case 1: $u_* = 0$}
+
+    The first equation becomes $a = 0$. But $a$ is a strictly positive constant so this is a contradiction.\\
+    
+    \emph{Case 2: $u_* = \frac{b}{v_*}$}
+
+    Here, the first equation becomes 
+    \[0 = a - \frac{b(b + 1)}{v_*} + \frac{b^2}{v_*} = a + \frac{-b^2 - b + b^2}{v_*} = a - \frac{b}{v_*} \implies b = av_* \implies v_* = \frac{b}{a}\]
+    Substituting this back into the form of $u_*$ then implies that $u_* = a$
+    Thus for all values of $a, b, D_1, D_2$:
+    \[\boxed{\begin{cases}
+        u(x, t) = u_*  = a\\
+        v(x, t) = v_* = \frac{b}{a}
+    \end{cases}}\]
+    \color{black}
+    \pagebreak
+
+    \item  The linearization of the PDE about $(u_*, v_*)$ is
+    \[\begin{bmatrix}
+        u_t\\v_t
+    \end{bmatrix} = \begin{bmatrix}
+        D_1u_{xx}\\D_2v_{xx}
+    \end{bmatrix} + \begin{bmatrix}
+        -(b + 1)+2u_* v_* & (u_*)^2\\
+        b - 2u_* v_* & -(u_*)^2
+    \end{bmatrix} \begin{bmatrix}
+        u\\v
+    \end{bmatrix}\]
+    Where $u_*$ and $v_*$ are the values you found in (a)
+    (don't prove this, but it's basically the Jacobian of the above PDE evaluated at $u_*$ and $v_*$ )
+    
+    Suppose the solutions $u(x, t)$ and $v(x, t)$ are of the form
+    \[\begin{cases}
+        u(x, t) = e^{\lambda t}\cos(\kappa x)u_0\\
+        v(x, t) = e^{\lambda t}\cos(\kappa x)v_0
+    \end{cases}\]
+    Plug $u$ and $v$ into the linearized PDE and find a matrix $A$ depending on $\kappa$ such that
+    \[A \begin{bmatrix}
+        u_0\\v_0
+    \end{bmatrix} = \lambda \begin{bmatrix}
+        u_0\\v_0
+    \end{bmatrix}\]
+
+    \color{blue}
+    \begin{align*}
+        \begin{bmatrix}
+            u_t\\v_t
+        \end{bmatrix} &= \begin{bmatrix}
+            D_1u_{xx}\\D_2v_{xx}
+        \end{bmatrix} + \begin{bmatrix}
+            -(b + 1)+2(a)(\frac{b}{a}) & (a)^2\\
+            b - 2(a)(\frac{b}{a}) & -(a)^2
+        \end{bmatrix} \begin{bmatrix}
+            u\\v
+        \end{bmatrix}\\
+        \begin{bmatrix}
+            u_t\\v_t
+        \end{bmatrix} &= \begin{bmatrix}
+            D_1u_{xx}\\D_2v_{xx}
+        \end{bmatrix} + \begin{bmatrix}
+            b - 1 & a^2\\
+            -b & -a^2
+        \end{bmatrix} \begin{bmatrix}
+            u\\v
+        \end{bmatrix}
+    \end{align*}
+    \[\begin{cases}
+            u(x, t) = e^{\lambda t}\cos(\kappa x)u_0\\
+            v(x, t) = e^{\lambda t}\cos(\kappa x)v_0
+        \end{cases} \implies 
+    \parbox{2in}{
+        \begin{align*}
+            &\begin{cases}
+                u_t = \lambda e^{\lambda t}\cos(\kappa x)u_0\\
+                v_t = \lambda e^{\lambda t}\cos(\kappa x)v_0
+            \end{cases}\\
+            &\begin{cases}
+                u_{xx} = -\kappa^2 e^{\lambda t}\cos(\kappa x)u_0\\
+                v_{xx} = -\kappa^2 e^{\lambda t}\cos(\kappa x)v_0
+            \end{cases}
+        \end{align*}
+    }\]
+
+    \begin{align*}
+        \begin{bmatrix}
+            \lambda e^{\lambda t}\cos(\kappa x)u_0\\
+            \lambda e^{\lambda t}\cos(\kappa x)v_0
+        \end{bmatrix} &= \begin{bmatrix}
+            -D_1\kappa^2 e^{\lambda t}\cos(\kappa x)u_0\\
+            -D_2\kappa^2 e^{\lambda t}\cos(\kappa x)v_0
+        \end{bmatrix} + \begin{bmatrix}
+            b - 1 & a^2\\
+            -b & -a^2
+        \end{bmatrix} \begin{bmatrix}
+            e^{\lambda t}\cos(\kappa x)u_0\\
+            e^{\lambda t}\cos(\kappa x)v_0
+        \end{bmatrix}\\
+        \lambda e^{\lambda t}\cos(\kappa x) \begin{bmatrix}
+            u_0\\v_0
+        \end{bmatrix} &= e^{\lambda t}\cos(\kappa x) \left(\begin{bmatrix}
+            -D_1 \kappa^2 u_0\\
+            -D_2 \kappa^2 v_0
+        \end{bmatrix} + \begin{bmatrix}
+            b-1 & a^2\\
+            -b & -a^2
+        \end{bmatrix} \begin{bmatrix}
+            u_0\\
+            v_0
+        \end{bmatrix}\right)
+    \end{align*}
+    For $u, v \neq 0$:
+    \begin{align*}
+        \lambda \begin{bmatrix}
+            u_0\\v_0
+        \end{bmatrix} &= \begin{bmatrix}
+            -D_1 \kappa^2 u_0\\
+            -D_2 \kappa^2 v_0
+        \end{bmatrix} + \begin{bmatrix}
+            (b-1)u_0 + a^2v_0\\
+            -bu_0 -a^2v_0
+        \end{bmatrix}\\
+        &= \begin{bmatrix}
+            -D_1 \kappa^2 u_0 + (b-1)u_0 + a^2v_0\\
+            -D_2 \kappa^2 v_0 -bu_0 -a^2v_0
+        \end{bmatrix}\\
+        &= \begin{bmatrix}
+            (-D_1\kappa^2 + b - 1)u_0 + a^2 v_0\\
+            -bu_0 + (-D_2\kappa^2 - a^2)v_0
+        \end{bmatrix}\\
+        &= \begin{bmatrix}
+            -D_1\kappa^2 + b - 1 & a^2\\
+            -b & -D_2\kappa^2 - a^2
+        \end{bmatrix}\begin{bmatrix}
+            u_0\\
+            v_0
+        \end{bmatrix}
+    \end{align*}
+    Thus 
+    \[A \begin{bmatrix}
+        u_0\\v_0
+    \end{bmatrix} = \lambda \begin{bmatrix}
+        u_0\\v_0
+    \end{bmatrix}\]
+    for 
+    \[\boxed{A = \begin{bmatrix}
+        -D_1\kappa^2 + b - 1 & a^2\\
+        -b & -D_2\kappa^2 - a^2
+    \end{bmatrix}}\]
+    \color{black}
+\end{enumerate}
+
+
+\end{document}
